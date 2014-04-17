@@ -5,27 +5,19 @@ import java.util.ArrayList;
 public class Poblacion extends ArrayList<Cromosoma> {
 
 	private static Integer ID = 0;
-	
-
-	
-
-	
 
 	public Poblacion() {
-		ID++; 
+		ID++;
 	}
-	
-	
-	public Poblacion(ArrayList<Cromosoma> hijos) {
-		ID++; 
-		
-for (Cromosoma c : hijos){
-	this.add(c);
-}		
 
-		
+	public Poblacion(ArrayList<Cromosoma> hijos) {
+		ID++;
+
+		for (Cromosoma c : hijos) {
+			this.add(c);
+		}
+
 	}
-	
 
 	private Double getSum() {
 		Double sum = 0d;
@@ -68,11 +60,5 @@ for (Cromosoma c : hijos){
 			c.setFitness(c.getFunctionValue() / this.getSum());
 		}
 	}
-
-	
-
-
-	
-	
 
 }

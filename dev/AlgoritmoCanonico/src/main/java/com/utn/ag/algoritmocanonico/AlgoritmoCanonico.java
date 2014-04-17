@@ -1,8 +1,5 @@
 package com.utn.ag.algoritmocanonico;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import com.utn.ag.algoritmocanonico.model.Cromosoma;
 import com.utn.ag.algoritmocanonico.model.Poblacion;
 
@@ -10,11 +7,9 @@ public class AlgoritmoCanonico {
 
 	private static Double probmutacion;
 	private static Double probcrossover;
-	
+
 	private int[][] ruleta;
-	
-	
-	
+
 	private void seleccionRuleta(Poblacion poblacion) {
 		ruleta = new int[poblacion.size() / 2][2];
 		Double sumaAcumulada = 0d;
@@ -43,11 +38,11 @@ public class AlgoritmoCanonico {
 			}
 		}
 	}
-	
+
 	public void operadorMutacion(Cromosoma cromosoma) {
 
 		if (Math.random() >= probmutacion) {
-					cromosoma.mutarBit();	
+			cromosoma.mutarBit();
 		}
 
 	}
@@ -63,27 +58,21 @@ public class AlgoritmoCanonico {
 		}
 
 	}
-	
-	
-	public AlgoritmoCanonico(Double probcrossover, Double promutacion){
+
+	public AlgoritmoCanonico(Double probcrossover, Double promutacion) {
 		this.probcrossover = probcrossover;
 		this.probmutacion = probcrossover;
-		
-	
+
 	}
-	
-	
+
 	public Poblacion siguienteGeneracion(Poblacion poblacion) {
 		poblacion.processFitness();
 		seleccionRuleta(poblacion);
 		Poblacion hijos = new Poblacion();
-		
-		//TODO: Implementar Crossover y a cada hijo aplicarle operadorMutacion
-		
-	
-		
-		
+
+		// TODO: Implementar Crossover y a cada hijo aplicarle operadorMutacion
+
 		return hijos;
 	}
-	
+
 }

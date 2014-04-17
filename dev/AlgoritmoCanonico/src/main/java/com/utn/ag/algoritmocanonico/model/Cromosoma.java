@@ -30,20 +30,20 @@ public class Cromosoma {
 		return sb.toString();
 	}
 	
-public void mutarBit(){
-	Random ran = new Random();
-	int index =  ran.nextInt(cadena.length());
-	StringBuilder builder = new StringBuilder(cadena);
-	if (cadena.charAt(index) == '0') {
-		builder.setCharAt(index, '1');
-	}else{
-		builder.setCharAt(index, '0');
-		
+	public void mutarBit() {
+		Random ran = new Random();
+		int index = ran.nextInt(cadena.length());
+		StringBuilder builder = new StringBuilder(cadena);
+		if (cadena.charAt(index) == '0') {
+			builder.setCharAt(index, '1');
+		} else {
+			builder.setCharAt(index, '0');
+
+		}
+
+		cadena = builder.toString();
+
 	}
-	
-	cadena = builder.toString();
-	
-}
 
 	private Integer ranBin() {
 		Double random = Math.random();

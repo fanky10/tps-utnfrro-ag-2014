@@ -13,18 +13,16 @@ public class App {
 		Poblacion p = generarPrimerPoblacion();
 		AlgoritmoCanonico a = new AlgoritmoCanonico(PROBCROSSOVER, PROBMUTACION);
 		p.processFitness();
-		p.showInforme();	
-		
-	for (int i = 0; i<ITERACIONES-1; i++){
-		
-		p = a.siguienteGeneracion(p);
 		p.showInforme();
-		
-	}
-		
-		
-	}
 
+		for (int i = 0; i < ITERACIONES - 1; i++) {
+
+			p = a.siguienteGeneracion(p);
+			p.showInforme();
+
+		}
+
+	}
 
 	private static Poblacion generarPrimerPoblacion() {
 		Poblacion poblacion = new Poblacion();
