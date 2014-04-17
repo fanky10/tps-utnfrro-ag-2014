@@ -5,10 +5,27 @@ import java.util.ArrayList;
 public class Poblacion extends ArrayList<Cromosoma> {
 
 	private static Integer ID = 0;
+	
+
+	
+
+	
 
 	public Poblacion() {
-		ID++; // increment id (:
+		ID++; 
 	}
+	
+	
+	public Poblacion(ArrayList<Cromosoma> hijos) {
+		ID++; 
+		
+for (Cromosoma c : hijos){
+	this.add(c);
+}		
+
+		
+	}
+	
 
 	private Double getSum() {
 		Double sum = 0d;
@@ -32,11 +49,12 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		Double sum = getSum();
 		Double prom = getSum() / this.size();
 		Double max = getMax();
+
 		int i = 1;
 		System.out.println("Poblacion " + ID);
 		for (Cromosoma c : this) {
 			System.out.println(i + ": " + c.toString() + " - fit: "
-					+ c.getFunctionValue() / sum);
+					+ c.getFitness());
 			i++;
 		}
 		System.out.println("Suma: " + sum);
@@ -44,4 +62,17 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		System.out.println("Maximo: " + max);
 
 	}
+
+	public void processFitness() {
+		for (Cromosoma c : this) {
+			c.setFitness(c.getFunctionValue() / this.getSum());
+		}
+	}
+
+	
+
+
+	
+	
+
 }

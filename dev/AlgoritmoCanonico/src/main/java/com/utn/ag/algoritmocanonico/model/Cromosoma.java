@@ -1,9 +1,13 @@
 package com.utn.ag.algoritmocanonico.model;
 
+import java.util.Random;
+
 public class Cromosoma {
 	private static final Integer LONGITUD = 30;
 	private static final Double COEFICIENTE = Math.pow(2, LONGITUD) - 1;
 	private String cadena;
+	private Double fitness;   
+	private Double sumaAcumulada;
 
 	public Cromosoma() {
 		cadena = genCadena();
@@ -25,6 +29,21 @@ public class Cromosoma {
 		}
 		return sb.toString();
 	}
+	
+public void mutarBit(){
+	Random ran = new Random();
+	int index =  ran.nextInt(cadena.length());
+	StringBuilder builder = new StringBuilder(cadena);
+	if (cadena.charAt(index) == '0') {
+		builder.setCharAt(index, '1');
+	}else{
+		builder.setCharAt(index, '0');
+		
+	}
+	
+	cadena = builder.toString();
+	
+}
 
 	private Integer ranBin() {
 		Double random = Math.random();
@@ -42,4 +61,29 @@ public class Cromosoma {
 	public String getCadena() {
 		return cadena;
 	}
+	
+	public  void setFitness (Double fitness) {		//Esteban
+		this.fitness = fitness;		
+	}
+	
+	public Double getFitness (){
+		return this.fitness;
+		
+		
+	}
+
+	public Double getSumaAcumulada() {
+		return sumaAcumulada;
+	}
+
+	public void setSumaAcumulada(Double sumaAcumulada) {
+		this.sumaAcumulada = sumaAcumulada;
+	}
+	
+	
+	
+	
+	
+	
+	
 }
