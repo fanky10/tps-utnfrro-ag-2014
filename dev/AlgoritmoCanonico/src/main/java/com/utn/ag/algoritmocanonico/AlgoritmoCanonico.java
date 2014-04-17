@@ -49,15 +49,20 @@ public class AlgoritmoCanonico {
 	}
 
 	private Cromosoma[] operadorCrossover(Cromosoma[] cromosomas) {
-		
+		String temp1[] = new String[2];
+		String temp2[] = new String[2];
+		int largoGenoma = cromosomas[0].getGenoma().length();
 
 		if (Math.random() <= probcrossover) {
 			// TODO crossovear
-
+			temp1[0] = cromosomas[0].getCadena().substring(0, largoGenoma/2);
+			temp1[1] = cromosomas[0].getCadena().substring(largoGenoma/2);
+						
+			temp2[0] = cromosomas[1].getCadena().substring(0, largoGenoma/2);
+			temp2[1] = cromosomas[1].getCadena().substring(largoGenoma/2);
 			
-			
-			
-			
+			cromosomas[0] = new Cromosoma( temp1[0]+temp2[1]);
+			cromosomas[1] = new Cromosoma( temp2[0]+temp1[1]);
 		}
 		
 		cromosomas[0] = operadorMutacion(cromosomas[0]);
@@ -77,7 +82,7 @@ public class AlgoritmoCanonico {
 		poblacion.processFitness();
 		seleccionRuleta(poblacion);
 		Poblacion hijos = new Poblacion();
-		Cromosoma[] parCromosomas = null;
+		Cromosoma[] parCromosomas = new Cromosoma[2];
 		
 		for (int i = 0; i<poblacion.size()/2; i++){
 			parCromosomas[0] = poblacion.get(ruleta[i][0]);

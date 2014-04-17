@@ -82,6 +82,16 @@ public class Cromosoma {
 	
 	
 	
+	public String getGenoma(){
+		
+		return cadena;
+	}
+	
+	public void setGenoma(String cadena){
+		this.cadena=cadena;
+	}
+	
+	
 	
 	
 	
