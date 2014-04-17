@@ -55,20 +55,19 @@ public class AlgoritmoCanonico {
 
 		if (Math.random() <= probcrossover) {
 			// TODO crossovear
-			temp1[0] = cromosomas[0].getCadena().substring(0, largoGenoma/2);
-			temp1[1] = cromosomas[0].getCadena().substring(largoGenoma/2);
-						
-			temp2[0] = cromosomas[1].getCadena().substring(0, largoGenoma/2);
-			temp2[1] = cromosomas[1].getCadena().substring(largoGenoma/2);
-			
-			cromosomas[0] = new Cromosoma( temp1[0]+temp2[1]);
-			cromosomas[1] = new Cromosoma( temp2[0]+temp1[1]);
+			temp1[0] = cromosomas[0].getCadena().substring(0, largoGenoma / 2);
+			temp1[1] = cromosomas[0].getCadena().substring(largoGenoma / 2);
+
+			temp2[0] = cromosomas[1].getCadena().substring(0, largoGenoma / 2);
+			temp2[1] = cromosomas[1].getCadena().substring(largoGenoma / 2);
+
+			cromosomas[0] = new Cromosoma(temp1[0] + temp2[1]);
+			cromosomas[1] = new  Cromosoma(temp2[0] + temp1[1]);
 		}
-		
+
 		cromosomas[0] = operadorMutacion(cromosomas[0]);
 		cromosomas[0] = operadorMutacion(cromosomas[1]);
-		
-		
+
 		return cromosomas;
 	}
 
@@ -83,20 +82,18 @@ public class AlgoritmoCanonico {
 		seleccionRuleta(poblacion);
 		Poblacion hijos = new Poblacion();
 		Cromosoma[] parCromosomas = new Cromosoma[2];
-		
-		for (int i = 0; i<poblacion.size()/2; i++){
+
+		for (int i = 0; i < poblacion.size() / 2; i++) {
 			parCromosomas[0] = poblacion.get(ruleta[i][0]);
 			parCromosomas[1] = poblacion.get(ruleta[i][1]);
-			
+
 			parCromosomas = operadorCrossover(parCromosomas);
-			
+
 			hijos.add(parCromosomas[0]);
 			hijos.add(parCromosomas[1]);
-			
-			
+
 		}
-		
-		
+
 		// TODO: Implementar Crossover y a cada hijo aplicarle operadorMutacion
 
 		return hijos;

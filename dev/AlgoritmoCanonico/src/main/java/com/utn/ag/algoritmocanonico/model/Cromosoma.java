@@ -6,7 +6,7 @@ public class Cromosoma {
 	private static final Integer LONGITUD = 30;
 	private static final Double COEFICIENTE = Math.pow(2, LONGITUD) - 1;
 	private String cadena;
-	private Double fitness;   
+	private Double  fitness;
 	private Double sumaAcumulada;
 
 	public Cromosoma() {
@@ -18,8 +18,9 @@ public class Cromosoma {
 	}
 
 	public String toString() {
-		return String.format("Cadena generada: %s - intValue %s - coef %s - f(x) %s", cadena,
-				getIntValue(), COEFICIENTE, getFunctionValue());
+		return String.format(
+				"Cadena generada: %s - intValue %s - coef %s - f(x) %s",
+				cadena, getIntValue(), COEFICIENTE, getFunctionValue());
 	}
 
 	private String genCadena() {
@@ -29,7 +30,7 @@ public class Cromosoma {
 		}
 		return sb.toString();
 	}
-	
+
 	public void mutarBit() {
 		Random ran = new Random();
 		int index = ran.nextInt(cadena.length());
@@ -61,15 +62,14 @@ public class Cromosoma {
 	public String getCadena() {
 		return cadena;
 	}
-	
-	public  void setFitness (Double fitness) {		//Esteban
-		this.fitness = fitness;		
+
+	public void setFitness(Double fitness) { // Esteban
+		this.fitness = fitness;
 	}
-	
-	public Double getFitness (){
+
+	public Double getFitness() {
 		return this.fitness;
-		
-		
+
 	}
 
 	public Double getSumaAcumulada() {
@@ -79,21 +79,14 @@ public class Cromosoma {
 	public void setSumaAcumulada(Double sumaAcumulada) {
 		this.sumaAcumulada = sumaAcumulada;
 	}
-	
-	
-	
-	public String getGenoma(){
-		
+
+	public String getGenoma() {
+
 		return cadena;
 	}
-	
-	public void setGenoma(String cadena){
-		this.cadena=cadena;
+
+	public void setGenoma(String cadena) {
+		this.cadena = cadena;
 	}
-	
-	
-	
-	
-	
-	
+
 }

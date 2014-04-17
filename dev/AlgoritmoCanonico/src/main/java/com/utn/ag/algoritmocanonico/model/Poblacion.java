@@ -2,7 +2,7 @@ package com.utn.ag.algoritmocanonico.model;
 
 import java.util.ArrayList;
 
-public class Poblacion extends ArrayList<Cromosoma> {
+public class Poblacion  extends ArrayList<Cromosoma> {
 
 	private static Integer ID = 0;
 
