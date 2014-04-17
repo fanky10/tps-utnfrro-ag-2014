@@ -39,24 +39,32 @@ public class AlgoritmoCanonico {
 		}
 	}
 
-	public void operadorMutacion(Cromosoma cromosoma) {
+	private Cromosoma operadorMutacion(Cromosoma cromosoma) {
 
-		if (Math.random() >= probmutacion) {
+		if (Math.random() <= probmutacion) {
 			cromosoma.mutarBit();
 		}
+		return cromosoma;
 
 	}
 
-	public void operadorCrossover(Cromosoma cromosoma1, Cromosoma cromosoma2) {
-		Cromosoma cromosomaHijo1, cromosomaHijo2;
+	private Cromosoma[] operadorCrossover(Cromosoma[] cromosomas) {
+		
 
-		if (Math.random() >= probcrossover) {
+		if (Math.random() <= probcrossover) {
 			// TODO crossovear
 
-		} else {
-
+			
+			
+			
+			
 		}
-
+		
+		cromosomas[0] = operadorMutacion(cromosomas[0]);
+		cromosomas[0] = operadorMutacion(cromosomas[1]);
+		
+		
+		return cromosomas;
 	}
 
 	public AlgoritmoCanonico(Double probcrossover, Double promutacion) {
@@ -69,7 +77,21 @@ public class AlgoritmoCanonico {
 		poblacion.processFitness();
 		seleccionRuleta(poblacion);
 		Poblacion hijos = new Poblacion();
-
+		Cromosoma[] parCromosomas = null;
+		
+		for (int i = 0; i<poblacion.size()/2; i++){
+			parCromosomas[0] = poblacion.get(ruleta[i][0]);
+			parCromosomas[1] = poblacion.get(ruleta[i][1]);
+			
+			parCromosomas = operadorCrossover(parCromosomas);
+			
+			hijos.add(parCromosomas[0]);
+			hijos.add(parCromosomas[1]);
+			
+			
+		}
+		
+		
 		// TODO: Implementar Crossover y a cada hijo aplicarle operadorMutacion
 
 		return hijos;
