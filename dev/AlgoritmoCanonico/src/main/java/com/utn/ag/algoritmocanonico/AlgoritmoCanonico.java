@@ -1,5 +1,7 @@
 package com.utn.ag.algoritmocanonico;
 
+import java.util.Random;
+
 import com.utn.ag.algoritmocanonico.model.Cromosoma;
 import com.utn.ag.algoritmocanonico.model.Poblacion;
 
@@ -13,17 +15,19 @@ public class AlgoritmoCanonico {
 	private void seleccionRuleta(Poblacion poblacion) {
 		ruleta = new int[poblacion.size() / 2][2];
 		Double sumaAcumulada = 0d;
+		Random ran = new Random();
 
 		for (Cromosoma c : poblacion) {
 			sumaAcumulada = sumaAcumulada + c.getFitness();
 			c.setSumaAcumulada(sumaAcumulada);
+
 		}
 
 		for (int i = 0; i < poblacion.size() / 2; i++) {
-			Double ran = Math.random();
+
 			for (int j = 0; j < poblacion.size(); j++) {
 
-				if (poblacion.get(j).getSumaAcumulada() > ran) {
+				if (poblacion.get(j).getSumaAcumulada() > ran.nextDouble()) {
 					ruleta[i][0] = j;
 					break;
 				}
@@ -31,12 +35,17 @@ public class AlgoritmoCanonico {
 
 			for (int j = 0; j < poblacion.size(); j++) {
 
-				if (poblacion.get(j).getSumaAcumulada() > ran) {
+				if (poblacion.get(j).getSumaAcumulada() > ran.nextDouble()) {
 					ruleta[i][1] = j;
 					break;
 				}
 			}
+
+			System.out.println("Seleccionado: " + (ruleta[i][0] + 1) + " y "
+					+ (ruleta[i][1] + 1));
+
 		}
+
 	}
 
 	private Cromosoma operadorMutacion(Cromosoma cromosoma) {
@@ -49,24 +58,24 @@ public class AlgoritmoCanonico {
 	}
 
 	private Cromosoma[] operadorCrossover(Cromosoma[] cromosomas) {
-		String temp1[] = new String[2];
-		String temp2[] = new String[2];
+		String tempA[] = new String[2];
+		String tempB[] = new String[2];
 		int largoGenoma = cromosomas[0].getGenoma().length();
 
 		if (Math.random() <= probcrossover) {
 			// TODO crossovear
-			temp1[0] = cromosomas[0].getCadena().substring(0, largoGenoma / 2);
-			temp1[1] = cromosomas[0].getCadena().substring(largoGenoma / 2);
+			tempA[0] = cromosomas[0].getCadena().substring(0, largoGenoma / 2);
+			tempA[1] = cromosomas[0].getCadena().substring(largoGenoma / 2);
 
-			temp2[0] = cromosomas[1].getCadena().substring(0, largoGenoma / 2);
-			temp2[1] = cromosomas[1].getCadena().substring(largoGenoma / 2);
+			tempB[0] = cromosomas[1].getCadena().substring(0, largoGenoma / 2);
+			tempB[1] = cromosomas[1].getCadena().substring(largoGenoma / 2);
 
-			cromosomas[0] = new Cromosoma(temp1[0] + temp2[1]);
-			cromosomas[1] = new  Cromosoma(temp2[0] + temp1[1]);
+			cromosomas[0] = new Cromosoma(tempA[0] + tempB[1]);
+			cromosomas[1] = new Cromosoma(tempB[0] + tempA[1]);
 		}
 
 		cromosomas[0] = operadorMutacion(cromosomas[0]);
-		cromosomas[0] = operadorMutacion(cromosomas[1]);
+		cromosomas[1] = operadorMutacion(cromosomas[1]);
 
 		return cromosomas;
 	}

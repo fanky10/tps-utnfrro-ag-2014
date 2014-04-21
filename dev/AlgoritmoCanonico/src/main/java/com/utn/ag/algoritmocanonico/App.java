@@ -4,10 +4,10 @@ import com.utn.ag.algoritmocanonico.model.Cromosoma;
 import com.utn.ag.algoritmocanonico.model.Poblacion;
 
 public class App {
-	private static final  Integer POBLACION = 20;
+	private static final Integer POBLACION = 10;
 	private static final Double PROBMUTACION = 0.05;
 	private static final Double PROBCROSSOVER = 0.75;
-	private static final int ITERACIONES = 1000;
+	private static final int ITERACIONES = 50;
 
 	public static void main(String args[]) {
 		Poblacion p = generarPrimerPoblacion();

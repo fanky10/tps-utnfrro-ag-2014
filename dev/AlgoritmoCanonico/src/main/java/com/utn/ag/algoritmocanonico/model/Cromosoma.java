@@ -6,7 +6,7 @@ public class Cromosoma {
 	private static final Integer LONGITUD = 30;
 	private static final Double COEFICIENTE = Math.pow(2, LONGITUD) - 1;
 	private String cadena;
-	private Double  fitness;
+	private Double fitness;
 	private Double sumaAcumulada;
 
 	public Cromosoma() {
