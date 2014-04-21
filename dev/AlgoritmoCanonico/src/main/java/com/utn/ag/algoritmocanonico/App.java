@@ -7,7 +7,8 @@ public class App {
 	private static final Integer POBLACION = 10;
 	private static final Double PROBMUTACION = 0.05;
 	private static final Double PROBCROSSOVER = 0.75;
-	private static final int ITERACIONES = 50;
+	private static final int ITERACIONES = 25;
+	public static final Boolean VERBOSE = true;  //Mostrar selecciones y resultados de crossover
 
 	public static void main(String args[]) {
 		Poblacion p = generarPrimerPoblacion();
