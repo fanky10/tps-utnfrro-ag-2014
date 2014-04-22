@@ -2,7 +2,7 @@ package com.utn.ag.algoritmocanonico;
 
 public class MockedLogger {
 	// Mostrar selecciones y resultados de crossover
-	public static final Boolean VERBOSE = true;
+	public static final Boolean VERBOSE = Boolean.FALSE;
 	private static final Boolean DEBUG = Boolean.FALSE;
 	
 	public static void verbose(String text) {
@@ -15,5 +15,8 @@ public class MockedLogger {
 		if (DEBUG) {
 			System.out.println("DEBUG: " + txt);
 		}
+	}
+	public static void informe(String txt){
+		System.out.println(txt);
 	}
 }

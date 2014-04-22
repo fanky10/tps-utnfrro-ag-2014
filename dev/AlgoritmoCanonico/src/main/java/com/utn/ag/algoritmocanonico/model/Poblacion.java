@@ -2,6 +2,8 @@ package com.utn.ag.algoritmocanonico.model;
 
 import java.util.ArrayList;
 
+import com.utn.ag.algoritmocanonico.MockedLogger;
+
 public class Poblacion extends ArrayList<Cromosoma> {
 
 	private static Integer ID = 0;
@@ -36,23 +38,38 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		}
 		return max;
 	}
+	
+	private Double getMin() {
+		Double min = 0d;
+		for (Cromosoma c : this) {
+			if (min > c.getFunctionValue()) {
+				min = c.getFunctionValue();
+			}
+		}
+		return min;
+	}
 
-	public void showInforme() {
+	public void showInformeData() {
 		Double sum = getSum();
 		Double prom = getSum() / this.size();
 		Double max = getMax();
+		Double min = getMin();
 
 		int i = 1;
-		System.out.println("Poblacion " + ID);
+		MockedLogger.debug("Poblacion " + ID);
 		for (Cromosoma c : this) {
-			System.out.println(i + ": " + c.toString() + " - fit: "
+			MockedLogger.debug(i + ": " + c.toString() + " - fit: "
 					+ c.getFitness());
 			i++;
 		}
-		System.out.println("Suma: " + sum);
-		System.out.println("Promedio: " + prom);
-		System.out.println("Maximo: " + max);
+		// informe! max, min, prom
+		MockedLogger.informe(max+","+min+","+prom);
 
+	}
+	
+	public static void showInformeHeaders(){
+		// informe! max, min, prom
+		MockedLogger.informe("max,min,prom");
 	}
 
 	public void processFitness() {

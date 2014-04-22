@@ -11,16 +11,17 @@ public class App {
 	
 
 	public static void main(String args[]) {
+		Poblacion.showInformeHeaders();
 		Poblacion p = generarPrimerPoblacion();
 		AlgoritmoCanonico a = new AlgoritmoCanonico(PROBCROSSOVER, PROBMUTACION);
 		p.processFitness();
-		p.showInforme();
+		p.showInformeData();
 
 		for (int i = 0; i < ITERACIONES - 1; i++) {
 
 			p = a.siguienteGeneracion(p);
 			p.processFitness();
-			p.showInforme();
+			p.showInformeData();
 
 		}
 
