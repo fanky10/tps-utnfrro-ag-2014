@@ -1,3 +1,6 @@
+#generated files
+informe.csv
+
 *.class
 .classpath
 .project
