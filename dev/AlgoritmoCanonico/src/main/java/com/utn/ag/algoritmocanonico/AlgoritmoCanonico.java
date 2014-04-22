@@ -41,7 +41,7 @@ public class AlgoritmoCanonico {
 				}
 			}
 
-			if(App.VERBOSE) System.out.println("Seleccionado: " + (ruleta[i][0] + 1) + " y "
+			MockedLogger.verbose("Seleccionado: " + (ruleta[i][0] + 1) + " y "
 					+ (ruleta[i][1] + 1));
 
 		}
@@ -63,7 +63,7 @@ public class AlgoritmoCanonico {
 		int largoGenoma = cromosomas[0].getGenoma().length();
 
 		if (Math.random() <= probcrossover) {
-			if(App.VERBOSE) System.out.println("PADRES " + cromosomas[0].getCadena() +" | "+ cromosomas[1].getCadena());	
+			MockedLogger.verbose("PADRES " + cromosomas[0].getCadena() +" | "+ cromosomas[1].getCadena());	
 			tempA[0] = cromosomas[0].getCadena().substring(0, largoGenoma / 2);
 			tempA[1] = cromosomas[0].getCadena().substring(largoGenoma / 2);
 
@@ -77,7 +77,7 @@ public class AlgoritmoCanonico {
 		cromosomas[0] = operadorMutacion(cromosomas[0]);
 		cromosomas[1] = operadorMutacion(cromosomas[1]);
 		
-		if(App.VERBOSE) System.out.println("DESEND " + cromosomas[0].getCadena() +" | "+ cromosomas[1].getCadena());	
+		MockedLogger.verbose("DESEND " + cromosomas[0].getCadena() +" | "+ cromosomas[1].getCadena());	
 
 		return cromosomas;
 	}

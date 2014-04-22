@@ -8,7 +8,7 @@ public class App {
 	private static final Double PROBMUTACION = 0.05;
 	private static final Double PROBCROSSOVER = 0.75;
 	private static final int ITERACIONES = 25;
-	public static final Boolean VERBOSE = true;  //Mostrar selecciones y resultados de crossover
+	
 
 	public static void main(String args[]) {
 		Poblacion p = generarPrimerPoblacion();
@@ -30,17 +30,9 @@ public class App {
 		Poblacion poblacion = new Poblacion();
 		for (int i = 0; i < POBLACION; i++) {
 			Cromosoma c = new Cromosoma();
-			debug(c.toString());
+			MockedLogger.debug(c.toString());
 			poblacion.add(c);
 		}
 		return poblacion;
-	}
-
-	private static final Boolean DEBUG = Boolean.FALSE;
-
-	private static void debug(String txt) {
-		if (DEBUG) {
-			System.out.println("DEBUG: " + txt);
-		}
 	}
 }
