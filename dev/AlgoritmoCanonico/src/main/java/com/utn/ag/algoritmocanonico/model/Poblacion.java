@@ -42,7 +42,7 @@ public class Poblacion extends ArrayList<Cromosoma> {
 	private Double getMin() {
 		Double min = 0d;
 		for (Cromosoma c : this) {
-			if (min > c.getFunctionValue()) {
+			if (min == 0 || min > c.getFunctionValue()) {
 				min = c.getFunctionValue();
 			}
 		}

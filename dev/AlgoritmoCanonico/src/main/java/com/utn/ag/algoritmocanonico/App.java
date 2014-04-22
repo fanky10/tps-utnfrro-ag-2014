@@ -2,8 +2,6 @@ package com.utn.ag.algoritmocanonico;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 
 import com.utn.ag.algoritmocanonico.model.Cromosoma;
 import com.utn.ag.algoritmocanonico.model.Poblacion;
@@ -41,8 +39,8 @@ public class App {
 		}
 		return poblacion;
 	}
-	
-	private static void cleanFile(){
+
+	private static void cleanFile() {
 		File f = new File(AppConstants.FILE_INFORME);
 		f.delete();
 	}
