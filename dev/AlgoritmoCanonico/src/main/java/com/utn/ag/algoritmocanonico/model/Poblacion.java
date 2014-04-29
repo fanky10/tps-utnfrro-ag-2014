@@ -11,6 +11,11 @@ public class Poblacion extends ArrayList<Cromosoma> {
 	public Poblacion() {
 		ID++;
 	}
+	
+	public Poblacion(int size) {
+		super(size);
+		ID++;
+	}
 
 	public Poblacion(ArrayList<Cromosoma> hijos) {
 		ID++;

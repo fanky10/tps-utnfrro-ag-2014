@@ -9,7 +9,7 @@ public class MockedLogger {
 	// Mostrar selecciones y resultados de crossover
 	public static final Boolean VERBOSE = Boolean.TRUE;
 	private static final Boolean DEBUG = Boolean.TRUE;
-	private static final Boolean WRITE_FILE = Boolean.FALSE;
+	private static final Boolean WRITE_FILE = Boolean.TRUE;
 	private static final Boolean SHOW_INFORME = Boolean.FALSE;
 
 	public static void verbose(String text) {

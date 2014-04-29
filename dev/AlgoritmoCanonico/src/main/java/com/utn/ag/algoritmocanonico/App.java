@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 
 import com.utn.ag.algoritmocanonico.model.Cromosoma;
 import com.utn.ag.algoritmocanonico.model.Poblacion;
+import com.utn.ag.algoritmocanonico.service.AlgoritmoCanonico;
+import com.utn.ag.algoritmocanonico.service.impl.AlgoritmoCanonicoImpl;
 
 public class App {
 
@@ -12,13 +14,11 @@ public class App {
 		cleanFile();
 		Poblacion.showInformeHeaders();
 		Poblacion p = generarPrimerPoblacion();
-		AlgoritmoCanonico a = new AlgoritmoCanonico();
-		p.processFitness();
+		AlgoritmoCanonico a = new AlgoritmoCanonicoImpl();
 		p.showInformeData();
 
 		for (int i = 0; i < AppConstants.ITERACIONES - 1; i++) {
-			p = a.siguienteGeneracion(p);
-			p.processFitness();
+			p = a.nuevaPoblacion(p);
 			p.showInformeData();
 		}
 
