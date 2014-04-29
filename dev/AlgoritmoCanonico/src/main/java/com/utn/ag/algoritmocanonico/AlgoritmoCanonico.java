@@ -7,10 +7,13 @@ import com.utn.ag.algoritmocanonico.model.Poblacion;
 
 public class AlgoritmoCanonico {
 
-	private static Double probmutacion;
-	private static Double probcrossover;
+	public static final Double PROBABILIDAD_MUTACION = AppConstants.PROBCROSSOVER;
+	public static final Double PROBABILIDAD_CROSSOVER = AppConstants.PROBCROSSOVER;
 
 	private int[][] ruleta;
+
+	public AlgoritmoCanonico() {
+	}
 
 	private void seleccionRuleta(Poblacion poblacion) {
 		ruleta = new int[poblacion.size() / 2][2];
@@ -50,7 +53,7 @@ public class AlgoritmoCanonico {
 
 	private Cromosoma operadorMutacion(Cromosoma cromosoma) {
 
-		if (Math.random() <= probmutacion) {
+		if (Math.random() <= PROBABILIDAD_MUTACION) {
 			cromosoma.mutarBit();
 		}
 		return cromosoma;
@@ -62,8 +65,9 @@ public class AlgoritmoCanonico {
 		String tempB[] = new String[2];
 		int largoGenoma = cromosomas[0].getGenoma().length();
 
-		if (Math.random() <= probcrossover) {
-			MockedLogger.verbose("PADRES " + cromosomas[0].getCadena() +" | "+ cromosomas[1].getCadena());	
+		if (Math.random() <= PROBABILIDAD_CROSSOVER) {
+			MockedLogger.verbose("PADRES " + cromosomas[0].getCadena() + " | "
+					+ cromosomas[1].getCadena());
 			tempA[0] = cromosomas[0].getCadena().substring(0, largoGenoma / 2);
 			tempA[1] = cromosomas[0].getCadena().substring(largoGenoma / 2);
 
@@ -76,16 +80,11 @@ public class AlgoritmoCanonico {
 
 		cromosomas[0] = operadorMutacion(cromosomas[0]);
 		cromosomas[1] = operadorMutacion(cromosomas[1]);
-		
-		MockedLogger.verbose("DESEND " + cromosomas[0].getCadena() +" | "+ cromosomas[1].getCadena());	
+
+		MockedLogger.verbose("DESEND " + cromosomas[0].getCadena() + " | "
+				+ cromosomas[1].getCadena());
 
 		return cromosomas;
-	}
-
-	public AlgoritmoCanonico(Double probcrossover, Double promutacion) {
-		this.probcrossover = probcrossover;
-		this.probmutacion = probcrossover;
-
 	}
 
 	public Poblacion siguienteGeneracion(Poblacion poblacion) {

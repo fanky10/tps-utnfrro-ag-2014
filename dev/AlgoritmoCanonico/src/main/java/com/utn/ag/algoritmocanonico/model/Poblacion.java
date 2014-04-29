@@ -50,7 +50,6 @@ public class Poblacion extends ArrayList<Cromosoma> {
 	}
 
 	public void showInformeData() {
-		Double sum = getSum();
 		Double prom = getSum() / this.size();
 		Double max = getMax();
 		Double min = getMin();
