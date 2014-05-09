@@ -20,6 +20,7 @@ public class App {
 		InformeChart informeVO = new InformeChart();
 		Poblacion.showInformeHeaders();
 		Poblacion p = generarPrimerPoblacion();
+		p.processFitness();
 		AlgoritmoCanonico a = new AlgoritmoCanonicoImpl();
 		informeVO.add(p.getInformeVO());
 

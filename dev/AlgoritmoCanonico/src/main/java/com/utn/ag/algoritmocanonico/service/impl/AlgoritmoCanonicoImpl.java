@@ -17,7 +17,7 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 	 * @return poblacionNueva
 	 */
 	public Poblacion nuevaPoblacion(Poblacion poblacionActual) {
-		poblacionActual.processFitness();
+		
 		// ruleta n veces por cantidad de poblacion actual
 		Poblacion poblacionNueva = RouletteWheelSelection
 				.select(poblacionActual);
@@ -25,14 +25,14 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 				"Poblacion luego de la seleccion de ruleta");
 		// aplicamos crossover cada dos
 		// aplicamos mutacion a cada cromosoma generado
-		for (int i = 0; i < poblacionNueva.size() / 2;i+=2) {
+		for (int i = 0; i < poblacionNueva.size();i+=2) {
 			Cromosoma c1 = poblacionNueva.get(i);
 			Cromosoma c2 = poblacionNueva.get(i + 1);
 			aplicarCrossover(c1, c2);
 			aplicarMutacion(c1);
 			aplicarMutacion(c2);
 		}
-
+		poblacionNueva.processFitness();
 		return poblacionNueva;
 	}
 
@@ -51,18 +51,22 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 	 */
 	public void aplicarCrossover(Cromosoma c1, Cromosoma c2) {
 		if (!aplicarCrossover()) {
+			MockedLogger.debug("NOT aplicar crossover!!");
 			return;
 		}
+		MockedLogger.debug("a aplicar crossover!!");
 		if (c1.getGenoma().length() != c2.getGenoma().length()) {
 			throw new IllegalArgumentException(
 					"cromosomas con genomas de distintas longitudes");
 		}
-		MockedLogger.verbose("PADRES " + c1.getGenoma() + " | "
+		MockedLogger.debug("PADRES " + c1.getGenoma() + " | "
 				+ c2.getGenoma());
 		// crossover de un corte
 		// donde se corta
 		Random ran = new Random();
 		int indexCorte = ran.nextInt(c1.getGenoma().length());
+
+		MockedLogger.debug("indexCorte " + indexCorte);
 		// se intercambian
 		StringBuilder genoma1 = new StringBuilder();
 		StringBuilder genoma2 = new StringBuilder();
@@ -75,7 +79,7 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 		c1.setGenoma(genoma1.toString());
 		c2.setGenoma(genoma2.toString());
 
-		MockedLogger.verbose("HIJOS! " + c1.getGenoma() + " | "
+		MockedLogger.debug("HIJOS! " + c1.getGenoma() + " | "
 				+ c2.getGenoma());
 	}
 
@@ -87,7 +91,9 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 		// ver si debo mutar por probabilidad
 		// si debo mutar, ver que inidice mutar.
 		if (aplicarMutacion()) {
+			MockedLogger.debug("Aplicar mutacion!! "+c1.getGenoma());
 			c1.mutarBit();
+			MockedLogger.debug("mutante!! "+c1.getGenoma());
 		}
 	}
 
