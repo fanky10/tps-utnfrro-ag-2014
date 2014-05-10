@@ -3,6 +3,7 @@ package com.utn.ag.algoritmocanonico.model;
 import java.util.ArrayList;
 
 import com.utn.ag.algoritmocanonico.MockedLogger;
+import com.utn.ag.algoritmocanonico.vo.InformeVO;
 
 public class Poblacion extends ArrayList<Cromosoma> {
 
@@ -70,6 +71,21 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		MockedLogger.informe(max+","+min+","+prom);
 
 	}
+        
+        public InformeVO getInformeVO(){
+            Double prom = getSum() / this.size();
+            Double max = getMax();
+            Double min = getMin();
+
+            int i = 1;
+            MockedLogger.debug("Poblacion " + ID);
+            for (Cromosoma c : this) {
+                    MockedLogger.debug(i + ": " + c.toString() + " - fit: "
+                                    + c.getFitness());
+                    i++;
+            }
+            return new InformeVO(min, max, prom);
+        }
 	
 	public static void showInformeHeaders(){
 		// informe! max, min, prom

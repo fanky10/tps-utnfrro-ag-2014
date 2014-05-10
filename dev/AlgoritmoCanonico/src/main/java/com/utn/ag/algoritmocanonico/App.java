@@ -7,6 +7,7 @@ import com.utn.ag.algoritmocanonico.model.Cromosoma;
 import com.utn.ag.algoritmocanonico.model.Poblacion;
 import com.utn.ag.algoritmocanonico.service.AlgoritmoCanonico;
 import com.utn.ag.algoritmocanonico.service.impl.AlgoritmoCanonicoImpl;
+import com.utn.ag.algoritmocanonico.vo.InformeChart;
 
 public class App {
 
@@ -23,6 +24,21 @@ public class App {
 		}
 
 	}
+        
+        public static InformeChart getInformeChart(){
+            InformeChart informeVO = new InformeChart();
+            Poblacion.showInformeHeaders();
+            Poblacion p = generarPrimerPoblacion();
+            AlgoritmoCanonico a = new AlgoritmoCanonicoImpl();
+            informeVO.add(p.getInformeVO());
+
+            for (int i = 0; i < AppConstants.ITERACIONES - 1; i++) {
+                    p = a.nuevaPoblacion(p);
+                    informeVO.add(p.getInformeVO());
+            }
+            MockedLogger.debug("fin!");
+            return informeVO;
+        }
 
 	private static Poblacion generarPrimerPoblacion() {
 		Poblacion poblacion = new Poblacion();
