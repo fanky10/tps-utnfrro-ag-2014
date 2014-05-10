@@ -4,10 +4,7 @@
  */
 package com.utn.ag.algoritmocanonico.vo;
 
-import java.awt.Color;
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
@@ -67,22 +64,17 @@ public class InformeChart extends ArrayList<InformeVO>{
         legend.setPosition(RectangleEdge.RIGHT);
         XYPlot plot = chart.getXYPlot();
         XYItemRenderer renderer = new XYLineAndShapeRenderer(true, false);
-        // set the color for each series
-//        for (int i = 0; i < colores.size(); i++) {
-//            renderer.setSeriesPaint(i, colores.get(i));
-//        }
+        
         plot.setRenderer(renderer);
         //percentage (rangeAxis)
-//        final NumberAxis timeAxis = new NumberAxis("tiempo");
-//        timeAxis.setInverted(false);
-//        timeAxis.setRange(0.0, 5 * maxTau);
-//        timeAxis.setTickUnit(new NumberTickUnit(1));
-//
-//        final NumberAxis functionAxis = new NumberAxis("y(t)");
-//        functionAxis.setInverted(false);
-////        functionAxis.setRange(0.0, 5 * maxTau);//automatic
-//        functionAxis.setTickUnit(new NumberTickUnit(1));
-//        plot.setRangeAxis(functionAxis);
+        final NumberAxis timeAxis = new NumberAxis("tiempo");
+        timeAxis.setInverted(false);
+        timeAxis.setTickUnit(new NumberTickUnit(1));
+
+        final NumberAxis functionAxis = new NumberAxis("y(t)");
+        functionAxis.setInverted(false);
+        functionAxis.setTickUnit(new NumberTickUnit(1));
+        plot.setRangeAxis(functionAxis);
 
 
     }

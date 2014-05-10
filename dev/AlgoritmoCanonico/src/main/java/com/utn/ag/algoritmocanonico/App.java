@@ -1,5 +1,6 @@
 package com.utn.ag.algoritmocanonico;
 
+import com.utn.ag.algoritmocanonico.gui.PnlInformeChart;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -12,33 +13,23 @@ import com.utn.ag.algoritmocanonico.vo.InformeChart;
 public class App {
 
 	public static void main(String args[]) throws FileNotFoundException {
-		cleanFile();
+		PnlInformeChart.showApp();
+	}
+
+	public static InformeChart getInformeChart() {
+		InformeChart informeVO = new InformeChart();
 		Poblacion.showInformeHeaders();
 		Poblacion p = generarPrimerPoblacion();
 		AlgoritmoCanonico a = new AlgoritmoCanonicoImpl();
-		p.showInformeData();
+		informeVO.add(p.getInformeVO());
 
 		for (int i = 0; i < AppConstants.ITERACIONES - 1; i++) {
 			p = a.nuevaPoblacion(p);
-			p.showInformeData();
+			informeVO.add(p.getInformeVO());
 		}
-
+		MockedLogger.debug("fin!");
+		return informeVO;
 	}
-        
-        public static InformeChart getInformeChart(){
-            InformeChart informeVO = new InformeChart();
-            Poblacion.showInformeHeaders();
-            Poblacion p = generarPrimerPoblacion();
-            AlgoritmoCanonico a = new AlgoritmoCanonicoImpl();
-            informeVO.add(p.getInformeVO());
-
-            for (int i = 0; i < AppConstants.ITERACIONES - 1; i++) {
-                    p = a.nuevaPoblacion(p);
-                    informeVO.add(p.getInformeVO());
-            }
-            MockedLogger.debug("fin!");
-            return informeVO;
-        }
 
 	private static Poblacion generarPrimerPoblacion() {
 		Poblacion poblacion = new Poblacion();

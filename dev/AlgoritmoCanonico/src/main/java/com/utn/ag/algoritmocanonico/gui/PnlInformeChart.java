@@ -100,7 +100,7 @@ public class PnlInformeChart extends JPanel {
     private javax.swing.JPanel pnlGrafico;
     // End of variables declaration//GEN-END:variables
 
-    public static void main(String args[]) {
+    public static void showApp() {
         JFrame frmMain = new JFrame("Algoritmos Geneticos");
         frmMain.getContentPane().add(new PnlInformeChart());
         frmMain.setLocationRelativeTo(null);
