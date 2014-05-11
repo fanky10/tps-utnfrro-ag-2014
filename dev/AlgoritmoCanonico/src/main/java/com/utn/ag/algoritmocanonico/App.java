@@ -16,6 +16,7 @@ import com.utn.ag.algoritmocanonico.model.Poblacion;
 import com.utn.ag.algoritmocanonico.service.AlgoritmoCanonico;
 import com.utn.ag.algoritmocanonico.service.impl.AlgoritmoCanonicoImpl;
 import com.utn.ag.algoritmocanonico.vo.InformeChart;
+import com.utn.ag.algoritmocanonico.vo.InformeVO;
 
 public class App {
 	private static Options createOptions() {
@@ -93,51 +94,44 @@ public class App {
 
 			if (cmd.hasOption("o")) {
 				String outputPath = cmd.getOptionValue("o");
-				MockedLogger.WRITE_FILE = true;
 				if (!StringUtils.isEmpty(outputPath)) {
 					AppConstants.FILE_INFORME = outputPath;
 				}
+				MockedLogger.WRITE_FILE = true;
+				//clean previous created file
+				File f = new File(AppConstants.FILE_INFORME);
+				f.delete();
+				MockedLogger.informe("max,min,prom");
 			}
 			if (cmd.hasOption("f")) {
 				generarInforme();
-				return;
+			}else{
+				PnlInformeChart.showApp();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			showHelp(options);
+			System.exit(-1);
 		}
-		PnlInformeChart.showApp();
+		
 	}
 
 	public static InformeChart generarInforme() {
-		InformeChart informeVO = new InformeChart();
-		Poblacion.showInformeHeaders();
+		InformeChart informe = new InformeChart();
 		AlgoritmoCanonico a = new AlgoritmoCanonicoImpl();
 		Poblacion p = null;
 		for (int i = 0; i < AppConstants.ITERACIONES - 1; i++) {
 			if(i==0){
-				p = generarPrimerPoblacion();
+				p = a.nuevaPoblacion();
 			}else{
 				p = a.nuevaPoblacion(p);
 			}
-			informeVO.add(p.getInformeVO());
+			InformeVO informeVO = p.getInformeVO();
+			MockedLogger.writeInforme(informeVO);
+			informe.add(informeVO);
 		}
 		MockedLogger.debug("fin!");
-		return informeVO;
+		return informe;
 	}
 
-	private static Poblacion generarPrimerPoblacion() {
-		Poblacion poblacion = new Poblacion();
-		for (int i = 0; i < AppConstants.POBLACION; i++) {
-			Cromosoma c = new Cromosoma();
-			poblacion.add(c);
-		}
-		poblacion.processFitness();
-		return poblacion;
-	}
-
-	private static void cleanFile() {
-		File f = new File(AppConstants.FILE_INFORME);
-		f.delete();
-	}
 }

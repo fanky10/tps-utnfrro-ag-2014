@@ -12,11 +12,11 @@ public class Poblacion extends ArrayList<Cromosoma> {
 	public Poblacion() {
 		this(0);
 	}
-	
+
 	public Poblacion(int size) {
 		super(size);
 		ID++;
-		MockedLogger.debug("## Nueva Poblacion: " + Poblacion.ID);
+		MockedLogger.verbose("## Nueva Poblacion: " + Poblacion.ID);
 	}
 
 	public Poblacion(ArrayList<Cromosoma> hijos) {
@@ -43,7 +43,7 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		}
 		return max;
 	}
-	
+
 	private Double getMin() {
 		Double min = 0d;
 		for (Cromosoma c : this) {
@@ -54,39 +54,21 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		return min;
 	}
 
-	public void showInformeData() {
-		Double prom = getSum() / this.size();
+	public InformeVO getInformeVO() {
+		Double sum = getSum();
+		Double prom = sum / this.size();
 		Double max = getMax();
 		Double min = getMin();
 
-		int i = 1;
 		for (Cromosoma c : this) {
-			MockedLogger.debug(i + ": " + c.toString() + " - fit: "
-					+ c.getFitness());
-			i++;
+			MockedLogger
+					.verbose(c.toString() + " - fitness: " + c.getFitness());
 		}
-		// informe! max, min, prom
-		MockedLogger.informe(max+","+min+","+prom);
-
-	}
-        
-        public InformeVO getInformeVO(){
-            Double prom = getSum() / this.size();
-            Double max = getMax();
-            Double min = getMin();
-
-            int i = 1;
-            for (Cromosoma c : this) {
-                    MockedLogger.debug(i + ": " + c.toString() + " - fit: "
-                                    + c.getFitness());
-                    i++;
-            }
-            return new InformeVO(min, max, prom);
-        }
-	
-	public static void showInformeHeaders(){
-		// informe! max, min, prom
-		MockedLogger.informe("max,min,prom");
+		InformeVO informeVO = new InformeVO(min, max, prom);
+		MockedLogger.verbose("Sum: "+sum);
+		MockedLogger.verbose("Prom: "+prom);
+		MockedLogger.verbose("Max: "+max);
+		return informeVO;
 	}
 
 	public void processFitness() {
