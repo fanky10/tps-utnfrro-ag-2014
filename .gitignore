@@ -6,6 +6,7 @@ informe.csv
 .project
 .settings/
 target/
+bin/
 *.prefs
 *.project
 log.txt
