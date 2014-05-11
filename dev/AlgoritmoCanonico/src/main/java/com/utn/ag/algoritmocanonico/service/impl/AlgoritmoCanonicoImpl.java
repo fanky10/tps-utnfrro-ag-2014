@@ -33,27 +33,34 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 		Poblacion poblacionNueva = RouletteWheelSelection
 				.select(poblacionActual);
 		debugPoblacion(poblacionNueva);
+		MockedLogger.debug("***************************************");
 		// aplicamos crossover cada dos
 		// aplicamos mutacion a cada cromosoma generado
 		for (int i = 0; i < poblacionNueva.size(); i += 2) {
 			Cromosoma c1 = poblacionNueva.get(i);
 			Cromosoma c2 = poblacionNueva.get(i + 1);
-			MockedLogger.debug("PADRES " + c1.getGenoma() + " | " + c2.getGenoma());
+			MockedLogger.debug("PADRES " + c1.getGenoma() + " | "
+					+ c2.getGenoma());
 			aplicarCrossover(c1, c2);
 			aplicarMutacion(c1);
 			aplicarMutacion(c2);
-			MockedLogger.debug("HIJOS! " + c1.getGenoma() + " | " + c2.getGenoma());
-			MockedLogger.debug("----------------------------------------------------");
+			MockedLogger.debug("HIJOS! " + c1.getGenoma() + " | "
+					+ c2.getGenoma());
+			MockedLogger
+					.debug("----------------------------------------------------");
 		}
 		poblacionNueva.processFitness();
+		MockedLogger.debug("### informe: ###");
+		poblacionNueva.getInformeVO();
+		MockedLogger.debug("### fin informe: ###");
 		return poblacionNueva;
 	}
 
 	private void debugPoblacion(Poblacion p) {
 		MockedLogger.debug("Poblacion luego de la seleccion de ruleta");
 		for (Cromosoma c : p) {
-			MockedLogger.debug("genoma: " + c.getGenoma() + " fitness: "
-					+ c.getFitness());
+			MockedLogger.debug("IntVal:" + c.getIntValue() + " genoma: "
+					+ c.getGenoma() + " fitness: " + c.getFitness());
 		}
 	}
 
