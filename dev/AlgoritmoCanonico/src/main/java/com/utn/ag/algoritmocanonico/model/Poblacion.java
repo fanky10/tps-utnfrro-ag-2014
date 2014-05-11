@@ -7,16 +7,12 @@ import com.utn.ag.algoritmocanonico.vo.InformeVO;
 
 public class Poblacion extends ArrayList<Cromosoma> {
 
-	public static Integer ID = 0;
-
 	public Poblacion() {
 		this(0);
 	}
 
 	public Poblacion(int size) {
 		super(size);
-		ID++;
-		MockedLogger.verbose("## Nueva Poblacion: " + Poblacion.ID);
 	}
 
 	public Poblacion(ArrayList<Cromosoma> hijos) {
@@ -65,9 +61,9 @@ public class Poblacion extends ArrayList<Cromosoma> {
 					.verbose(c.toString() + " - fitness: " + c.getFitness());
 		}
 		InformeVO informeVO = new InformeVO(min, max, prom);
-		MockedLogger.verbose("Sum: "+sum);
-		MockedLogger.verbose("Prom: "+prom);
-		MockedLogger.verbose("Max: "+max);
+		MockedLogger.verbose("Sum: " + sum);
+		MockedLogger.verbose("Prom: " + prom);
+		MockedLogger.verbose("Max: " + max);
 		return informeVO;
 	}
 

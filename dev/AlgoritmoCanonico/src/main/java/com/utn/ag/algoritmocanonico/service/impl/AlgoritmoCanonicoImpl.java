@@ -30,27 +30,40 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 	public Poblacion nuevaPoblacion(Poblacion poblacionActual) {
 
 		// ruleta n veces por cantidad de poblacion actual
-		Poblacion poblacionNueva = RouletteWheelSelection
+		Poblacion poblacionSeleccionada = RouletteWheelSelection
 				.select(poblacionActual);
-		debugPoblacion(poblacionNueva);
+		debugPoblacion(poblacionSeleccionada);
+		Poblacion nuevaPoblacion = new Poblacion();
 		MockedLogger.debug("***************************************");
 		// aplicamos crossover cada dos
 		// aplicamos mutacion a cada cromosoma generado
-		for (int i = 0; i < poblacionNueva.size(); i += 2) {
-			Cromosoma c1 = poblacionNueva.get(i);
-			Cromosoma c2 = poblacionNueva.get(i + 1);
-			MockedLogger.debug("PADRES " + c1.getGenoma() + " | "
-					+ c2.getGenoma());
+		for (int i = 0; i < poblacionSeleccionada.size(); i += 2) {
+			Cromosoma c1 = poblacionSeleccionada.get(i);
+			Cromosoma c2 = poblacionSeleccionada.get(i + 1);
+			debugCromosoma("Padre: 1 ", c1);
+			debugCromosoma("Padre: 2 ", c2);
+			
 			aplicarCrossover(c1, c2);
-			aplicarMutacion(c1);
-			aplicarMutacion(c2);
-			MockedLogger.debug("HIJOS! " + c1.getGenoma() + " | "
-					+ c2.getGenoma());
+			debugCromosoma("Hijo: 1 ", c1);
+			debugCromosoma("Hijo: 2 ", c2);
+			if (aplicarMutacion(c1)) {
+				debugCromosoma("Hijo: 1 Mutado! ", c1);
+			}
+			if (aplicarMutacion(c2)) {
+				debugCromosoma("Hijo: 2 Mutado! ", c2);
+			}
 			MockedLogger
 					.debug("----------------------------------------------------");
+			nuevaPoblacion.add(c1);
+			nuevaPoblacion.add(c2);
 		}
-		poblacionNueva.processFitness();
-		return poblacionNueva;
+		nuevaPoblacion.processFitness();
+		return nuevaPoblacion;
+	}
+
+	private void debugCromosoma(String msg, Cromosoma c) {
+		MockedLogger.debug(msg + c.getGenoma() + " intVal: " + c.getIntValue()
+				+ " f(x)" + c.getFunctionValue());
 	}
 
 	private void debugPoblacion(Poblacion p) {
@@ -102,14 +115,30 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 		return (Math.random() <= PROBABILIDAD_CROSSOVER);
 	}
 
-	public void aplicarMutacion(Cromosoma c1) {
+	public boolean aplicarMutacion(Cromosoma c1) {
 		// ver si debo mutar por probabilidad
 		// si debo mutar, ver que inidice mutar.
-		if (aplicarMutacion()) {
-			MockedLogger.debug("Aplicar mutacion!! " + c1.getGenoma());
-			c1.mutarBit();
-			MockedLogger.debug("mutante!! " + c1.getGenoma());
+		boolean aplicarMutacion = aplicarMutacion();
+		if (aplicarMutacion) {
+			MockedLogger.debug("Aplicar mutacion!! ");
+			String nuevoGenoma = mutarBit(c1.getGenoma());
+			c1.setGenoma(nuevoGenoma);
 		}
+		return aplicarMutacion;
+	}
+
+	public String mutarBit(String genoma) {
+		MockedLogger.debug("Genoma a Mutar: " + genoma);
+		Random ran = new Random();
+		int index = ran.nextInt(genoma.length());
+		StringBuilder builder = new StringBuilder(genoma);
+		if (genoma.charAt(index) == '0') {
+			builder.setCharAt(index, '1');
+		} else {
+			builder.setCharAt(index, '0');
+		}
+		MockedLogger.debug("Cambio de genoma en: " + index);
+		return builder.toString();
 	}
 
 	private boolean aplicarMutacion() {

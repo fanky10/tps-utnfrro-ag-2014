@@ -120,13 +120,13 @@ public class App {
 		InformeChart informe = new InformeChart();
 		AlgoritmoCanonico a = new AlgoritmoCanonicoImpl();
 		Poblacion p = null;
-		Poblacion.ID = 0;
 		for (int i = 0; i < AppConstants.ITERACIONES - 1; i++) {
 			if (i == 0) {
 				p = a.nuevaPoblacion();
 			} else {
 				p = a.nuevaPoblacion(p);
 			}
+			MockedLogger.verbose("## Nueva Poblacion: " + i);
 			InformeVO informeVO = p.getInformeVO();
 			MockedLogger.writeInforme(informeVO);
 			informe.add(informeVO);
