@@ -98,14 +98,14 @@ public class App {
 					AppConstants.FILE_INFORME = outputPath;
 				}
 				MockedLogger.WRITE_FILE = true;
-				//clean previous created file
+				// clean previous created file
 				File f = new File(AppConstants.FILE_INFORME);
 				f.delete();
 				MockedLogger.informe("max,min,prom");
 			}
 			if (cmd.hasOption("f")) {
 				generarInforme();
-			}else{
+			} else {
 				PnlInformeChart.showApp();
 			}
 		} catch (Exception e) {
@@ -113,17 +113,18 @@ public class App {
 			showHelp(options);
 			System.exit(-1);
 		}
-		
+
 	}
 
 	public static InformeChart generarInforme() {
 		InformeChart informe = new InformeChart();
 		AlgoritmoCanonico a = new AlgoritmoCanonicoImpl();
 		Poblacion p = null;
+		Poblacion.ID = 0;
 		for (int i = 0; i < AppConstants.ITERACIONES - 1; i++) {
-			if(i==0){
+			if (i == 0) {
 				p = a.nuevaPoblacion();
-			}else{
+			} else {
 				p = a.nuevaPoblacion(p);
 			}
 			InformeVO informeVO = p.getInformeVO();

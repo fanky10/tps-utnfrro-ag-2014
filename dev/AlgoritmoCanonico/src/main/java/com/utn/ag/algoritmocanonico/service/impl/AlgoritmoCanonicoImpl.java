@@ -50,9 +50,6 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 					.debug("----------------------------------------------------");
 		}
 		poblacionNueva.processFitness();
-		MockedLogger.debug("### informe: ###");
-		poblacionNueva.getInformeVO();
-		MockedLogger.debug("### fin informe: ###");
 		return poblacionNueva;
 	}
 

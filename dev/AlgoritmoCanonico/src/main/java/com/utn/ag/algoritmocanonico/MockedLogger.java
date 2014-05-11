@@ -9,8 +9,8 @@ import com.utn.ag.algoritmocanonico.vo.InformeVO;
 
 public class MockedLogger {
 	// Mostrar selecciones y resultados de crossover
-	public static Boolean VERBOSE = Boolean.TRUE;
-	public static Boolean DEBUG = Boolean.TRUE;
+	public static Boolean VERBOSE = Boolean.FALSE;
+	public static Boolean DEBUG = Boolean.FALSE;
 	public static Boolean WRITE_FILE = Boolean.FALSE;
 
 	public static void verbose(String text) {
