@@ -99,7 +99,7 @@ public class App {
 				}
 			}
 			if (cmd.hasOption("f")) {
-				getInformeChart();
+				generarInforme();
 				return;
 			}
 		} catch (Exception e) {
@@ -109,16 +109,17 @@ public class App {
 		PnlInformeChart.showApp();
 	}
 
-	public static InformeChart getInformeChart() {
+	public static InformeChart generarInforme() {
 		InformeChart informeVO = new InformeChart();
 		Poblacion.showInformeHeaders();
-		Poblacion p = generarPrimerPoblacion();
-		p.processFitness();
 		AlgoritmoCanonico a = new AlgoritmoCanonicoImpl();
-		informeVO.add(p.getInformeVO());
-
+		Poblacion p = null;
 		for (int i = 0; i < AppConstants.ITERACIONES - 1; i++) {
-			p = a.nuevaPoblacion(p);
+			if(i==0){
+				p = generarPrimerPoblacion();
+			}else{
+				p = a.nuevaPoblacion(p);
+			}
 			informeVO.add(p.getInformeVO());
 		}
 		MockedLogger.debug("fin!");
@@ -129,9 +130,9 @@ public class App {
 		Poblacion poblacion = new Poblacion();
 		for (int i = 0; i < AppConstants.POBLACION; i++) {
 			Cromosoma c = new Cromosoma();
-			MockedLogger.debug(c.toString());
 			poblacion.add(c);
 		}
+		poblacion.processFitness();
 		return poblacion;
 	}
 

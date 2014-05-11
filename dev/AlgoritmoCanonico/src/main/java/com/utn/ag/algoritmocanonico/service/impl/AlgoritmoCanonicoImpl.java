@@ -21,7 +21,7 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 		// ruleta n veces por cantidad de poblacion actual
 		Poblacion poblacionNueva = RouletteWheelSelection
 				.select(poblacionActual);
-		verbosePoblacion(poblacionNueva,
+		debugPoblacion(poblacionNueva,
 				"Poblacion luego de la seleccion de ruleta");
 		// aplicamos crossover cada dos
 		// aplicamos mutacion a cada cromosoma generado
@@ -36,9 +36,10 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 		return poblacionNueva;
 	}
 
-	private void verbosePoblacion(Poblacion p, String mensaje) {
+	private void debugPoblacion(Poblacion p, String mensaje) {
+		MockedLogger.debug(mensaje);
 		for (Cromosoma c : p) {
-			MockedLogger.verbose("genoma: " + c.getGenoma());
+			MockedLogger.debug("genoma: " + c.getGenoma());
 		}
 	}
 

@@ -31,7 +31,7 @@ public class PnlInformeChart extends JPanel {
     }
 
     private void refreshDatos() {
-        cPanel.setModel(new DefaultChartModel(App.getInformeChart().getChart()));
+        cPanel.setModel(new DefaultChartModel(App.generarInforme().getChart()));
     }
 
 
