@@ -38,12 +38,14 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 		// aplicamos crossover cada dos
 		// aplicamos mutacion a cada cromosoma generado
 		for (int i = 0; i < poblacionSeleccionada.size(); i += 2) {
-			Cromosoma c1 = poblacionSeleccionada.get(i);
-			Cromosoma c2 = poblacionSeleccionada.get(i + 1);
-			debugCromosoma("Padre: 1 ", c1);
-			debugCromosoma("Padre: 2 ", c2);
-			
-			aplicarCrossover(c1, c2);
+			String genoma1 = poblacionSeleccionada.get(i).getGenoma();
+			String genoma2 = poblacionSeleccionada.get(i + 1).getGenoma();
+			debugCromosoma("Padre: 1 ", poblacionSeleccionada.get(i));
+			debugCromosoma("Padre: 2 ", poblacionSeleccionada.get(i + 1));
+
+			String nuevosGenomas[] = aplicarCrossover(genoma1, genoma2);
+			Cromosoma c1 = new Cromosoma(nuevosGenomas[0]);
+			Cromosoma c2 = new Cromosoma(nuevosGenomas[1]);
 			debugCromosoma("Hijo: 1 ", c1);
 			debugCromosoma("Hijo: 2 ", c2);
 			if (aplicarMutacion(c1)) {
@@ -63,7 +65,7 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 
 	private void debugCromosoma(String msg, Cromosoma c) {
 		MockedLogger.debug(msg + c.getGenoma() + " intVal: " + c.getIntValue()
-				+ " f(x)" + c.getFunctionValue());
+				+ " f(x) " + c.getFunctionValue());
 	}
 
 	private void debugPoblacion(Poblacion p) {
@@ -81,33 +83,32 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 	 * @param c2
 	 * @return
 	 */
-	public void aplicarCrossover(Cromosoma c1, Cromosoma c2) {
+	public String[] aplicarCrossover(String g1, String g2) {
 		if (!aplicarCrossover()) {
 			MockedLogger.debug("NOT aplicar crossover!!");
-			return;
+			return new String[]{g1,g2};
 		}
 		MockedLogger.debug("a aplicar crossover!!");
-		if (c1.getGenoma().length() != c2.getGenoma().length()) {
+		if (g1.length() != g2.length()) {
 			throw new IllegalArgumentException(
 					"cromosomas con genomas de distintas longitudes");
 		}
 		// crossover de un corte
 		// donde se corta
 		Random ran = new Random();
-		int indexCorte = ran.nextInt(c1.getGenoma().length());
+		int indexCorte = ran.nextInt(g1.length());
 
 		MockedLogger.debug("indexCorte " + indexCorte);
 		// se intercambian
 		StringBuilder genoma1 = new StringBuilder();
 		StringBuilder genoma2 = new StringBuilder();
-		genoma1.append(c1.getGenoma().substring(0, indexCorte));
-		genoma1.append(c2.getGenoma().substring(indexCorte));
+		genoma1.append(g1.substring(0, indexCorte));
+		genoma1.append(g2.substring(indexCorte));
 
-		genoma2.append(c2.getGenoma().substring(0, indexCorte));
-		genoma2.append(c1.getGenoma().substring(indexCorte));
+		genoma2.append(g2.substring(0, indexCorte));
+		genoma2.append(g1.substring(indexCorte));
 		// se sobreescribe
-		c1.setGenoma(genoma1.toString());
-		c2.setGenoma(genoma2.toString());
+		return new String[]{genoma1.toString(), genoma2.toString()};
 
 	}
 
