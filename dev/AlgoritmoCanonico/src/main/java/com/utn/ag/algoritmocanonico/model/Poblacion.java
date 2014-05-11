@@ -3,27 +3,23 @@ package com.utn.ag.algoritmocanonico.model;
 import java.util.ArrayList;
 
 import com.utn.ag.algoritmocanonico.MockedLogger;
+import com.utn.ag.algoritmocanonico.vo.InformeVO;
 
 public class Poblacion extends ArrayList<Cromosoma> {
 
-	private static Integer ID = 0;
-
 	public Poblacion() {
-		ID++;
+		this(0);
 	}
-	
+
 	public Poblacion(int size) {
 		super(size);
-		ID++;
 	}
 
 	public Poblacion(ArrayList<Cromosoma> hijos) {
-		ID++;
-
+		this();
 		for (Cromosoma c : hijos) {
 			this.add(c);
 		}
-
 	}
 
 	private Double getSum() {
@@ -43,7 +39,7 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		}
 		return max;
 	}
-	
+
 	private Double getMin() {
 		Double min = 0d;
 		for (Cromosoma c : this) {
@@ -54,26 +50,21 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		return min;
 	}
 
-	public void showInformeData() {
-		Double prom = getSum() / this.size();
+	public InformeVO getInformeVO() {
+		Double sum = getSum();
+		Double prom = sum / this.size();
 		Double max = getMax();
 		Double min = getMin();
 
-		int i = 1;
-		MockedLogger.debug("Poblacion " + ID);
 		for (Cromosoma c : this) {
-			MockedLogger.debug(i + ": " + c.toString() + " - fit: "
-					+ c.getFitness());
-			i++;
+			MockedLogger
+					.verbose(c.toString() + " - fitness: " + c.getFitness());
 		}
-		// informe! max, min, prom
-		MockedLogger.informe(max+","+min+","+prom);
-
-	}
-	
-	public static void showInformeHeaders(){
-		// informe! max, min, prom
-		MockedLogger.informe("max,min,prom");
+		InformeVO informeVO = new InformeVO(min, max, prom);
+		MockedLogger.verbose("Sum: " + sum);
+		MockedLogger.verbose("Prom: " + prom);
+		MockedLogger.verbose("Max: " + max);
+		return informeVO;
 	}
 
 	public void processFitness() {

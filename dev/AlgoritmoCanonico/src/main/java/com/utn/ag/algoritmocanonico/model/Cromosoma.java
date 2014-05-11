@@ -31,18 +31,6 @@ public class Cromosoma {
 		return sb.toString();
 	}
 
-	public void mutarBit() {
-		Random ran = new Random();
-		int index = ran.nextInt(genoma.length());
-		StringBuilder builder = new StringBuilder(genoma);
-		if (genoma.charAt(index) == '0') {
-			builder.setCharAt(index, '1');
-		} else {
-			builder.setCharAt(index, '0');
-		}
-		genoma = builder.toString();
-	}
-
 	private Integer ranBin() {
 		Double random = Math.random();
 		return random > 0.5d ? 1 : 0;
