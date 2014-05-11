@@ -14,7 +14,6 @@ import javax.swing.JPanel;
  */
 public class CustomChartPanel extends JPanel implements ChartModelListener{
     private ChartModel model;
-//    private LayoutManager manager;
     public CustomChartPanel(ChartModel model,LayoutManager manager ){
         super(manager);
         setModel(model);

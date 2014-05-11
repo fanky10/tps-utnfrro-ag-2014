@@ -51,9 +51,9 @@ public class InformeChart extends ArrayList<InformeVO>{
 
     protected void createChart() {
         chart = ChartFactory.createXYLineChart(
-                "Title", // chart title
-                "tiempo", // domain axis label
-                "Y(t)", // range axis label
+                "Grafico", // chart title
+                "x", // domain axis label
+                "Y(x)", // range axis label
                 data, // data
                 PlotOrientation.VERTICAL, // orientation
                 true, // include legend
@@ -64,17 +64,7 @@ public class InformeChart extends ArrayList<InformeVO>{
         legend.setPosition(RectangleEdge.RIGHT);
         XYPlot plot = chart.getXYPlot();
         XYItemRenderer renderer = new XYLineAndShapeRenderer(true, false);
-        
         plot.setRenderer(renderer);
-        //percentage (rangeAxis)
-        final NumberAxis timeAxis = new NumberAxis("tiempo");
-        timeAxis.setInverted(false);
-        timeAxis.setTickUnit(new NumberTickUnit(1));
-
-        final NumberAxis functionAxis = new NumberAxis("y(t)");
-        functionAxis.setInverted(false);
-        functionAxis.setTickUnit(new NumberTickUnit(1));
-        plot.setRangeAxis(functionAxis);
 
 
     }

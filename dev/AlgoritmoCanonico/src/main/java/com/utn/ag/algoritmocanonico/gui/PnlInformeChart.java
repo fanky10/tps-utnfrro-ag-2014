@@ -11,6 +11,7 @@
 package com.utn.ag.algoritmocanonico.gui;
 
 import com.utn.ag.algoritmocanonico.App;
+import com.utn.ag.algoritmocanonico.AppConstants;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -26,11 +27,17 @@ public class PnlInformeChart extends JPanel {
     /** Creates new form pnlEscalon */
     public PnlInformeChart() {
         initComponents();
-        cPanel = new CustomChartPanel(new DefaultChartModel("rechart", "Tiempo", "Y(t)"));
+        cPanel = new CustomChartPanel(new DefaultChartModel("Grafica", "valores x", "Y(x)"));
         pnlGrafico.add(cPanel, BorderLayout.CENTER);
     }
 
     private void refreshDatos() {
+        try{
+            Integer ciclos = Integer.parseInt(txtCiclos.getText());
+            AppConstants.ITERACIONES = ciclos;
+        }catch(NumberFormatException ex){
+            
+        }
         cPanel.setModel(new DefaultChartModel(App.generarInforme().getChart()));
     }
 
@@ -38,7 +45,7 @@ public class PnlInformeChart extends JPanel {
 
     @Override
     public String toString() {
-        return "Entrada Escalon";
+        return "Algoritmos Geneticos";
     }
 
     /** This method is called from within the constructor to
@@ -52,6 +59,7 @@ public class PnlInformeChart extends JPanel {
 
         pnlGrafico = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        txtCiclos = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         pnlGrafico.setBackground(new java.awt.Color(255, 255, 255));
@@ -59,6 +67,19 @@ public class PnlInformeChart extends JPanel {
         pnlGrafico.setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        txtCiclos.setText("Nro Ciclos");
+        txtCiclos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCiclosActionPerformed(evt);
+            }
+        });
+        txtCiclos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCiclosFocusGained(evt);
+            }
+        });
+        jPanel1.add(txtCiclos);
 
         jButton1.setText("Ingresar Datos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -94,10 +115,19 @@ public class PnlInformeChart extends JPanel {
         refreshDatos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void txtCiclosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCiclosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCiclosActionPerformed
+
+    private void txtCiclosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCiclosFocusGained
+        txtCiclos.selectAll();
+    }//GEN-LAST:event_txtCiclosFocusGained
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel pnlGrafico;
+    private javax.swing.JTextField txtCiclos;
     // End of variables declaration//GEN-END:variables
 
     public static void showApp() {
