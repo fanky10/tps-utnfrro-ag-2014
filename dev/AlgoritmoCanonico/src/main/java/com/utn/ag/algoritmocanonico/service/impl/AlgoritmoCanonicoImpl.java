@@ -113,7 +113,7 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 	}
 
 	private boolean aplicarCrossover() {
-		return (Math.random() <= PROBABILIDAD_CROSSOVER);
+		return (new Random().nextDouble() <= PROBABILIDAD_CROSSOVER);
 	}
 
 	public boolean aplicarMutacion(Cromosoma c1) {
@@ -143,7 +143,7 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 	}
 
 	private boolean aplicarMutacion() {
-		return Math.random() <= PROBABILIDAD_MUTACION;
+		return new Random().nextDouble() <= PROBABILIDAD_MUTACION;
 	}
 
 }

@@ -47,7 +47,7 @@ public class RouletteWheelSelection {
 		
 		Poblacion selection = new Poblacion(population.size());
 		for (int i = 0; i < population.size(); i++) {
-			double randomFitness = Math.random()
+			double randomFitness = new Random().nextDouble()
 					* cumulativeFitnesses[cumulativeFitnesses.length - 1];
 			int index = Arrays.binarySearch(cumulativeFitnesses, randomFitness);
 			if (index < 0) {

@@ -32,7 +32,7 @@ public class Cromosoma {
 	}
 
 	private Integer ranBin() {
-		Double random = Math.random();
+		Double random = new Random().nextDouble();
 		return random > 0.5d ? 1 : 0;
 	}
 

@@ -27,6 +27,7 @@ public class App {
 		options.addOption("f", "fast", false, "no gui");
 		options.addOption("h", "help", false, "print this message and exit");
 		options.addOption("i", "iteraciones", true, "nro iteraciones");
+		options.addOption("inf", "informe", false, "escribe el informe");
 		options.addOption("o", "output file", true,
 				"save data to output file in csv");
 		options.addOption("p", "poblacion", true, "poblacion n");
@@ -97,6 +98,8 @@ public class App {
 				if (!StringUtils.isEmpty(outputPath)) {
 					AppConstants.FILE_INFORME = outputPath;
 				}
+			}
+			if(cmd.hasOption("inf")){
 				MockedLogger.WRITE_FILE = true;
 				// clean previous created file
 				File f = new File(AppConstants.FILE_INFORME);
