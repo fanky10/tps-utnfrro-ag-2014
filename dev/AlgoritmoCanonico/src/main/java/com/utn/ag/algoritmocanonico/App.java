@@ -101,10 +101,6 @@ public class App {
 			}
 			if(cmd.hasOption("inf")){
 				MockedLogger.WRITE_FILE = true;
-				// clean previous created file
-				File f = new File(AppConstants.FILE_INFORME);
-				f.delete();
-				MockedLogger.informe("max,min,prom");
 			}
 			if (cmd.hasOption("f")) {
 				generarInforme();
@@ -120,6 +116,10 @@ public class App {
 	}
 
 	public static InformeChart generarInforme() {
+		// clean previous created file
+		File f = new File(AppConstants.FILE_INFORME);
+		f.delete();
+		MockedLogger.informe("Max-F(x),Min-F(x),Promedio,MaxGenoma");
 		InformeChart informe = new InformeChart();
 		AlgoritmoCanonico a = new AlgoritmoCanonicoImpl();
 		Poblacion p = null;

@@ -4,38 +4,40 @@
  */
 package com.utn.ag.algoritmocanonico.vo;
 
+import com.utn.ag.algoritmocanonico.model.Cromosoma;
+
 /**
  *
  * @author fanky10
  */
 public class InformeVO {
-    private Double min;
-    private Double max;
+    private Cromosoma min;
+    private Cromosoma max;
     private Double prom;
 
-    public InformeVO(Double min, Double max, Double prom) {
+    public InformeVO(Cromosoma min, Cromosoma max, Double prom) {
         this.min = min;
         this.max = max;
         this.prom = prom;
     }
-    
-    public Double getMin() {
-        return min;
-    }
 
-    public void setMin(Double min) {
-        this.min = min;
-    }
+    public Cromosoma getMin() {
+		return min;
+	}
 
-    public Double getMax() {
-        return max;
-    }
+	public void setMin(Cromosoma min) {
+		this.min = min;
+	}
 
-    public void setMax(Double max) {
-        this.max = max;
-    }
+	public Cromosoma getMax() {
+		return max;
+	}
 
-    public Double getProm() {
+	public void setMax(Cromosoma max) {
+		this.max = max;
+	}
+
+	public Double getProm() {
         return prom;
     }
 

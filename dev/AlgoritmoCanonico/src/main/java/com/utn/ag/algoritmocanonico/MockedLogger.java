@@ -26,8 +26,9 @@ public class MockedLogger {
 	}
 
 	public static void writeInforme(InformeVO informeVO) {
-		MockedLogger.informe(informeVO.getMax() + "," + informeVO.getMin()
-				+ "," + informeVO.getProm());
+		MockedLogger.informe(informeVO.getMax().getFunctionValue() + ","
+				+ informeVO.getMin().getFunctionValue() + ","
+				+ informeVO.getProm() + "," + informeVO.getMax().getGenoma());
 	}
 
 	public static void informe(String txt) {

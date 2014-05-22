@@ -33,7 +33,7 @@ public class PnlInformeChart extends JPanel {
 
     private void refreshDatos() {
         try{
-            Integer ciclos = Integer.parseInt(txtCiclos.getText());
+        	Integer ciclos = Integer.parseInt(txtCiclos.getText());
             AppConstants.ITERACIONES = ciclos;
         }catch(NumberFormatException ex){
             
@@ -131,7 +131,7 @@ public class PnlInformeChart extends JPanel {
     // End of variables declaration//GEN-END:variables
 
     public static void showApp() {
-        JFrame frmMain = new JFrame("Algoritmos Geneticos");
+        JFrame frmMain = new JFrame("Algoritmos Geneticos Grupo 06");
         frmMain.getContentPane().add(new PnlInformeChart());
         frmMain.setLocationRelativeTo(null);
         frmMain.pack();

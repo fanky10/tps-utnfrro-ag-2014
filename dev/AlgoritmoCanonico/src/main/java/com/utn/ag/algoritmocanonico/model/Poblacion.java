@@ -30,31 +30,35 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		return sum;
 	}
 
-	private Double getMax() {
+	private Cromosoma getMax() {
 		Double max = 0d;
+		Cromosoma cromosomaMax = new Cromosoma();
 		for (Cromosoma c : this) {
 			if (max < c.getFunctionValue()) {
 				max = c.getFunctionValue();
+				cromosomaMax = c;
 			}
 		}
-		return max;
+		return cromosomaMax;
 	}
 
-	private Double getMin() {
+	private Cromosoma getMin() {
 		Double min = 0d;
+		Cromosoma cromosomaMin = new Cromosoma();
 		for (Cromosoma c : this) {
 			if (min == 0 || min > c.getFunctionValue()) {
 				min = c.getFunctionValue();
+				cromosomaMin = c;
 			}
 		}
-		return min;
+		return cromosomaMin;
 	}
 
 	public InformeVO getInformeVO() {
 		Double sum = getSum();
 		Double prom = sum / this.size();
-		Double max = getMax();
-		Double min = getMin();
+		Cromosoma max = getMax();
+		Cromosoma min = getMin();
 
 		for (Cromosoma c : this) {
 			MockedLogger
@@ -63,7 +67,7 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		InformeVO informeVO = new InformeVO(min, max, prom);
 		MockedLogger.verbose("Sum: " + sum);
 		MockedLogger.verbose("Prom: " + prom);
-		MockedLogger.verbose("Max: " + max);
+		MockedLogger.verbose("Max: " + max.getFunctionValue());
 		return informeVO;
 	}
 
