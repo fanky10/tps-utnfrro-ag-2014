@@ -123,7 +123,7 @@ public class App {
 		InformeChart informe = new InformeChart();
 		AlgoritmoCanonico a = new AlgoritmoCanonicoImpl();
 		Poblacion p = null;
-		for (int i = 0; i < AppConstants.ITERACIONES - 1; i++) {
+		for (int i = 0; i < AppConstants.ITERACIONES; i++) {
 			if (i == 0) {
 				p = a.nuevaPoblacion();
 			} else {

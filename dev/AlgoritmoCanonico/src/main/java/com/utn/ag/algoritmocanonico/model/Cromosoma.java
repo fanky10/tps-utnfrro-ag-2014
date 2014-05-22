@@ -24,15 +24,16 @@ public class Cromosoma {
 	}
 
 	private String generarGenoma() {
+		Random r = new Random();
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < LONGITUD; i++) {
-			sb.append(ranBin());
+			sb.append(ranBin(r));
 		}
 		return sb.toString();
 	}
 
-	private Integer ranBin() {
-		Double random = new Random().nextDouble();
+	private Integer ranBin(Random r) {
+		Double random = r.nextDouble();
 		return random > 0.5d ? 1 : 0;
 	}
 

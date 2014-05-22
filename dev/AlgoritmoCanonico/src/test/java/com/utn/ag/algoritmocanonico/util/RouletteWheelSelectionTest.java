@@ -1,5 +1,7 @@
 package com.utn.ag.algoritmocanonico.util;
 
+import java.util.Random;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,7 +38,7 @@ public class RouletteWheelSelectionTest{
 	
 	@Test
 	public void checkData(){
-		Poblacion newPoblacion = RouletteWheelSelection.select(poblacion);
+		Poblacion newPoblacion = RouletteWheelSelection.select(poblacion,new Random());
 		newPoblacion.getInformeVO();
 		assert(true);
 	}

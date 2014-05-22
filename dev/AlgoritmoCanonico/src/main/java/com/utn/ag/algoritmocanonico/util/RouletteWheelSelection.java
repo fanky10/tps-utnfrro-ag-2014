@@ -25,7 +25,7 @@ import com.utn.ag.algoritmocanonico.model.Poblacion;
  * @author Daniel Dyer
  */
 public class RouletteWheelSelection {
-	public static Poblacion select(Poblacion population) {
+	public static Poblacion select(Poblacion population,Random random) {
 		// Record the cumulative fitness scores. It doesn't matter whether the
 		// population is sorted or not. We will use these cumulative scores to
 		// work out
@@ -47,7 +47,7 @@ public class RouletteWheelSelection {
 		
 		Poblacion selection = new Poblacion(population.size());
 		for (int i = 0; i < population.size(); i++) {
-			double randomFitness = new Random().nextDouble()
+			double randomFitness = random.nextDouble()
 					* cumulativeFitnesses[cumulativeFitnesses.length - 1];
 			int index = Arrays.binarySearch(cumulativeFitnesses, randomFitness);
 			if (index < 0) {

@@ -68,6 +68,7 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		MockedLogger.verbose("Sum: " + sum);
 		MockedLogger.verbose("Prom: " + prom);
 		MockedLogger.verbose("Max: " + max.getFunctionValue());
+		MockedLogger.verbose("MaxGenoma: " + max.getGenoma());
 		return informeVO;
 	}
 
