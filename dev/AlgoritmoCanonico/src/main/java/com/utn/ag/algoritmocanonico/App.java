@@ -21,6 +21,7 @@ import com.utn.ag.algoritmocanonico.vo.InformeVO;
 public class App {
 	private static Options createOptions() {
 		Options options = new Options();
+		
 		options.addOption("c", "crossover", true,
 				"probabilidad de crossover double number: between 0 and 1");
 		options.addOption("d", "debug", false, "debug app");
@@ -33,6 +34,8 @@ public class App {
 		options.addOption("m", "mutacion", true,
 				"probabilidad de crossover double number: between 0 and 1");
 		options.addOption("v", "verbose", false, "verbose");
+		options.addOption("e" , "eliticidad", false, "implementa elticidad");
+		
 		return options;
 	}
 
@@ -91,6 +94,7 @@ public class App {
 			}
 			MockedLogger.DEBUG = cmd.hasOption("d");
 			MockedLogger.VERBOSE = cmd.hasOption("v");
+			AppConstants.ELITICIDAD = cmd.hasOption("e");
 
 			if (cmd.hasOption("o")) {
 				String outputPath = cmd.getOptionValue("o");

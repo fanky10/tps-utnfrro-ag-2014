@@ -35,9 +35,38 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 		debugPoblacion(poblacionSeleccionada);
 		Poblacion nuevaPoblacion = new Poblacion();
 		MockedLogger.debug("***************************************");
+		
+		//Forzar Eliticidad
+		int index = 0;
+		
+		if (AppConstants.ELITICIDAD){
+			index = 2;
+			int maximo1 = 0;
+			int maximo2 = 0;		
+			for(int n = 0; n<poblacionActual.size() - 1 ; n++  ){
+				if (poblacionActual.get(maximo1).getFitness()<poblacionActual.get(n).getFitness()){ 
+				maximo1=n;
+				}	
+			}
+			
+			for(int n = 0; n<poblacionActual.size() - 1 ; n++  ){
+				if (poblacionActual.get(maximo2).getFitness()<poblacionActual.get(n).getFitness() & n!=maximo1){ 
+				maximo2=n;
+				}	
+			}
+			
+			
+			
+			
+			MockedLogger.verbose("MAYORES="+ poblacionActual.get(maximo1).getFitness() + "&" +  poblacionActual.get(maximo2).getFitness());
+			nuevaPoblacion.add(poblacionActual.get(maximo1));			
+			nuevaPoblacion.add(poblacionActual.get(maximo2));	
+		}	
+		
+		
 		// aplicamos crossover cada dos
 		// aplicamos mutacion a cada cromosoma generado
-		for (int i = 0; i < poblacionSeleccionada.size(); i += 2) {
+		for (int i = index; i < poblacionSeleccionada.size(); i += 2) {
 			String genoma1 = poblacionSeleccionada.get(i).getGenoma();
 			String genoma2 = poblacionSeleccionada.get(i + 1).getGenoma();
 			debugCromosoma("Padre: 1 ", poblacionSeleccionada.get(i));

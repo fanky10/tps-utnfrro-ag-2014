@@ -6,4 +6,5 @@ public class AppConstants {
 	public static Double PROBMUTACION = 0.05;
 	public static Double PROBCROSSOVER = 0.75;
 	public static int ITERACIONES = 50;
+	public static boolean ELITICIDAD = false;
 }
