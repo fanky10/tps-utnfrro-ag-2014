@@ -8,7 +8,7 @@ import com.utn.ag.problemamochila.model.Item;
 public class Main {
 
 	public static void main(String[] args) {
-		
+
 		Bag mochila = new Bag(Constants.BAG_VOLUME);
 		House casa = new House();
 		// Comienzo entrada manual TODO: persistencia, levantar items de archivo
@@ -22,41 +22,43 @@ public class Main {
 		casa.items.add(new Item(String.valueOf(8), 60, 18));
 		casa.items.add(new Item(String.valueOf(9), 930, 46));
 		casa.items.add(new Item(String.valueOf(10), 353, 28));
-		//Fin entrada manual
-		
-		
+		// Fin entrada manual
+
+		System.out.println("Implementacion Algoritmo EXAHUSTIVO:");
 		Exhaustive algExhaustivo = new Exhaustive();
-		// TODO: I/O Exahustive
+		//COMIENZO Algoritmo Exahustivo
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//FIN Algoritmo Exahustivo
+
+		System.out.println("Implementacion Algoritmo GREEDY:");
+
 		Greedy algGreedy = new Greedy();
-	   	algGreedy.processValueVolumeProp(casa.items);
-	   	   	
+		algGreedy.processValueVolumeProp(casa.items);
+
 		algGreedy.sortProportion(casa.items);
-	   	
-algGreedy.fillBag(mochila, casa);
-	   	
 
-System.out.println(mochila.getRemainingVolume() + "/" + mochila.items.size());
- 	
-System.out.println("Mochila:");
-for (Item i : mochila.items){
-	System.out.println("Name:" + i.getName() + " Value:" + i.getValue() + " Volume:" + i.getVolume() +" GetProportion:"+ i.getvalueVolumeProportion() );
-	
-}
-System.out.println("Items:" + mochila.items.size()  +" Volumen Sobrante: " + mochila.getRemainingVolume());
+		algGreedy.fillBag(mochila, casa);
 
+		System.out.println("Mochila:");
+		for (Item i : mochila.items) {
+			System.out.println("Name:" + i.getName() + " Value:" + i.getValue()
+					+ " Volume:" + i.getVolume() + " GetProportion:"
+					+ i.getvalueVolumeProportion());
 
+		}
+		System.out.println("Items:" + mochila.items.size()
+				+ " Volumen Sobrante: " + mochila.getRemainingVolume());
 
-
-	
 	}
-	
-	
-
-
-	
-	
-	
 
 }
