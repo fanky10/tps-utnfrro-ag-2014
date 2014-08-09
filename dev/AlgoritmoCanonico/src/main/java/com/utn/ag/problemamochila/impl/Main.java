@@ -27,17 +27,13 @@ public class Main {
 		System.out.println("Implementacion Algoritmo EXAHUSTIVO:");
 		Exhaustive algExhaustivo = new Exhaustive();
 		//COMIENZO Algoritmo Exahustivo
+		algExhaustivo.fillBag(mochila, casa);		
+		
+		getBagInfo(mochila);
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
+		mochila.items.clear(); //Limpia antes de empezar el GREEDY
 		//FIN Algoritmo Exahustivo
 
 		System.out.println("Implementacion Algoritmo GREEDY:");
@@ -49,6 +45,11 @@ public class Main {
 
 		algGreedy.fillBag(mochila, casa);
 
+		getBagInfo(mochila);
+
+	}
+	
+	public static void getBagInfo (Bag mochila){
 		System.out.println("Mochila:");
 		for (Item i : mochila.items) {
 			System.out.println("Name:" + i.getName() + " Value:" + i.getValue()
@@ -58,7 +59,7 @@ public class Main {
 		}
 		System.out.println("Items:" + mochila.items.size()
 				+ " Volumen Sobrante: " + mochila.getRemainingVolume());
-
+		
 	}
 
 }
