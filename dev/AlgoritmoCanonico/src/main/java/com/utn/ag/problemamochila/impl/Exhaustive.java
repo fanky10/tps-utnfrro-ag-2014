@@ -27,6 +27,8 @@ public class Exhaustive
 		 * La combinacion/es de mayor valor es/son la/s
 		 * respuesta/s
 		 */
+		float maxParcial = 0;
+		float valTemp;
 		ICombinatoricsVector<Item> initialVector = Factory.createVector(); // Crea el Vector Inicial (que luego sera combinado)
 
 		for (Item i : casa.items)  // Agrega los Items que seran combinados al Vector 
@@ -51,8 +53,6 @@ public class Exhaustive
 		
 		for(ArrayList<Item> comb : CombinacionesDeItems)
 		{
-			float maxParcial = 0;
-			float valTemp = 0;
 			valTemp = getValueOfCombination(comb);
 			if(valTemp == maxParcial) //Si son iguales es otra posible respuesta, lo agrega a las respuestas
 			{

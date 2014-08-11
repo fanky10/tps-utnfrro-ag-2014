@@ -42,11 +42,11 @@ public class Main
 		{
 			System.out.printf("%-1s\t %-10s\t %-15s %-10s\n",i.getName(), i.getValue(),
 					i.getVolume(), i.getvalueVolumeProportion());
-		valueSum = valueSum + i.getValue();
+		valueSum += i.getValue();
 		}
 		System.out.println("\n*Cantidad de objetos:" + mochila.items.size()+
 				" \n*Valor total de items en mochila: $" + valueSum + 
-				" \n*Volumen Sobrante: " + mochila.getRemainingVolume());
+				" \n*Volumen Sobrante: " + mochila.getRemainingVolume()+ "\n*Valor total: "+ valueSum);
 		
 	}
 }
