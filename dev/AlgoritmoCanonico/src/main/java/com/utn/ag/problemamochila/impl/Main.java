@@ -44,9 +44,9 @@ public class Main
 					i.getVolume(), i.getvalueVolumeProportion());
 		valueSum += i.getValue();
 		}
-		System.out.println("\n*Cantidad de objetos:" + mochila.items.size()+
+		System.out.println(" \n*Cantidad de objetos:" + mochila.items.size()+
 				" \n*Valor total de items en mochila: $" + valueSum + 
-				" \n*Volumen Sobrante: " + mochila.getRemainingVolume()+ "\n*Valor total: "+ valueSum);
+				" \n*Volumen Sobrante: " + mochila.getRemainingVolume());
 		
 	}
 }
