@@ -37,13 +37,15 @@ public class Main
 	{
 		System.out.println("Mochila:");
 		System.out.printf("Objeto\tValor($)\tVolumen(cm³)\tProporcion($/cm³)\n");
+		float valueSum = 0;
 		for (Item i : mochila.items) 
 		{
 			System.out.printf("%-1s\t %-10s\t %-15s %-10s\n",i.getName(), i.getValue(),
 					i.getVolume(), i.getvalueVolumeProportion());
-		
+		valueSum = valueSum + i.getValue();
 		}
 		System.out.println("\n*Cantidad de objetos:" + mochila.items.size()+
+				" \n*Valor total de items en mochila: $" + valueSum + 
 				" \n*Volumen Sobrante: " + mochila.getRemainingVolume());
 		
 	}
