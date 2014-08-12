@@ -1,28 +1,34 @@
 package com.utn.ag.problemamochila.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Bag {
-	public	ArrayList <Item> items = new ArrayList<Item>();
+	private List<Item> items = new ArrayList<Item>();
 	private float volume;
-	
-	public Bag (float volume)
-	{
-		this.volume = volume;		
+
+	public Bag(float volume) {
+		this.volume = volume;
 	}
-	
-	public float getRemainingVolume() //Devuelve el volumen restante
-	{
+
+	// Devuelve el volumen restante
+	public float getRemainingVolume() {
 		float remainingVolume = volume;
-		for (Item i : items)
-		{
-			remainingVolume = remainingVolume - i.getVolume();	
+		for (Item i : items) {
+			remainingVolume = remainingVolume - i.getVolume();
 		}
 		return remainingVolume;
 	}
-	
-	public float getOriginalVolume()
-	{
+
+	public float getOriginalVolume() {
 		return volume;
+	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 }
