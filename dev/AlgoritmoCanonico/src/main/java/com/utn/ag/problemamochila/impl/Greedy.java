@@ -26,11 +26,9 @@ public class Greedy {
 
 	public void fillBag(Bag mochila, House casa) {
 		List<Item> houseItems = casa.getItems();
-		for(int idx = 0; idx<houseItems.size();idx++){
-			if (houseItems.get(idx).getVolume() <= mochila
-					.getRemainingVolume()) {
+		for (int idx = 0; idx < houseItems.size(); idx++) {
+			if (houseItems.get(idx).getVolume() <= mochila.getRemainingVolume()) {
 				mochila.getItems().add(houseItems.get(idx));
-				// casa.items.remove(index);
 			}
 		}
 	}

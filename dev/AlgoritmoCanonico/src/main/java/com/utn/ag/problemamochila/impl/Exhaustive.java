@@ -11,9 +11,6 @@ import com.utn.ag.problemamochila.model.House;
 import com.utn.ag.problemamochila.model.Item;
 
 public class Exhaustive {
-
-	// TODO: Implementar con esto: https://code.google.com/p/combinatoricslib/
-	// BIEN FACIL... funca con Maven
 	private ArrayList<ArrayList<Item>> CombinacionesDeItems = new ArrayList<ArrayList<Item>>();
 	private ArrayList<ArrayList<Item>> CombinacionesRespuesta = new ArrayList<ArrayList<Item>>();
 
@@ -35,14 +32,14 @@ public class Exhaustive {
 		// Crea las combinaciones, verifica si pueden entrar en la mochila, y si
 		// es asi las va agregando a CombinacionesDeItems que es una Lista de
 		// Listas de Item
-
 		for (int index = 1; index < casa.getItems().size(); index++) {
 			Generator<Item> gen = Factory.createSimpleCombinationGenerator(
 					initialVector, index);
 			for (ICombinatoricsVector<Item> combination : gen) {
+				// Verifica que puedan entrar en la mochila
+				// antes de agregarlas a la combinacion
 				if (fitsInBag((ArrayList<Item>) combination.getVector(),
-						mochila)) { // Verifica que puedan entrar en la mochila
-									// antes de agregarlas a la combinacion
+						mochila)) {
 					CombinacionesDeItems.add((ArrayList<Item>) combination
 							.getVector());
 				}
@@ -50,7 +47,6 @@ public class Exhaustive {
 		}
 		// Va buscando el mayor valor entre todas las combinaciones. Tiene en
 		// cuenta si dos combinaciones comparten tener mayor valor
-
 		for (ArrayList<Item> comb : CombinacionesDeItems) {
 			valTemp = getValueOfCombination(comb);
 			if (valTemp == maxParcial) // Si son iguales es otra posible
