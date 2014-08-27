@@ -18,7 +18,6 @@ public class App {
 
 	public static void main(String[] args) throws IOException {
 		contarProvinciasYGenerarTablas ();
-		System.out.println(Constants.distanciasTabla[1][2]);
 		
 		Heuristica heur = new Heuristica();
 		heur.calcularRecorrido();
