@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 
 import org.apache.commons.lang3.StringUtils;
+import org.omg.CORBA.CODESET_INCOMPATIBLE;
 
 import com.utn.ag.viajante.model.Constants;
 
@@ -16,54 +17,26 @@ public class App {
 	
 
 	public static void main(String[] args) throws IOException {
-		
 		contarProvinciasYGenerarTablas ();
-	
+		System.out.println(Constants.distanciasTabla[1][2]);
+		
+		Heuristica heur = new Heuristica();
+		heur.calcularRecorrido();
+		
+		
 		
 		
 		
 		
 	}
-	
-	
-	
-	
 	
 	public static void contarProvinciasYGenerarTablas (){
-		
-		Constants.CANTIDAD_PROVINCIAS= Constants.distanciasTexto.split("-").length;
-		Constants.distanciasTabla = new int[Constants.CANTIDAD_PROVINCIAS][Constants.CANTIDAD_PROVINCIAS];
-
-		String[] lineas = Constants.distanciasTexto.split("-");
-		String[] tempDistancias = new String[Constants.CANTIDAD_PROVINCIAS]; 
-		
-
-		
-		for (int i = 0; i<Constants.CANTIDAD_PROVINCIAS ; i++){
-			tempDistancias = lineas[i].split("x");
-			for (int j = 0; i< Constants.CANTIDAD_PROVINCIAS ; j++){
-				
-				Constants.distanciasTabla[i][j]= Integer.valueOf(tempDistancias[j]);
-			
-			}
-			
-			
-			
-		}
-		
-		
-		
-		System.out.println("Se cargaron " + Constants.CANTIDAD_PROVINCIAS + " provincias y " + (1 + StringUtils.countMatches(Constants.nombresProvincias, "," )) + " nombres de provincias.");
-		
-	
-		
-		
+		Constants.CANTIDAD_PROVINCIAS = Constants.distanciasTabla[0].length;
+		System.out.println("Se cargaron " + Constants.CANTIDAD_PROVINCIAS + " provincias y " + Constants.nombresProvincias.length + " nombres");
 	}
 	
-	
 
 	
-
 	
 	
 
