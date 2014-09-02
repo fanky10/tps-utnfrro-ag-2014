@@ -8,18 +8,27 @@ public class Heuristica {
 
 	int[] recorrido = new int[Constants.CANTIDAD_PROVINCIAS + 1];
 
-	int ciudadOrigen = 0;
+	int ciudadOrigen;
+	int distanciaRecorrida =0;
 
-	public void calcularRecorrido() {
-
+	public void calcularRecorrido(int ciudadInicial) {
+		ciudadOrigen = ciudadInicial;
+		recorrido = new int[Constants.CANTIDAD_PROVINCIAS + 1];
+		distanciaRecorrida =0;  //Inicializar TODO
+		
+		
 		recorrido[0] = ciudadOrigen;
-
+		
+		
 		for (int i = 1; i < Constants.CANTIDAD_PROVINCIAS; i++) {
 
 			recorrido[i] = getCiudadCercana(recorrido[i-1]);
 
 		}
 
+		
+		distanciaRecorrida = getDistancia(ciudadOrigen, Constants.CANTIDAD_PROVINCIAS -1);
+		
 		recorrido[Constants.CANTIDAD_PROVINCIAS] = ciudadOrigen;
 
 		imprimirRecorridoNombre();
@@ -68,7 +77,7 @@ public class Heuristica {
 		
 		
 		
-		
+		distanciaRecorrida = distanciaRecorrida + getDistancia(res, origen);
 		
 		
 		
@@ -107,6 +116,13 @@ public class Heuristica {
 
 		System.out.println(recorridoNombre);
 
+	}
+	
+	public int getDistanciaRecorrido(){
+	
+		
+		
+		return distanciaRecorrida;
 	}
 	
 	

@@ -20,7 +20,8 @@ public class App {
 		contarProvinciasYGenerarTablas ();
 		
 		Heuristica heur = new Heuristica();
-		heur.calcularRecorrido();
+		
+		heur.calcularRecorrido(0);
 		
 		
 		
