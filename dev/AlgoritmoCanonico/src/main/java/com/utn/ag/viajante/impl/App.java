@@ -22,6 +22,7 @@ public class App {
 		Heuristica heur = new Heuristica();
 		
 		heur.calcularRecorrido(0);
+		System.out.println("DIST. TOTAL:" + heur.getDistanciaRecorrido());
 		
 		
 		

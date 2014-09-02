@@ -1,5 +1,7 @@
 package com.utn.ag.viajante.impl;
 
+import java.awt.Container;
+
 import com.utn.ag.viajante.model.Constants;
 
 public class Heuristica {
@@ -9,12 +11,12 @@ public class Heuristica {
 	int[] recorrido = new int[Constants.CANTIDAD_PROVINCIAS + 1];
 
 	int ciudadOrigen;
-	int distanciaRecorrida =0;
+
 
 	public void calcularRecorrido(int ciudadInicial) {
 		ciudadOrigen = ciudadInicial;
 		recorrido = new int[Constants.CANTIDAD_PROVINCIAS + 1];
-		distanciaRecorrida =0;  //Inicializar TODO
+	 //Inicializar TODO
 		
 		
 		recorrido[0] = ciudadOrigen;
@@ -27,14 +29,17 @@ public class Heuristica {
 		}
 
 		
-		distanciaRecorrida = getDistancia(ciudadOrigen, Constants.CANTIDAD_PROVINCIAS -1);
 		
-		recorrido[Constants.CANTIDAD_PROVINCIAS] = ciudadOrigen;
+		
+		recorrido[Constants.CANTIDAD_PROVINCIAS ] = ciudadOrigen;
 
 		imprimirRecorridoNombre();
 		imprimirRecorridoNumeros();
 	}
 
+	
+	
+	
 	public boolean fueVisitada(int ciudad) {
 		boolean res = false;
 
@@ -73,17 +78,10 @@ public class Heuristica {
 
 				res = i;
 	}
-			}
+			}	
 		
-		
-		
-		distanciaRecorrida = distanciaRecorrida + getDistancia(res, origen);
-		
-		
-		
-		
-		String debug = Constants.nombresProvincias[origen] + " tiene mas cerca a " + Constants.nombresProvincias[res] + " estando a " + getDistancia(origen, res);
-		System.out.println(debug);
+	//	String debug = Constants.nombresProvincias[origen] + " tiene mas cerca a " + Constants.nombresProvincias[res] + " estando a " + getDistancia(origen, res);
+		//System.out.println(debug);
 
 		return res;
 	}
@@ -119,15 +117,24 @@ public class Heuristica {
 	}
 	
 	public int getDistanciaRecorrido(){
+	int distanciaRecorrida = 0;
+	
+	for (int i = 1; i < recorrido.length -1; i++ ){
+		
+		distanciaRecorrida = distanciaRecorrida + getDistancia(recorrido[i-1], recorrido[i]);
+		
+		System.out.println(Constants.nombresProvincias[recorrido[i-1]] + " a " + Constants.nombresProvincias[recorrido[i]] + " " + getDistancia(i-1, i));
+		
+	}
 	
 		
 		
 		return distanciaRecorrida;
 	}
 	
+	}
+		
 	
+
+
 	
-	
-	
-	
-}
