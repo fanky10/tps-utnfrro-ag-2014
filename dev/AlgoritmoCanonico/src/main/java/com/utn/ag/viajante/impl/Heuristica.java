@@ -1,6 +1,7 @@
 package com.utn.ag.viajante.impl;
 
 import java.awt.Container;
+import java.util.ArrayList;
 
 import com.utn.ag.viajante.model.Constants;
 
@@ -24,8 +25,15 @@ public class Heuristica {
 		
 		for (int i = 1; i < Constants.CANTIDAD_PROVINCIAS; i++) {
 
+		System.out.println("SINVI"+cantidadSinVisitar());	
+		
+			if (cantidadSinVisitar()>0){
+			
 			recorrido[i] = getCiudadCercana(recorrido[i-1]);
-
+			} 
+			
+			
+			
 		}
 
 		
@@ -37,8 +45,43 @@ public class Heuristica {
 		imprimirRecorridoNumeros();
 	}
 
+    public int ultimaSinVisitar(){
+		int res = 0;
+		
+		for (int i = 0; i < Constants.CANTIDAD_PROVINCIAS ; i++){
+			
+			res = res + i;
+			
+		}
+		
+for (int i = 0; i < Constants.CANTIDAD_PROVINCIAS ; i++){
+			
+			res = res - recorrido[i];
+			
+		}
+		
+		
+		
+    	return res;
+    }
 	
 	
+	public int cantidadSinVisitar(){
+		int res = 0;
+		
+		for (int i = 0; i < Constants.CANTIDAD_PROVINCIAS ; i++){
+			
+			if (fueVisitada(i) == false){
+				res++;
+			}
+			
+		}
+		
+		
+		
+		
+		return  res;
+	}
 	
 	public boolean fueVisitada(int ciudad) {
 		boolean res = false;
@@ -70,14 +113,18 @@ public class Heuristica {
 		
 		if (origen == 0)
 			res = 1;
-
+		
 		for (int i = 0; i < Constants.CANTIDAD_PROVINCIAS; i++) {
 
-			if (getDistancia(origen, res) > getDistancia(origen, i)
-					& fueVisitada(i) == false & origen != i ) {
+			
+			if ( fueVisitada(i) == false & origen != i & getDistancia(origen, res) > getDistancia(origen, i) ) {
 
 				res = i;
 	}
+			
+			
+			
+			
 			}	
 		
 	//	String debug = Constants.nombresProvincias[origen] + " tiene mas cerca a " + Constants.nombresProvincias[res] + " estando a " + getDistancia(origen, res);
@@ -119,11 +166,11 @@ public class Heuristica {
 	public int getDistanciaRecorrido(){
 	int distanciaRecorrida = 0;
 	
-	for (int i = 1; i < recorrido.length -1; i++ ){
+	for (int i = 1; i < recorrido.length ; i++ ){
 		
 		distanciaRecorrida = distanciaRecorrida + getDistancia(recorrido[i-1], recorrido[i]);
 		
-		System.out.println(Constants.nombresProvincias[recorrido[i-1]] + " a " + Constants.nombresProvincias[recorrido[i]] + " " + getDistancia(i-1, i));
+		System.out.println(Constants.nombresProvincias[recorrido[i-1]] + " a " + Constants.nombresProvincias[recorrido[i]] + " " + getDistancia(recorrido[i-1], recorrido[i]));
 		
 	}
 	
