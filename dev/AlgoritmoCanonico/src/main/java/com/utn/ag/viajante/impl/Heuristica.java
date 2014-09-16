@@ -14,6 +14,19 @@ public class Heuristica {
 	int ciudadOrigen;
 
 
+	
+	public void resolverHeuristica (){
+		
+		
+		for (int i = 0; i < Constants.CANTIDAD_PROVINCIAS;i++){
+			calcularRecorrido(i);
+			imprimirRecorridoNombre();
+		}
+		
+		
+	}
+	
+	
 	public void calcularRecorrido(int ciudadInicial) {
 		ciudadOrigen = ciudadInicial;
 		recorrido = new int[Constants.CANTIDAD_PROVINCIAS + 1];
@@ -25,8 +38,7 @@ public class Heuristica {
 		
 		for (int i = 1; i < Constants.CANTIDAD_PROVINCIAS; i++) {
 
-		System.out.println("SINVI"+cantidadSinVisitar());	
-		
+				
 			if (cantidadSinVisitar()>0){
 			
 			recorrido[i] = getCiudadCercana(recorrido[i-1]);
@@ -41,8 +53,8 @@ public class Heuristica {
 		
 		recorrido[Constants.CANTIDAD_PROVINCIAS ] = ciudadOrigen;
 
-		imprimirRecorridoNombre();
-		imprimirRecorridoNumeros();
+		
+		//imprimirRecorridoNumeros();
 	}
 
     public int ultimaSinVisitar(){
@@ -102,7 +114,7 @@ for (int i = 0; i < Constants.CANTIDAD_PROVINCIAS ; i++){
 	}
 
 	public int getCiudadCercana(int origen) {
-		int res = 0;
+		int res = 2;
 		for (int i = 0; i < Constants.CANTIDAD_PROVINCIAS; i++) {  //Encontrar una ciudad para referencia que no haya sido visitada
 			
 			if (fueVisitada(res)) res++;
@@ -111,7 +123,7 @@ for (int i = 0; i < Constants.CANTIDAD_PROVINCIAS ; i++){
 		
 		
 		
-		if (origen == 0)
+		if (origen == 2)
 			res = 1;
 		
 		for (int i = 0; i < Constants.CANTIDAD_PROVINCIAS; i++) {

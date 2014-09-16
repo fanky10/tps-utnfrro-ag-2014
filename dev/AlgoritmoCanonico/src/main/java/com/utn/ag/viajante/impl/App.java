@@ -21,7 +21,7 @@ public class App {
 		
 		Heuristica heur = new Heuristica();
 		
-		heur.calcularRecorrido(22);
+		heur.resolverHeuristica();
 		
 		
 		
