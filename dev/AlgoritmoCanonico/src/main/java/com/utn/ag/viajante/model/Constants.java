@@ -60,11 +60,11 @@ public class Constants {
 					593, 0 } };
 
 	public static final String[] NOMBRES_PROVINCIAS = { "Buenos Aires",
-			" San S. de Jujuy", " Salta", " S. M. de Tucumán",
-			" Sgo. del Estero", " Formosa", " Resistencia", " Santa Fe",
-			" Corrientes", " Posadas", " Paraná", " Córdoba", " La Rioja",
-			" San Juan", " San Luis", " Catamarca", " Mendoza", " Santa Rosa",
-			" Neuquén", " Viedma", " Rawson", " Rio Gallegos", " Ushuaia" };
+			"San S. de Jujuy", "Salta", "S. M. de Tucumán",
+			"Sgo. del Estero", "Formosa", "Resistencia", "Santa Fe",
+			"Corrientes", "Posadas", "Paraná", "Córdoba", "La Rioja",
+			"San Juan", "San Luis", "Catamarca", "Mendoza", "Santa Rosa",
+			"Neuquén", "Viedma", "Rawson", "Rio Gallegos", "Ushuaia" };
 
 	public static final int CANTIDAD_PROVINCIAS = NOMBRES_PROVINCIAS.length;
 

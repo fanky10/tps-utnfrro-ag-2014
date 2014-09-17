@@ -45,6 +45,7 @@ public class HeuristicaFacu implements Heuristica {
     private List<Integer> recorridoList = new ArrayList<Integer>();
     private List<Movimiento> movementList = new ArrayList<Movimiento>();
     private List<Integer> ciudadesList = new ArrayList<Integer>();
+    private int kmRecorridos = 0;
 
     public void recorreCiudades(int indiceCiudad) {
         movementList.add(new Movimiento(indiceCiudad, 0));
@@ -55,6 +56,7 @@ public class HeuristicaFacu implements Heuristica {
         int[] ciudadesDestinoUltimaCiudad = Constants.TABLA_DISTANCIAS[ultimaCiudad];
         int distanciaUltimaCiudadDestino = ciudadesDestinoUltimaCiudad[indiceCiudad];
         movementList.add(new Movimiento(indiceCiudad, distanciaUltimaCiudadDestino));
+        kmRecorridos += distanciaUltimaCiudadDestino;
 
     }
 
@@ -71,6 +73,7 @@ public class HeuristicaFacu implements Heuristica {
         }
         recorridoList.add(nextMove.getIndiceCiudad());
         movementList.add(nextMove);
+        kmRecorridos += nextMove.getDistanciaCiudadAnterior();
         if (maxCities > 0) {
             // decrement
             recorreCiudades(nextMove.getIndiceCiudad(), maxCities - 1);
@@ -103,26 +106,23 @@ public class HeuristicaFacu implements Heuristica {
         }
         return new Movimiento(indiceDestino, bestRecorrido);
     }
-
+    
+    public int getKmRecorridos(){
+        return kmRecorridos;
+    }
+    
     public void printRecorrido() {
-        System.out.println("Inicio recorrido");
+        debug("Inicio recorrido");
         int totalKm = 0;
         int totalCiudades = 0;
         for (Movimiento m : movementList) {
-            System.out.println("Ciudad movimiento: " + m);
+            debug("Ciudad movimiento: " + m);
             totalKm += m.getDistanciaCiudadAnterior();
             totalCiudades++;
         }
-        System.out.println("Fin recorrido");
-        System.out.println("Total ciudades: " + totalCiudades);
-        System.out.println("Total km: " + totalKm);
-    }
-
-    public void resolverCiudades() {
-        // TODO Auto-generated method stub
-        // primer ciudad:
-        recorreCiudades(0);
-        printRecorrido();
+        debug("Fin recorrido");
+        debug("Total ciudades: " + totalCiudades);
+        debug("Total km: " + totalKm);
     }
 
     public static void main(String args[]) {
@@ -131,9 +131,9 @@ public class HeuristicaFacu implements Heuristica {
         int ciudadOrigen = 0;
         HeuristicaFacu hf = new HeuristicaFacu();
         Movimiento nextMove = hf.getClosestMovimiento(ciudadOrigen);
-        System.out.println("next Move: " + nextMove);
+        debug("next Move: " + nextMove);
         if (ciudadObjetivo == nextMove.getIndiceCiudad() && distObjetivo == nextMove.getDistanciaCiudadAnterior()) {
-            System.out.println("todo bien!!");
+            debug("todo bien!!");
         }
 
         // nos movemos dos ciudades adelante:
@@ -142,24 +142,48 @@ public class HeuristicaFacu implements Heuristica {
         ciudadObjetivo = 10;
         distObjetivo = 31;
         nextMove = hf.getClosestMovimiento(nextMove.getIndiceCiudad());
-        System.out.println("next Move: " + nextMove);
+        debug("next Move: " + nextMove);
         if (ciudadObjetivo == nextMove.getIndiceCiudad() && distObjetivo == nextMove.getDistanciaCiudadAnterior()) {
-            System.out.println("todo bien next!!");
+            debug("todo bien next!!");
         }
 
         // ahora lo hace automatico
         // hasta la 3er ciudad
         hf = new HeuristicaFacu();
-        System.out.println("ciudad origen: " + Constants.NOMBRES_PROVINCIAS[0]);
+        debug("ciudad origen: " + Constants.NOMBRES_PROVINCIAS[0]);
         hf.recorreCiudades(0);
         hf.printRecorrido();
 
         // ahora lo hace automatico
         // hasta que no encuentra mas ciudades que recorrer
-        System.out.println("ciudad origen: " + Constants.NOMBRES_PROVINCIAS[18]);
+        debug("ciudad origen: " + Constants.NOMBRES_PROVINCIAS[18]);
         hf = new HeuristicaFacu();
         hf.recorreCiudades(18);
         hf.printRecorrido();
+        
+        int mejorCiudad = -1;
+        int mejorRecorrido = -1;
+        for(int i=0;i<Constants.CANTIDAD_PROVINCIAS;i++){
+            hf = new HeuristicaFacu();
+            hf.recorreCiudades(i);
+            hf.printRecorrido();
+            if(mejorRecorrido<0 || mejorRecorrido>hf.kmRecorridos){
+                mejorRecorrido = hf.kmRecorridos;
+                mejorCiudad = i;
+            }
+        }
+        info("mejor ciudad: "+mejorCiudad+" - "+Constants.NOMBRES_PROVINCIAS[mejorCiudad]+" km recorridos: "+mejorRecorrido);
+    }
+    
+    public static Boolean DEBUG = Boolean.TRUE;
+    private static void debug(String text){
+        if(DEBUG){
+            System.out.println("DEBUG: "+text);
+        }
+    }
+    
+    private static void info(String text){
+        System.out.println("INFO: "+text);
     }
 
 }
