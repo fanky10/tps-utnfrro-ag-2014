@@ -39,12 +39,14 @@ public class App {
     
   
     Poblacion p = null;
-	for (int i = 0; i < AppConstants.ITERACIONES; i++) {
+	for (int i = 0; i < GeneticoEst.CANT_CICLOS; i++) {
 		if (i == 0) {
 			p = gen.nuevaPoblacion();
 		} else {
 			p = gen.nuevaPoblacion(p);
 		}
+		
+		p.printPoblacion();
     
   
 

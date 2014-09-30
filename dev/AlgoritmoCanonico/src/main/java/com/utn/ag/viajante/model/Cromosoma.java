@@ -27,6 +27,19 @@ generarGenoma();
 	}
 
 
+	public void printRecorrido(){
+		String recorrido = "";
+		
+		for (int k : ciudades){
+			
+			recorrido = recorrido + Constants.NOMBRES_PROVINCIAS[k] + ",";
+			
+		}
+		
+		System.out.println(recorrido);
+		
+	}
+	
 	public int[] getCiudades(){
 		return ciudades;
 	}

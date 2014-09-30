@@ -24,9 +24,29 @@ public class Poblacion extends ArrayList<Cromosoma> {
 	}
 
 	public void processFitness() {
-		for (Cromosoma c : this) {
-			c.setFitness(1 / c.getDistanciaRecorrido());
+		int distTotal = 0;
+		for (Cromosoma c : this){
+			distTotal = distTotal + c.getDistanciaRecorrido();
 		}
+				
+		
+		for (Cromosoma c : this) {
+			c.setFitness(c.getDistanciaRecorrido()/distTotal);
+		}
+		
 	}
+	
+	public void printPoblacion(){
+		System.out.println("Recorridos Finales");
+	for (Cromosoma c : this)	{
+		
+		c.printRecorrido();
+		System.out.println(c.getDistanciaRecorrido());
+		System.out.println(c.getFitness());
+		
+	}
+		
+		
+	}	
 	
 }
