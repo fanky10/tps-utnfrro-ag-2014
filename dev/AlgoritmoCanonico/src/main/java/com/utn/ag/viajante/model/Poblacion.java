@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 public class Poblacion extends ArrayList<Cromosoma> {
 
+	public Poblacion(int size) {
+		super(size);
+	}
+	
 	public Poblacion(ArrayList<Cromosoma> hijos) {
 		
 		for (Cromosoma c : hijos) {

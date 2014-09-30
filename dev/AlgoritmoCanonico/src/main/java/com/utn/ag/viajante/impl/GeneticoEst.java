@@ -2,18 +2,9 @@ package com.utn.ag.viajante.impl;
 
 import java.util.Random;
 
-
-
-
-
-
-
-
-
-import com.utn.ag.algoritmocanonico.MockedLogger;
-import com.utn.ag.algoritmocanonico.util.RouletteWheelSelection;
 import com.utn.ag.viajante.model.Cromosoma;
 import com.utn.ag.viajante.model.Poblacion;
+import com.utn.ag.viajante.model.RouletteWheelSelection;
 
 public class GeneticoEst implements Geneticos{
 
@@ -43,9 +34,12 @@ public class GeneticoEst implements Geneticos{
 		
 		Poblacion nuevaPoblacion = new Poblacion();
 		
-		Poblacion poblacionSeleccionada = null; // TODO
+	
 		
+		Poblacion poblacionSeleccionada = RouletteWheelSelection
+				.select(poblacionActual,rouletteRan);
 		
+
 		
 		// aplicamos crossover cada dos
 		// aplicamos mutacion a cada cromosoma generado
@@ -79,13 +73,13 @@ public class GeneticoEst implements Geneticos{
 		int[][] temp = new int[2][23];
 		
 		if (!aplicarCrossover()) {
-			MockedLogger.debug("NOT aplicar crossover!!");
+			
 			
 			temp[0] = g1;
 			temp[1] = g2;
 			return temp;
 		}
-		MockedLogger.debug("a aplicar crossover!!");
+		
 		if (g1.length != g2.length) {
 			throw new IllegalArgumentException(
 					"cromosomas con genomas de distintas longitudes");
@@ -107,8 +101,7 @@ public class GeneticoEst implements Geneticos{
 			t = -1;					
 		}
 		
-		n=0;
-		
+		n=0;		
 		hijo1[n] = g1[n];
 		boolean sigue = true;
 		while(sigue){		
@@ -126,6 +119,38 @@ public class GeneticoEst implements Geneticos{
 		for ( int t : hijo1){
 			
 			if (t == g2[n]){
+				sigue = false;
+			}
+		
+		}
+		
+		
+		}
+		
+		
+		
+		
+		
+		
+		
+		n=0;		
+		hijo2[n] = g2[n];
+		 sigue = true;
+		while(sigue){		
+		
+		for(int t : g2){
+			if (t == g1[n]) {
+				break;
+			}
+			
+			n++;
+		}		
+		
+		hijo2[n] = g2[n];
+		
+		for ( int t : hijo2){
+			
+			if (t == g1[n]){
 				sigue = false;
 			}
 		
