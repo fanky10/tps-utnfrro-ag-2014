@@ -124,6 +124,27 @@ public class HeuristicaFacu implements Heuristica {
         debug("Total ciudades: " + totalCiudades);
         debug("Total km: " + totalKm);
     }
+    
+    public void printCiudadesRecorridas(){
+    	
+    	String lista = "";
+    	
+         int totalKm = 0;
+         int totalCiudades = 0;
+           for (Movimiento m : movementList) {
+           lista = lista + Constants.NOMBRES_PROVINCIAS[m.getIndiceCiudad()] + ",";
+             totalKm += m.getDistanciaCiudadAnterior();
+             totalCiudades++;
+         }
+           
+         lista = lista + "|| Total Km:" + totalKm;
+    	
+         System.out.println(lista);
+    	
+    	
+    }
+    
+    
 
     public static void main(String args[]) {
         int ciudadObjetivo = 7;

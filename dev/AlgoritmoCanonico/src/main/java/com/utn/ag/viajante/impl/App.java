@@ -16,6 +16,8 @@ public class App {
                 mejorRecorrido = hf.getKmRecorridos();
                 mejorCiudad = i;
             }
+            
+            hf.printCiudadesRecorridas();
         }
         System.out.println("Mejor ciudad: " + mejorCiudad + " - " + Constants.NOMBRES_PROVINCIAS[mejorCiudad] + " km recorridos: " + mejorRecorrido);
     }
