@@ -24,8 +24,6 @@ public class GeneticoEst implements Geneticos{
 	public static Random r = new Random();
 	
 	
-	
-
 	public Poblacion nuevaPoblacion() {
 		Poblacion poblacion = new Poblacion();
 		for (int i = 0; i < CANT_POBLACION; i++) {
@@ -46,6 +44,8 @@ public class GeneticoEst implements Geneticos{
 		Poblacion nuevaPoblacion = new Poblacion();
 		
 		Poblacion poblacionSeleccionada = null; // TODO
+		
+		
 		
 		// aplicamos crossover cada dos
 		// aplicamos mutacion a cada cromosoma generado
@@ -90,23 +90,54 @@ public class GeneticoEst implements Geneticos{
 			throw new IllegalArgumentException(
 					"cromosomas con genomas de distintas longitudes");
 		}
-		// crossover de un corte
-		// donde se corta
+				
 		Random ran = new Random();
-		int indexCorte = ran.nextInt(g1.length);
-
-		MockedLogger.debug("indexCorte " + indexCorte);
-		//TODO se intercambian
-		/*StringBuilder genoma1 = new StringBuilder();
-		StringBuilder genoma2 = new StringBuilder();
-		genoma1.append(g1.substring(0, indexCorte));
-		genoma1.append(g2.substring(indexCorte));
-
-		genoma2.append(g2.substring(0, indexCorte));
-		genoma2.append(g1.substring(indexCorte));*/
-		// se sobreescribe
-		//temp[0] = genoma1;
-		//temp[1]  = genoma2;
+		
+		
+		int j, k , n;
+		
+		int hijo1[] = new int[23];
+		int hijo2[] = new int[23];
+		
+		for (int t : hijo1){
+			t = -1;					
+		}
+		
+		for (int t : hijo2){
+			t = -1;					
+		}
+		
+		n=0;
+		
+		hijo1[n] = g1[n];
+		boolean sigue = true;
+		while(sigue){		
+		
+		for(int t : g1){
+			if (t == g2[n]) {
+				break;
+			}
+			
+			n++;
+		}		
+		
+		hijo1[n] = g1[n];
+		
+		for ( int t : hijo1){
+			
+			if (t == g2[n]){
+				sigue = false;
+			}
+		
+		}
+		
+		
+		}
+		
+		
+		
+		temp[0] = hijo1;
+		temp[1]  = hijo2;
 		return temp;
 
 	}

@@ -35,12 +35,19 @@ public class App {
     System.out.println( "\n\nAlgoritmo Genético:");
     
    
-	
+    GeneticoEst gen = new GeneticoEst();
     
-    
+  
+    Poblacion p = null;
+	for (int i = 0; i < AppConstants.ITERACIONES; i++) {
+		if (i == 0) {
+			p = gen.nuevaPoblacion();
+		} else {
+			p = gen.nuevaPoblacion(p);
+		}
     
   
 
 }
 
-}
+    }}
