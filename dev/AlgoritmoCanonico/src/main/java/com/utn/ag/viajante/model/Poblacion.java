@@ -24,7 +24,8 @@ public class Poblacion extends ArrayList<Cromosoma> {
 	}
 
 	public void processFitness() {
-		int distTotal = 0;
+		double distTotal = 0;
+		// double sumacontrol = 0;
 		for (Cromosoma c : this){
 			distTotal = distTotal + c.getDistanciaRecorrido();
 		}
@@ -32,6 +33,9 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		
 		for (Cromosoma c : this) {
 			c.setFitness(c.getDistanciaRecorrido()/distTotal);
+	//sumacontrol = sumacontrol + c.getFitness();
+	
+	
 		}
 		
 	}

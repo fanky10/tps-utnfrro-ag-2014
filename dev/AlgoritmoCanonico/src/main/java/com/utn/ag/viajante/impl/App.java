@@ -4,6 +4,7 @@ import com.utn.ag.algoritmocanonico.AppConstants;
 import com.utn.ag.algoritmocanonico.MockedLogger;
 import com.utn.ag.algoritmocanonico.vo.InformeVO;
 import com.utn.ag.viajante.model.Constants;
+import com.utn.ag.viajante.model.Cromosoma;
 import com.utn.ag.viajante.model.Poblacion;
 
 import java.io.IOException;
@@ -37,16 +38,21 @@ public class App {
    
     GeneticoEst gen = new GeneticoEst();
     
+    
   
     Poblacion p = null;
 	for (int i = 0; i < GeneticoEst.CANT_CICLOS; i++) {
 		if (i == 0) {
 			p = gen.nuevaPoblacion();
+			
+		
+			
+			
 		} else {
 			p = gen.nuevaPoblacion(p);
 		}
 		
-		p.printPoblacion();
+		// p.printPoblacion();
     
   
 

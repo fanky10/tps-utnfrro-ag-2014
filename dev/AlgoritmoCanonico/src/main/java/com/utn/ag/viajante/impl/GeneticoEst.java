@@ -38,8 +38,10 @@ public class GeneticoEst implements Geneticos{
 		
 		Poblacion poblacionSeleccionada = RouletteWheelSelection
 				.select(poblacionActual,rouletteRan);
+	    poblacionSeleccionada.processFitness();
+	    
+	    //System.out.println(poblacionSeleccionada.size());
 		
-
 		
 		// aplicamos crossover cada dos
 		// aplicamos mutacion a cada cromosoma generado
@@ -105,7 +107,7 @@ public class GeneticoEst implements Geneticos{
 		hijo1[n] = g1[n];
 		boolean sigue = true;
 		while(sigue){		
-		
+		n = 0;
 		for(int t : g1){
 			if (t == g2[n]) {
 				break;
