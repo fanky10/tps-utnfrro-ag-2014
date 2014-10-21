@@ -8,10 +8,10 @@ import com.utn.ag.viajante.model.RouletteWheelSelection;
 
 public class GeneticoEst implements Geneticos{
 
-	static int CANT_POBLACION = 50;
-	static int CANT_CICLOS = 200;
-	static double PROBABILIDAD_CROSSOVER = 0.1 ;
-	static double  PROBABILIDAD_MUTACION = 0.05 ;
+	static int CANT_POBLACION = 50;  //PAR
+	static int CANT_CICLOS = 5000;
+	static double PROBABILIDAD_CROSSOVER = (double) 0.1 ;
+	static double  PROBABILIDAD_MUTACION = (double) 0.05 ;
 	public static Random r = new Random();
 	
 	
@@ -99,14 +99,12 @@ public class GeneticoEst implements Geneticos{
 		
 		
 		
-		for (int t : hijo1){
-			t = -1;					
-		}
+		for (int i = 0; i<23 ; i++ ){
+	hijo1[i]= -1;
+	hijo2[i]= -1;
 		
-		for (int t : hijo2){
-			t = -1;					
 		}
-		
+		//System.out.println("BUIBNB"+hijo1[22]+ hijo2[22]);
 		
 		int n;
 		int k;
@@ -132,7 +130,6 @@ public class GeneticoEst implements Geneticos{
 		}
 	     
 		for (int t : hijo1){
-			System.out.println(t);
 			if(t == g1[k]){
 				
 				sigue = false;

@@ -51,7 +51,7 @@ public class App {
 		} else {
 			p = gen.nuevaPoblacion(p);
 		}
-		
+		System.out.println("********CICLO " + (i+1));
 		 p.printPoblacion();
     
   
