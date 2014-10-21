@@ -31,7 +31,7 @@ public class AlgoritmoCanonicoImpl implements AlgoritmoCanonico {
 		Random rouletteRan = new Random();
 		// ruleta n veces por cantidad de poblacion actual
 		Poblacion poblacionSeleccionada = RouletteWheelSelection
-				.select(poblacionActual,rouletteRan);
+			 	.select(poblacionActual,rouletteRan);
 		debugPoblacion(poblacionSeleccionada);
 		Poblacion nuevaPoblacion = new Poblacion();
 		MockedLogger.debug("***************************************");

@@ -8,7 +8,7 @@ import com.utn.ag.viajante.model.Cromosoma;
 import com.utn.ag.viajante.model.Poblacion;
 
 import java.io.IOException;
-
+ 
 public class App {
 
     public static void main(String[] args) throws IOException {
