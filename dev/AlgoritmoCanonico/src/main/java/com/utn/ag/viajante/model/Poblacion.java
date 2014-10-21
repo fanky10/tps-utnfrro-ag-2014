@@ -21,6 +21,7 @@ public class Poblacion extends ArrayList<Cromosoma> {
 	
 	public Poblacion() {
 		// TODO Auto-generated constructor stub
+
 	}
 
 	public void processFitness() {
@@ -32,7 +33,8 @@ public class Poblacion extends ArrayList<Cromosoma> {
 				
 		
 		for (Cromosoma c : this) {
-			c.setFitness(c.getDistanciaRecorrido()/distTotal);
+			c.setFitness(1/(distTotal/c.getDistanciaRecorrido()));
+			//c.setFitness(c.getDistanciaRecorrido()/distTotal);
 	//sumacontrol = sumacontrol + c.getFitness();
 	
 	

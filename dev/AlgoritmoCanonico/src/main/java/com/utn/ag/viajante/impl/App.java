@@ -6,8 +6,10 @@ import com.utn.ag.algoritmocanonico.vo.InformeVO;
 import com.utn.ag.viajante.model.Constants;
 import com.utn.ag.viajante.model.Cromosoma;
 import com.utn.ag.viajante.model.Poblacion;
+import com.utn.ag.viajante.model.RouletteWheelSelection;
 
 import java.io.IOException;
+import java.util.Random;
  
 public class App {
 
@@ -44,12 +46,14 @@ public class App {
 	for (int i = 0; i < GeneticoEst.CANT_CICLOS; i++) {
 		if (i == 0) {
 			p = gen.nuevaPoblacion();
+			p.processFitness();
 			
 		
 			
 			
 		} else {
 			p = gen.nuevaPoblacion(p);
+			p.processFitness();
 		}
 		System.out.println("********CICLO " + (i+1));
 		 p.printPoblacion();
@@ -57,5 +61,39 @@ public class App {
   
 
 }
+	
+	
+	
+	
+	
+	Random rouletteRan = new Random();
+	// ruleta n veces por cantidad de poblacion actual
+	
+	//TODO RULETA y SELECCION
+	
+	Poblacion nuevaPoblacion = new Poblacion();
+	for (int i = 0; i < 6; i++) {
+		Cromosoma c = new Cromosoma();
+		nuevaPoblacion.add(c);
+	}
+	nuevaPoblacion.processFitness();
+
+	
+	Poblacion poblacionSeleccionada = RouletteWheelSelection
+			.select(nuevaPoblacion,rouletteRan);
+    poblacionSeleccionada.processFitness();
+	
+	
+    System.out.println("ORIGINAL:");
+    nuevaPoblacion.printPoblacion();
+    System.out.println("Seleccionados:");
+    poblacionSeleccionada.printPoblacion();
+	
+	
+	
+	
+	
+	
+	
 
     }}
