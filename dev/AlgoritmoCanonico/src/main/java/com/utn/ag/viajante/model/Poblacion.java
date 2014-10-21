@@ -31,14 +31,19 @@ public class Poblacion extends ArrayList<Cromosoma> {
 			distTotal = distTotal + c.getDistanciaRecorrido();
 		}
 				
-		
+		double fitnessTotal = 0;
 		for (Cromosoma c : this) {
-			c.setFitness(1/(distTotal/c.getDistanciaRecorrido()));
-			//c.setFitness(c.getDistanciaRecorrido()/distTotal);
+			//c.setFitness(c.getDistanciaRecorrido());
+			c.setFitness(1-(c.getDistanciaRecorrido()/distTotal));
 	//sumacontrol = sumacontrol + c.getFitness();
 	
-	
+
 		}
+		
+	
+		
+		
+		
 		
 	}
 	
