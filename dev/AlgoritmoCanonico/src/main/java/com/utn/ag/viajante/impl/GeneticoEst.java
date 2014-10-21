@@ -90,10 +90,14 @@ public class GeneticoEst implements Geneticos{
 		Random ran = new Random();
 		
 		
-		int j, k , n;
+		
+		
+		
 		
 		int hijo1[] = new int[23];
 		int hijo2[] = new int[23];
+		
+		
 		
 		for (int t : hijo1){
 			t = -1;					
@@ -103,65 +107,101 @@ public class GeneticoEst implements Geneticos{
 			t = -1;					
 		}
 		
-		n=0;		
+		
+		int n;
+		int k;
+		//Croosover Hijo1
+		n = 0;
+		k = 0;
+		
 		hijo1[n] = g1[n];
 		boolean sigue = true;
-		while(sigue){		
+		
+		
+		while (sigue) {
+		k = 0;
+		for (int t : g1){
+			
+			if ( t == g2[n]){
+				//System.out.println("X:" + k);
+				break;
+				
+			}
+			
+			k++;
+		}
+	     
+		for (int t : hijo1){
+			System.out.println(t);
+			if(t == g1[k]){
+				
+				sigue = false;
+				
+			}			
+		}
+		
+		if (sigue){
+		hijo1[k]=g1[k];
+		n = k;
+		}
+		
+		}
+		
+		for (int i = 0; i<23 ; i++){
+			
+			if (hijo1[i] == -1){
+				
+				hijo1[i]=g2[i];
+				
+			}
+			
+		}
+		
+		
+		//Crossover Hijo2
 		n = 0;
-		for(int t : g1){
-			if (t == g2[n]) {
+		k = 0;
+		
+		hijo2[n] = g2[n];
+		sigue = true;
+		
+		
+		while (sigue) {
+		k = 0;
+		for (int t : g2){
+			
+			if ( t == g1[n]){
+				
 				break;
 			}
 			
-			n++;
-		}		
+			k++;
+		}
 		
-		hijo1[n] = g1[n];
-		
-		for ( int t : hijo1){
+		for (int t : hijo2){
 			
-			if (t == g2[n]){
+			if(t == g2[k]){
 				sigue = false;
 			}
+			
+		}
+		if (sigue){
+		hijo2[k]=g2[k];
+		n = k;
+		}
 		
 		}
 		
-		
-		}
-		
-		
-		
-		
-		
-		
-		
-		n=0;		
-		hijo2[n] = g2[n];
-		 sigue = true;
-		while(sigue){		
-		
-		for(int t : g2){
-			if (t == g1[n]) {
-				break;
+		for (int i = 0; i<23 ; i++){
+			
+			if (hijo2[i] == -1){
+				
+				hijo2[i]=g1[i];
+				
 			}
 			
-			n++;
-		}		
-		
-		hijo2[n] = g2[n];
-		
-		for ( int t : hijo2){
-			
-			if (t == g1[n]){
-				sigue = false;
-			}
-		
 		}
-		
-		
-		}
-		
-		
+				
 		
 		temp[0] = hijo1;
 		temp[1]  = hijo2;

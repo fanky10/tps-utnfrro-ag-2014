@@ -52,7 +52,7 @@ public class App {
 			p = gen.nuevaPoblacion(p);
 		}
 		
-		// p.printPoblacion();
+		 p.printPoblacion();
     
   
 
