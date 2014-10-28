@@ -17,7 +17,9 @@ class ImagePanel extends JPanel {
 	int radiocontadores = 5;
 	
 static Image snapshot;	
-	
+
+//int[] ciudades = new int[23];
+
   private Image img;
   Dimension size;
   
@@ -45,19 +47,21 @@ static Image snapshot;
  } */
  
  
+public void dibujarRecorrido(int[] ciudades){
+	pintarRecorrido(ciudades);
+	//this.ciudades = ciudades;
+	//this.repaint();
+}
 
-
-  public void pintarInicio(int x, int y){
-      Graphics g = this.getGraphics();
-      g.setColor(Color.red);         
-      g.fillOval(x-2, y-2, radiocontadores, radiocontadores);
-  }
+  
   
   
   public void pintarRecorrido(int[] ciudades){
-	  this.repaint();
+	  
 	  Graphics g = this.getGraphics();
-      g.setColor(Color.yellow);         
+      g.setColor(Color.black);
+      
+      
       
       for (int i = 1 ; i < ciudades.length  ; i++){
       
@@ -110,7 +114,7 @@ static Image snapshot;
 
   public void paintComponent(Graphics g) {
 	  super.paintComponent(g);
-	  
+	//  pintarRecorrido(ciudades);
 	  g.drawRect(0, 0, width, height);
     g.drawImage(img, 0, 0, width, height , x1,y1,x2,y2, null);
 	  g.drawImage(img, 0, 0 ,width, height ,0, 0, size.width ,size.height, null); 
