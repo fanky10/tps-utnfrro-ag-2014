@@ -38,19 +38,46 @@ public class Poblacion extends ArrayList<Cromosoma> {
 	
 	
 	public void processFitness() {
-				
-	
-		
-		
-		
 		//Resetear Fitness a 0;
-				for (Cromosoma c : this){
-					c.setFitness(0);
-				}
+		for (Cromosoma c : this){
+			c.setFitness(0);
+		}	
+	
+		double factor = 1;
+		
+		
+		double distTotal = 0;
+		double sumaTotal = 0;
+		double controlFit = 0;
+		
+		for (Cromosoma c : this){
+		if (c.getDistanciaRecorrido()+factor > distTotal)
+			distTotal = c.getDistanciaRecorrido() + factor;
+			//distTotal = distTotal + c.getDistanciaRecorrido();
+		}
+		
+		
+		for (Cromosoma c : this){
+		
+			c.setFitness(distTotal - c.getDistanciaRecorrido());
+			sumaTotal = sumaTotal + (distTotal - c.getDistanciaRecorrido());
+			
+		}
+		
+		for (Cromosoma c : this){
+			
+			double fitness = c.getFitness()/sumaTotal;
+			
+			c.setFitness(fitness);
+			
+			controlFit = controlFit + c.getFitness();
+			
+		}
 				
 		
 		
-		
+		/*
+		 //FINTESS QUE FUNCIONA
 		double distTotal = 0;
 		double sumaTotal = 0;
 		double controlFit = 0;
@@ -76,8 +103,14 @@ public class Poblacion extends ArrayList<Cromosoma> {
 			controlFit = controlFit + c.getFitness();
 			
 		}
-		
+		*/
 
+		
+		
+		
+		
+		
+		
 		//System.out.println("Distancia TOTAL:" + distTotal + "| fitness TOT:" + sumaTotal + "|sumacontrol:" + controlFit);
 		
 		
