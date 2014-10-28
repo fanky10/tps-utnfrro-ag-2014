@@ -1,5 +1,6 @@
 package com.utn.ag.viajante.model;
 
+import java.awt.geom.Arc2D.Double;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -42,12 +43,18 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		
 		
 		
-		
+		//Resetear Fitness a 0;
+				for (Cromosoma c : this){
+					c.setFitness(0);
+				}
+				
 		
 		
 		
 		double distTotal = 0;
-		double fitTotal= 0;
+		double sumaTotal = 0;
+		double controlFit = 0;
+		
 		for (Cromosoma c : this){
 			distTotal = distTotal + c.getDistanciaRecorrido();
 		}
@@ -56,21 +63,22 @@ public class Poblacion extends ArrayList<Cromosoma> {
 		for (Cromosoma c : this){
 		
 			c.setFitness(distTotal - c.getDistanciaRecorrido());
-			fitTotal = fitTotal + c.getFitness();
+			sumaTotal = sumaTotal + (distTotal - c.getDistanciaRecorrido());
 			
 		}
 		
 		for (Cromosoma c : this){
 			
-			double fitness = c.getFitness()/fitTotal;
+			double fitness = c.getFitness()/sumaTotal;
 			
 			c.setFitness(fitness);
 			
+			controlFit = controlFit + c.getFitness();
 			
 		}
 		
 
-		System.out.println("Distancia TOTAL:" + distTotal + "| fitness TOT:" + fitTotal);
+		//System.out.println("Distancia TOTAL:" + distTotal + "| fitness TOT:" + sumaTotal + "|sumacontrol:" + controlFit);
 		
 		
 		

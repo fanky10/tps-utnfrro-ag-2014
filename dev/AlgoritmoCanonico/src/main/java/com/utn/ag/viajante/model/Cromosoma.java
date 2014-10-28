@@ -36,6 +36,8 @@ generarGenoma();
 			
 		}
 		
+		recorrido = recorrido + ciudades[0];
+		
 		System.out.println(recorrido);
 		
 	}

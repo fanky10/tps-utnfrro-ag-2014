@@ -21,7 +21,7 @@ public class GeneticoEst implements Geneticos{
 			Cromosoma c = new Cromosoma();
 			poblacion.add(c);
 		}
-		poblacion.processFitness();
+		 //QUITADO	poblacion.processFitness();
 		return poblacion;
 	}
 	
@@ -35,10 +35,10 @@ public class GeneticoEst implements Geneticos{
 		Poblacion nuevaPoblacion = new Poblacion();
 		
 	
-		
+		poblacionActual.processFitness();
 		Poblacion poblacionSeleccionada = RouletteWheelSelection
 				.select(poblacionActual,rouletteRan);
-	    poblacionSeleccionada.processFitness();
+		 //QUITADO    poblacionSeleccionada.processFitness();
 	    
 	    //System.out.println(poblacionSeleccionada.size());
 		
@@ -65,7 +65,7 @@ public class GeneticoEst implements Geneticos{
 			nuevaPoblacion.add(c1);
 			nuevaPoblacion.add(c2);
 		}
-		nuevaPoblacion.processFitness();
+		 //QUITADO	nuevaPoblacion.processFitness();
 		return nuevaPoblacion;
 	}
 	

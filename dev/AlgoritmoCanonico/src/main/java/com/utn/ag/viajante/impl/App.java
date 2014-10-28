@@ -46,14 +46,14 @@ public class App {
 	for (int i = 0; i < GeneticoEst.CANT_CICLOS; i++) {
 		if (i == 0) {
 			p = gen.nuevaPoblacion();
-			p.processFitness();
+			 //QUITADO	p.processFitness();
 			
 		
 			
 			
 		} else {
 			p = gen.nuevaPoblacion(p);
-			p.processFitness();
+			//p.processFitness();
 		}
 		System.out.println("********CICLO " + (i+1));
 		 p.printPoblacion();
@@ -62,6 +62,34 @@ public class App {
 
 }
 	
+	p.processFitness();
+	
+
+	Cromosoma resultado = new Cromosoma();
+	resultado.setFitness(0);
+	
+	
+	for (Cromosoma c : p){
+		
+		if (c.getFitness()>resultado.getFitness()){
+			
+			resultado = c;
+			
+		}
+		
+	}
+	
+	
+	System.out.println("Recorrido Resultado:");
+	resultado.printRecorrido();
+	System.out.println(resultado.getDistanciaRecorrido()+"km");
+	
+	
+	
+	
+/*	
+	
+	System.out.println("CONTROL:");
 	
 	
 	
@@ -76,12 +104,12 @@ public class App {
 		Cromosoma c = new Cromosoma();
 		nuevaPoblacion.add(c);
 	}
-	nuevaPoblacion.processFitness();
-
 	
+
+	nuevaPoblacion.processFitness();
 	Poblacion poblacionSeleccionada = RouletteWheelSelection
 			.select(nuevaPoblacion,rouletteRan);
-    poblacionSeleccionada.processFitness();
+    //QUITADO poblacionSeleccionada.processFitness();
 	
 	
     System.out.println("ORIGINAL:");
@@ -89,11 +117,13 @@ public class App {
     System.out.println("Seleccionados:");
     poblacionSeleccionada.printPoblacion();
 	
-	
+*/
 	
 	
 	
 	
 	
 
-    }}
+    }
+    
+}

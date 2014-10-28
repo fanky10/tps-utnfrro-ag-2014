@@ -37,6 +37,9 @@ public class RouletteWheelSelection {
 		// proportional to the probability of the corresponding candidate in the
 		// population
 		// being selected.
+		
+		//poblacionActual.processFitness();
+		
 		double[] cumulativeFitnesses = new double[poblacionActual.size()];
 		cumulativeFitnesses[0] = poblacionActual.get(0)
 				.getFitness();
