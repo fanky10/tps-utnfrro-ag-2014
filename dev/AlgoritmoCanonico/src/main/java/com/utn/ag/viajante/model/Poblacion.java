@@ -1,6 +1,7 @@
 package com.utn.ag.viajante.model;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 
@@ -8,6 +9,9 @@ import java.util.ArrayList;
 
 public class Poblacion extends ArrayList<Cromosoma> {
 
+	private static Random m_rand = new Random();
+	
+	
 	public Poblacion(int size) {
 		super(size);
 	}
@@ -24,13 +28,76 @@ public class Poblacion extends ArrayList<Cromosoma> {
 
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
 	public void processFitness() {
+				
+	
+		
+		
+		
+		
+		
+		
+		
 		double distTotal = 0;
-		// double sumacontrol = 0;
+		double fitTotal= 0;
 		for (Cromosoma c : this){
 			distTotal = distTotal + c.getDistanciaRecorrido();
 		}
-				
+		
+		
+		for (Cromosoma c : this){
+		
+			c.setFitness(distTotal - c.getDistanciaRecorrido());
+			fitTotal = fitTotal + c.getFitness();
+			
+		}
+		
+		for (Cromosoma c : this){
+			
+			double fitness = c.getFitness()/fitTotal;
+			
+			c.setFitness(fitness);
+			
+			
+		}
+		
+
+		System.out.println("Distancia TOTAL:" + distTotal + "| fitness TOT:" + fitTotal);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
+		double distTotal = 0;
+		for (Cromosoma c : this){
+			distTotal = distTotal + c.getDistanciaRecorrido();
+		}
+		double porcTotal = 0d;
+		for (Cromosoma c : this){
+			double invPorc = 1 / (c.getDistanciaRecorrido()/distTotal);
+			c.setFitness(invPorc);
+			porcTotal = porcTotal + invPorc;
+		}
+		for (Cromosoma c : this){
+			double fitness = c.getFitness() / porcTotal;
+			c.setFitness(fitness);
+		}
 		double fitnessTotal = 0;
 		for (Cromosoma c : this) {
 			//c.setFitness(c.getDistanciaRecorrido());
@@ -40,7 +107,7 @@ public class Poblacion extends ArrayList<Cromosoma> {
 
 		}
 		
-	
+	*/
 		
 		
 		
