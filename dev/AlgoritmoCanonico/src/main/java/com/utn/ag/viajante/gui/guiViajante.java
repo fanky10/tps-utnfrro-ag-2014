@@ -2,16 +2,33 @@ package com.utn.ag.viajante.gui;
 
 import java.awt.EventQueue;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+
 import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
+
 import java.awt.GridLayout;
+
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+import java.awt.Canvas;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Label;
+
+
+
 public class guiViajante {
 
+	private static final String IMG_PATH = "src/main/java/com/utn/ag/viajante/gui/mapa1Argentina.jpg";
+	
+	
 	private JFrame frmGui;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -78,7 +95,7 @@ public class guiViajante {
 		pnlBtnResult.add(pnlResult, BorderLayout.NORTH);
 		
 		JLabel lblResultado = new JLabel("");
-		pnlBtnResult.add(lblResultado, BorderLayout.WEST);
+		pnlResult.add(lblResultado);
 		
 		JPanel pnlBotones = new JPanel();
 		pnlBtnResult.add(pnlBotones, BorderLayout.SOUTH);
@@ -92,6 +109,16 @@ public class guiViajante {
 		
 		JPanel pnlMapa = new JPanel();
 		frmGui.getContentPane().add(pnlMapa, BorderLayout.CENTER);
+		
+		JLabel mapa = new JLabel("");
+		
+		ImageIcon icon = new ImageIcon(IMG_PATH); 
+		
+		mapa.setIcon(icon);
+	
+		
+		pnlMapa.add(mapa);
+		
 	}
 
 }
