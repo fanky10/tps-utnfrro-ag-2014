@@ -36,7 +36,7 @@ generarGenoma();
 			
 		}
 		
-		recorrido = recorrido + ciudades[0];
+		recorrido = recorrido + Constants.NOMBRES_PROVINCIAS[ciudades[0]];
 		
 		System.out.println(recorrido);
 		

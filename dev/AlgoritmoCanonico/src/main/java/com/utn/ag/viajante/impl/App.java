@@ -14,76 +14,13 @@ import java.util.Random;
 public class App {
 
     public static void main(String[] args) throws IOException {
-        HeuristicaFacu.DEBUG = Boolean.FALSE;
-       
-        System.out.println("Algoritmo Heurístico:");
         
-        int mejorCiudad = -1;
-        int mejorRecorrido = -1;
-        for (int i = 0; i < Constants.CANTIDAD_PROVINCIAS; i++) {
-            HeuristicaFacu hf = new HeuristicaFacu();
-            hf.recorreCiudades(i);
-            if (mejorRecorrido < 0 || mejorRecorrido > hf.getKmRecorridos()) {
-                mejorRecorrido = hf.getKmRecorridos();
-                mejorCiudad = i;
-            }
-            
-            hf.printCiudadesRecorridas();
-        }
-        System.out.println("Mejor ciudad: " + mejorCiudad + " - " + Constants.NOMBRES_PROVINCIAS[mejorCiudad] + " km recorridos: " + mejorRecorrido);
-  
+    //Ejecución heurístico   
+     algHeuristico();
     
     
-    
-    System.out.println( "\n\nAlgoritmo Genético:");
-    
-   
-    GeneticoEst gen = new GeneticoEst();
-    
-    
-  
-    Poblacion p = null;
-	for (int i = 0; i < GeneticoEst.CANT_CICLOS; i++) {
-		if (i == 0) {
-			p = gen.nuevaPoblacion();
-			 //QUITADO	p.processFitness();
-			
-		
-			
-			
-		} else {
-			p = gen.nuevaPoblacion(p);
-			//p.processFitness();
-		}
-		System.out.println("********CICLO " + (i+1));
-		 p.printPoblacion();
-    
-  
-
-}
-	
-	p.processFitness();
-	
-
-	Cromosoma resultado = new Cromosoma();
-	resultado.setFitness(0);
-	
-	
-	for (Cromosoma c : p){
-		
-		if (c.getFitness()>resultado.getFitness()){
-			
-			resultado = c;
-			
-		}
-		
-	}
-	
-	
-	System.out.println("Recorrido Resultado:");
-	resultado.printRecorrido();
-	System.out.println(resultado.getDistanciaRecorrido()+"km");
-	
+   //Ejecución AlgGenetico
+     algGenetico();
 	
 	
 	
@@ -125,5 +62,93 @@ public class App {
 	
 
     }
+    
+    
+    public static  int[] algHeuristico(){
+    	int[] recorridoFinal = null;
+    	
+    	
+    	
+    	 System.out.println("Algoritmo Heurístico:");
+         
+         int mejorCiudad = -1;
+         int mejorRecorrido = -1;
+         for (int i = 0; i < Constants.CANTIDAD_PROVINCIAS; i++) {
+             HeuristicaFacu hf = new HeuristicaFacu();
+             hf.recorreCiudades(i);
+             if (mejorRecorrido < 0 || mejorRecorrido > hf.getKmRecorridos()) {
+                 mejorRecorrido = hf.getKmRecorridos();
+                 mejorCiudad = i;
+             }
+             
+             hf.printCiudadesRecorridas();
+         }
+         System.out.println("Mejor ciudad: " + mejorCiudad + " - " + Constants.NOMBRES_PROVINCIAS[mejorCiudad] + " km recorridos: " + mejorRecorrido);
+   
+    	
+    	
+    	
+    	return recorridoFinal;
+    }
+    
+    
+    public static int[] algGenetico(){
+    	
+    	
+    	 System.out.println( "\n\nAlgoritmo Genético:");
+    	    
+    	   
+    	    GeneticoEst gen = new GeneticoEst();
+    	    
+    	    
+    	  
+    	    Poblacion p = null;
+    		for (int i = 0; i < GeneticoEst.CANT_CICLOS; i++) {
+    			if (i == 0) {
+    				p = gen.nuevaPoblacion();
+    				 //QUITADO	p.processFitness();
+    				
+    			
+    				
+    				
+    			} else {
+    				p = gen.nuevaPoblacion(p);
+    				//p.processFitness();
+    			}
+    			System.out.println("********CICLO " + (i+1));
+    			 p.printPoblacion();
+    	    
+    	  
+
+    	}
+    		
+    		p.processFitness();
+    		
+
+    		Cromosoma resultado = new Cromosoma();
+    		resultado.setFitness(0);
+    		
+    		
+    		for (Cromosoma c : p){
+    			
+    			if (c.getFitness()>resultado.getFitness()){
+    				
+    				resultado = c;
+    				
+    			}
+    			
+    		}
+    		
+    		
+    		System.out.println("Recorrido Resultado:");
+    		resultado.printRecorrido();
+    		System.out.println(resultado.getDistanciaRecorrido()+"km");
+    		
+    	return resultado.getCiudades();
+    	
+    }
+    
+    
+    
     
 }
