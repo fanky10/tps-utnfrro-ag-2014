@@ -16,8 +16,11 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+import com.utn.ag.viajante.impl.GeneticoEst;
 import com.utn.ag.viajante.impl.HeuristicaFacu;
 import com.utn.ag.viajante.model.Constants;
+import com.utn.ag.viajante.model.Cromosoma;
+import com.utn.ag.viajante.model.Poblacion;
 
 import java.awt.Canvas;
 import java.awt.event.MouseEvent;
@@ -117,6 +120,75 @@ public class guiViajante {
 
 		JButton btnEjecutarAlgGentico = new JButton("Ejecutar Alg. Genético");
 		pnlBotones.add(btnEjecutarAlgGentico);
+		
+		btnEjecutarAlgGentico.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				
+
+		    	
+		    	
+		    	 GeneticoEst.CANT_CICLOS = Integer.valueOf(textField.getText());
+		    	 GeneticoEst.CANT_POBLACION = Integer.valueOf(textField_1.getText());    
+		    	   
+		    	    GeneticoEst gen = new GeneticoEst();
+		    	    
+		    	    
+		    	  
+		    	    Poblacion p = null;
+		    		for (int i = 0; i < GeneticoEst.CANT_CICLOS; i++) {
+		    			if (i == 0) {
+		    				p = gen.nuevaPoblacion();
+		    				 //QUITADO	p.processFitness();
+		    				
+		    			
+		    				
+		    				
+		    			} else {
+		    				p = gen.nuevaPoblacion(p);
+		    				//p.processFitness();
+		    			}
+		    			
+		    			 p.printPoblacion();
+		    	    
+		    	  
+
+		    	}
+		    		
+		    		p.processFitness();
+		    		
+
+		    		Cromosoma resultado = new Cromosoma();
+		    		resultado.setFitness(0);
+		    		
+		    		
+		    		for (Cromosoma c : p){
+		    			
+		    			if (c.getFitness()>resultado.getFitness()){
+		    				
+		    				resultado = c;
+		    				
+		    			}
+		    			
+		    		}
+		    		
+		    		
+		    	
+		    		
+		    	
+		    	
+		    
+				
+				pnlMapa.dibujarRecorrido(resultado.getCiudades());
+//				 pnlMapa.repaint();
+
+				lblResultado.setText("Ciudad Inicial: " + Constants.NOMBRES_PROVINCIAS[resultado.getCiudades()[0]]
+						+ " y recorrido de " + resultado.getDistanciaRecorrido() + "km");
+				
+			}
+		});
+		
+		
 
 		JButton btnEjecutarAlgHeurstico = new JButton(
 				"Ejecutar Alg. Heurístico");
@@ -142,7 +214,8 @@ public class guiViajante {
 				pnlMapa.dibujarRecorrido(hf.getRecorrido());
 //				 pnlMapa.repaint();
 
-				lblResultado.setText("Ciudad Inicial: " + Constants.NOMBRES_PROVINCIAS[mejorCiudad]);
+				lblResultado.setText("Ciudad Inicial: " + Constants.NOMBRES_PROVINCIAS[mejorCiudad]
+						+ " y recorrido de " + mejorRecorrido + "km");
 				
 			}
 		});

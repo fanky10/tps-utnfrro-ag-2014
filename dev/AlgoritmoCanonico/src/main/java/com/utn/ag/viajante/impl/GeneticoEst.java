@@ -9,8 +9,8 @@ import com.utn.ag.viajante.model.RouletteWheelSelection;
 public class GeneticoEst implements Geneticos{
  
 	static boolean DEBUG = true;
-	static int CANT_POBLACION = 50;  //PAR
-	static int CANT_CICLOS = 1500;
+	public static int CANT_POBLACION = 50;  //PAR
+	public static int CANT_CICLOS = 1500;
 	static double PROBABILIDAD_CROSSOVER = (double) 0.1 ;
 	static double  PROBABILIDAD_MUTACION = (double) 0.05 ;
 	public static Random r = new Random();

@@ -18,7 +18,7 @@ class ImagePanel extends JPanel {
 	
 static Image snapshot;	
 
-//int[] ciudades = new int[23];
+int[] ciudades = new int[23];
 
   private Image img;
   Dimension size;
@@ -49,7 +49,7 @@ static Image snapshot;
  
 public void dibujarRecorrido(int[] ciudades){
 	pintarRecorrido(ciudades);
-	//this.ciudades = ciudades;
+	this.ciudades = ciudades;
 	//this.repaint();
 }
 
@@ -114,12 +114,12 @@ public void dibujarRecorrido(int[] ciudades){
 
   public void paintComponent(Graphics g) {
 	  super.paintComponent(g);
-	//  pintarRecorrido(ciudades);
+	
 	  g.drawRect(0, 0, width, height);
     g.drawImage(img, 0, 0, width, height , x1,y1,x2,y2, null);
 	  g.drawImage(img, 0, 0 ,width, height ,0, 0, size.width ,size.height, null); 
 	 
-	
+	  pintarRecorrido(ciudades);
 	  
 	  
 	  //snapshot = img.getScaledInstance(width,  height, Image.SCALE_SMOOTH);
