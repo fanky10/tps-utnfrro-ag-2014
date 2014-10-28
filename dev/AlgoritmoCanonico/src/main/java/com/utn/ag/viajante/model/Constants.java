@@ -1,5 +1,7 @@
 package com.utn.ag.viajante.model;
 
+import java.util.Vector;
+
 public class Constants {
 	public static final int[][] TABLA_DISTANCIAS = {
 			{ 0, 1543, 1510, 1203, 1043, 1191, 1023, 478, 940, 1040, 480, 715,
@@ -67,5 +69,36 @@ public class Constants {
 			"Neuquén", "Viedma", "Rawson", "Rio Gallegos", "Ushuaia" };
 
 	public static final int CANTIDAD_PROVINCIAS = NOMBRES_PROVINCIAS.length;
+	
+	public static final Vector2D[] COORENADAS_CIUDADES = {
+		
+		 new Vector2D(223 , 262 )
+		 , new Vector2D(98 , 53 )
+		 , new Vector2D(97 , 65 )
+		 , new Vector2D(101 , 107 )
+		 , new Vector2D(119 , 124 )
+		 , new Vector2D(229 , 91 )
+		 , new Vector2D(215 , 115 )
+		 , new Vector2D(186 , 201 )
+		 , new Vector2D(223 , 117 )
+		 , new Vector2D(273 , 117 )
+		 , new Vector2D(191 , 203 )
+		 , new Vector2D(125 , 198 )
+		 , new Vector2D(76 , 161 )
+		 , new Vector2D(49 , 204 )
+		 , new Vector2D(89 , 238 )
+		 , new Vector2D(94 , 139 )
+		 , new Vector2D(45 , 234 )
+		 , new Vector2D(128 , 302 )
+		 , new Vector2D(67 , 352 )
+		 , new Vector2D(152 , 389 )
+		 , new Vector2D(120 , 438 )
+		 , new Vector2D(78 , 612 )
+		 , new Vector2D(97 , 673 )
+		
+	};
+	
+	
+	
 
 }

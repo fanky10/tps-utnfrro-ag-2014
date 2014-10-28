@@ -1,5 +1,8 @@
 package com.utn.ag.viajante.gui;
 
+
+
+
 import java.awt.EventQueue;
 
 import javax.imageio.ImageIO;
@@ -17,16 +20,23 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 
 import java.awt.Canvas;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.awt.Label;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 
 public class guiViajante {
 
 	private static final String IMG_PATH = "src/main/java/com/utn/ag/viajante/gui/mapa1Argentina.jpg";
+	static ImagePanel pnlMapa ;
+	BufferedImage tableroBuffer = null;
+	
 	
 	
 	private JFrame frmGui;
@@ -49,6 +59,25 @@ public class guiViajante {
 		});
 	}
 
+	
+	public void dibujarResultado(int[] ciudades){
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	public void dibujarInicio(int[] ciudades){
+		
+		
+		
+	}
+	
+	
+	
 	/**
 	 * Create the application.
 	 */
@@ -61,9 +90,9 @@ public class guiViajante {
 	 */
 	private void initialize() {
 		frmGui = new JFrame();
-		frmGui.setTitle("guiTSP");
 		frmGui.setResizable(false);
-		frmGui.setBounds(100, 100, 487, 573);
+		frmGui.setTitle("guiTSP");
+		frmGui.setBounds(100, 100, 346, 786);
 		frmGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGui.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -105,19 +134,45 @@ public class guiViajante {
 		pnlBotones.add(btnEjecutarAlgGentico);
 		
 		JButton btnEjecutarAlgHeurstico = new JButton("Ejecutar Alg. Heurístico");
+		btnEjecutarAlgHeurstico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		pnlBotones.add(btnEjecutarAlgHeurstico);
 		
-		JPanel pnlMapa = new JPanel();
+		ImageIcon imagen = new ImageIcon(IMG_PATH);	
+		pnlMapa = new ImagePanel(imagen.getImage());	
+	/*	pnlMapa.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				try {
+					
+					System.out.println(arg0.getX()+ ":" + arg0.getY());
+					
+				}catch (Exception e){
+					
+					
+					
+				}
+			}
+		});
+		
+		*/
+		
+		
+		
+		
+		
+		
+		
+		
 		frmGui.getContentPane().add(pnlMapa, BorderLayout.CENTER);
 		
-		JLabel mapa = new JLabel("");
 		
-		ImageIcon icon = new ImageIcon(IMG_PATH); 
 		
-		mapa.setIcon(icon);
-	
-		
-		pnlMapa.add(mapa);
+
+
 		
 	}
 
