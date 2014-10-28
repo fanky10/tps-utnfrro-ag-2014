@@ -104,6 +104,14 @@ public class guiViajante {
 		pnlInput.add(textField_1);
 		textField_1.setColumns(10);
 
+		JLabel lblCiudad = new JLabel("Ciudad:");
+		pnlInput.add(lblCiudad);
+
+		final JTextField txtIndiceCiudad = new JTextField();
+		txtIndiceCiudad.setText("21");
+		pnlInput.add(txtIndiceCiudad);
+		txtIndiceCiudad.setColumns(5);
+
 		JPanel pnlBtnResult = new JPanel();
 		frmGui.getContentPane().add(pnlBtnResult, BorderLayout.SOUTH);
 		pnlBtnResult.setLayout(new BorderLayout(0, 0));
@@ -183,7 +191,7 @@ public class guiViajante {
 //				 pnlMapa.repaint();
 
 				lblResultado.setText("Ciudad Inicial: " + Constants.NOMBRES_PROVINCIAS[resultado.getCiudades()[0]]
-						+ " y recorrido de " + resultado.getDistanciaRecorrido() + "km");
+						+ " i: "+resultado.getCiudades()[0] + " y recorrido de " + resultado.getDistanciaRecorrido() + "km");
 				
 			}
 		});
@@ -209,15 +217,27 @@ public class guiViajante {
 
 				}
 
+				
+				
 				HeuristicaFacu hf = new HeuristicaFacu();
+							
+				if(!txtIndiceCiudad.getText().isEmpty())
+					mejorCiudad= Integer.parseInt(txtIndiceCiudad.getText());
+				
+				
 				hf.recorreCiudades(mejorCiudad);
+				
+				mejorRecorrido= hf.getKmRecorridos();
+				
 				pnlMapa.dibujarRecorrido(hf.getRecorrido());
 //				 pnlMapa.repaint();
 
 				lblResultado.setText("Ciudad Inicial: " + Constants.NOMBRES_PROVINCIAS[mejorCiudad]
-						+ " y recorrido de " + mejorRecorrido + "km");
+						+ " i: "+mejorCiudad + " y recorrido de " + mejorRecorrido + "km");
 				
 			}
+			
+			
 		});
 //		btnEjecutarAlgHeurstico.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent arg0) {
