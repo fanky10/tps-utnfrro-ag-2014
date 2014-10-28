@@ -59,6 +59,9 @@ public class HeuristicaFacu implements Heuristica {
         kmRecorridos += distanciaUltimaCiudadDestino;
 
     }
+    
+    
+    
 
     /**
      *
@@ -124,6 +127,27 @@ public class HeuristicaFacu implements Heuristica {
         debug("Total ciudades: " + totalCiudades);
         debug("Total km: " + totalKm);
     }
+    
+    
+    
+    
+    public int[] getRecorrido(){
+    	int ciudades[] = new int[23];
+    	
+    	for (int i = 0; i < 23 ; i++)
+    	 {
+            ciudades[i]= movementList.get(i).indiceCiudad;
+            
+        }
+    	
+    	return ciudades;
+    	
+    }
+    
+    
+    
+    
+    
     
     public void printCiudadesRecorridas(){
     	

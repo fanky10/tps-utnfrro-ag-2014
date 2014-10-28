@@ -10,9 +10,11 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import com.utn.ag.viajante.model.Constants;
+
 class ImagePanel extends JPanel {
 
-	int radiocontadores = 16;
+	int radiocontadores = 5;
 	
 static Image snapshot;	
 	
@@ -45,7 +47,54 @@ static Image snapshot;
  
 
 
- 
+  public void pintarInicio(int x, int y){
+      Graphics g = this.getGraphics();
+      g.setColor(Color.red);         
+      g.fillOval(x-2, y-2, radiocontadores, radiocontadores);
+  }
+  
+  
+  public void pintarRecorrido(int[] ciudades){
+	  this.repaint();
+	  Graphics g = this.getGraphics();
+      g.setColor(Color.yellow);         
+      
+      for (int i = 1 ; i < ciudades.length  ; i++){
+      
+      x1= Constants.COORENADAS_CIUDADES[i].getX();
+      y1= Constants.COORENADAS_CIUDADES[i].getY();
+      
+      x2= Constants.COORENADAS_CIUDADES[i-1].getX();
+      y2= Constants.COORENADAS_CIUDADES[i-1].getY();
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  g.drawLine(x1, y1, x2, y2);
+      
+      }
+      
+      
+      g.drawLine(Constants.COORENADAS_CIUDADES[ciudades.length-1].getX(), Constants.COORENADAS_CIUDADES[ciudades.length-1].getY() ,
+    		      
+    		  Constants.COORENADAS_CIUDADES[ciudades[0]].getX(), Constants.COORENADAS_CIUDADES[ciudades[0]].getY() );
+      
+      
+      
+      g.setColor(Color.green);  
+      
+      for (int c :ciudades){
+    	  
+    	  g.fillOval(Constants.COORENADAS_CIUDADES[c].getX() - 2, Constants.COORENADAS_CIUDADES[c].getY() - 2, radiocontadores, radiocontadores);  
+    	  
+      }
+	  
+      g.setColor(Color.red);     
+      g.fillOval(Constants.COORENADAS_CIUDADES[ciudades[0]].getX() - 2, Constants.COORENADAS_CIUDADES[ciudades[0]].getY() - 2, radiocontadores, radiocontadores);
+	  
+	  
+  }
  
   
   public ImagePanel(Image img) {
@@ -69,13 +118,16 @@ static Image snapshot;
 	
 	  
 	  
-	  snapshot = img.getScaledInstance(width,  height, Image.SCALE_SMOOTH);
+	  //snapshot = img.getScaledInstance(width,  height, Image.SCALE_SMOOTH);
 	
 	
 	  
 	    
-		  Font font = new Font("Times New Roman", Font.BOLD , 12 );
+		//  Font font = new Font("Times New Roman", Font.BOLD , 12 );
 
+	  
+	  
+		  
 		  
 		 /* originalmentSi
 		  for (int i = 0 ; i< 50 ; i++){

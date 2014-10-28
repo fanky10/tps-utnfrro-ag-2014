@@ -19,6 +19,9 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+import com.utn.ag.viajante.impl.HeuristicaFacu;
+import com.utn.ag.viajante.model.Constants;
+
 import java.awt.Canvas;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -136,6 +139,37 @@ public class guiViajante {
 		JButton btnEjecutarAlgHeurstico = new JButton("Ejecutar Alg. Heurístico");
 		btnEjecutarAlgHeurstico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				int mejorCiudad = -1;
+		         int mejorRecorrido = -1;
+		         for (int i = 0; i < Constants.CANTIDAD_PROVINCIAS; i++) {
+		             HeuristicaFacu hf = new HeuristicaFacu();
+		             hf.recorreCiudades(i);
+		             if (mejorRecorrido < 0 || mejorRecorrido > hf.getKmRecorridos()) {
+		                 mejorRecorrido = hf.getKmRecorridos();
+		                 mejorCiudad = i;
+		             }
+		             
+		            // hf.printCiudadesRecorridas();
+		         }
+		         
+		         HeuristicaFacu hf = new HeuristicaFacu();
+	             hf.recorreCiudades(mejorCiudad);
+		         
+	             /*int indice =  hf.getRecorrido()[0];
+	    	             
+	    	             
+	             
+	             int x = Constants.COORENADAS_CIUDADES[indice].getX();
+	             int y = Constants.COORENADAS_CIUDADES[indice].getY();
+	             pnlMapa.pintarInicio(x, y);
+		         */
+				
+	             pnlMapa.pintarRecorrido( hf.getRecorrido());
+	             
+	             
+	             
+	             
 				
 			}
 		});
