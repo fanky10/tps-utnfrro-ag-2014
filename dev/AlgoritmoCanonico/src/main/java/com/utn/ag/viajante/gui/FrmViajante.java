@@ -1,139 +1,40 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.utn.ag.viajante.gui;
-
-import javax.swing.ImageIcon;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
 
 import com.utn.ag.viajante.impl.GeneticoEst;
 import com.utn.ag.viajante.impl.HeuristicaFacu;
 import com.utn.ag.viajante.model.Constants;
 import com.utn.ag.viajante.model.Cromosoma;
 import com.utn.ag.viajante.model.Poblacion;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.GridLayout;
 
-import java.awt.image.BufferedImage;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-public class FrmViajante extends JFrame {
-
-    private static final String IMG_PATH = "src/main/java/com/utn/ag/viajante/gui/mapa1Argentina.jpg";
-    static ImagePanel pnlMapa;
-    BufferedImage tableroBuffer = null;
-
-    private JTextField txtCantCiclos;
-    private JTextField txtCantPoblacion;
-    private JTextField txtIndiceCiudad;
-    private JLabel lblResultado;
-
+/**
+ *
+ * @author fanky
+ */
+public class FrmViajante extends javax.swing.JFrame {
+    private ImagePanel pnlMapa;
     /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    FrmViajante window = new FrmViajante();
-                    window.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    /**
-     * Create the application.
+     * Creates new form FrmViajante2
      */
     public FrmViajante() {
-        initialize();
+        initComponents();
+        init();
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
-    private void initialize() {
-        setTitle("guiTSP");
-        setBounds(100, 100, 346, 786);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new BorderLayout(0, 0));
-
-        JPanel pnlInput = new JPanel();
-        getContentPane().add(pnlInput, BorderLayout.NORTH);
-        pnlInput.setLayout(new GridLayout(0, 4, 0, 0));
-
-        JLabel lblCiclos = new JLabel("Ciclos:");
-        pnlInput.add(lblCiclos);
-
-        txtCantCiclos = new JTextField();
-        txtCantCiclos.setText("200");
-        pnlInput.add(txtCantCiclos);
-        txtCantCiclos.setColumns(10);
-
-        JLabel lblPoblacin = new JLabel("Población:");
-        pnlInput.add(lblPoblacin);
-
-        txtCantPoblacion = new JTextField();
-        txtCantPoblacion.setText("50");
-        pnlInput.add(txtCantPoblacion);
-        txtCantPoblacion.setColumns(10);
-
-        JLabel lblCiudad = new JLabel("Ciudad:");
-        pnlInput.add(lblCiudad);
-
-        txtIndiceCiudad = new JTextField();
-        txtIndiceCiudad.setText("21");
-        pnlInput.add(txtIndiceCiudad);
-        txtIndiceCiudad.setColumns(5);
-
-        JPanel pnlBtnResult = new JPanel();
-        getContentPane().add(pnlBtnResult, BorderLayout.SOUTH);
-        pnlBtnResult.setLayout(new BorderLayout(0, 0));
-
-        JPanel pnlResult = new JPanel();
-        pnlBtnResult.add(pnlResult, BorderLayout.NORTH);
-
-        lblResultado = new JLabel("");
-        pnlResult.add(lblResultado);
-
-        JButton btnEjecutarAlgGentico = new JButton("Ejecutar Alg. Genético");
-        btnEjecutarAlgGentico.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                ejecutaAlgoritmoGenetico();
-            }
-        });
-
-        JButton btnEjecutarAlgHeurstico = new JButton(
-                "Ejecutar Alg. Heurístico");
-        btnEjecutarAlgHeurstico.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                ejecutaAlgoritmoHeuristico();
-            }
-        });
-
-        JPanel pnlBotones = new JPanel();
-        pnlBotones.setLayout(new GridLayout(1, 0, 0, 0));
-        pnlBotones.add(btnEjecutarAlgGentico);
-        pnlBotones.add(btnEjecutarAlgHeurstico);
-        pnlBtnResult.add(pnlBotones, BorderLayout.SOUTH);
-        
+    private void init() {
+        setTitle("AG - Viajante");
         pnlMapa = new ImagePanel();
-
-        getContentPane().add(pnlMapa, BorderLayout.CENTER);
-
+        scrollPane.setViewportView(pnlMapa);
     }
 
     private void ejecutaAlgoritmoGenetico() {
         pnlMapa.clearMap();
-        GeneticoEst.CANT_CICLOS = Integer.valueOf(txtCantCiclos.getText());
-        GeneticoEst.CANT_POBLACION = Integer.valueOf(txtCantPoblacion.getText());
+        GeneticoEst.CANT_CICLOS = Integer.valueOf(txtCiclos.getText());
+        GeneticoEst.CANT_POBLACION = Integer.valueOf(txtPoblacion.getText());
 
         GeneticoEst gen = new GeneticoEst();
 
@@ -157,7 +58,7 @@ public class FrmViajante extends JFrame {
             }
         }
         pnlMapa.dibujarRecorrido(resultado.getCiudades());
-        lblResultado.setText("Ciudad Inicial: " + Constants.NOMBRES_PROVINCIAS[resultado.getCiudades()[0]]
+        lblEstado.setText("Ciudad Inicial: " + Constants.NOMBRES_PROVINCIAS[resultado.getCiudades()[0]]
                 + " i: " + resultado.getCiudades()[0] + " y recorrido de " + resultado.getDistanciaRecorrido() + "km");
     }
 
@@ -183,8 +84,185 @@ public class FrmViajante extends JFrame {
         hf.recorreCiudades(mejorCiudad);
         mejorRecorrido = hf.getKmRecorridos();
         pnlMapa.dibujarRecorrido(hf.getRecorrido());
-        lblResultado.setText("Ciudad Inicial: " + Constants.NOMBRES_PROVINCIAS[mejorCiudad]
+        lblEstado.setText("Ciudad Inicial: " + Constants.NOMBRES_PROVINCIAS[mejorCiudad]
                 + " i: " + mejorCiudad + " y recorrido de " + mejorRecorrido + "km");
     }
 
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtCiclos = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtPoblacion = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtIndiceCiudad = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        btnAGenetico = new javax.swing.JButton();
+        btnAHeuristico = new javax.swing.JButton();
+        btnClean = new javax.swing.JButton();
+        scrollPane = new javax.swing.JScrollPane();
+        lblEstado = new javax.swing.JLabel();
+
+        jLabel4.setText("jLabel4");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(new java.awt.GridLayout(1, 6));
+
+        jLabel1.setText("Ciclos");
+        jPanel1.add(jLabel1);
+
+        txtCiclos.setText("200");
+        txtCiclos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCiclosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtCiclos);
+
+        jLabel2.setText("Población");
+        jPanel1.add(jLabel2);
+
+        txtPoblacion.setText("50");
+        jPanel1.add(txtPoblacion);
+
+        jLabel3.setText("Ciudad Inicial");
+        jPanel1.add(jLabel3);
+
+        txtIndiceCiudad.setText("21");
+        jPanel1.add(txtIndiceCiudad);
+
+        btnAGenetico.setText("AlgoritmoGenetico");
+        btnAGenetico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAGeneticoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnAGenetico);
+
+        btnAHeuristico.setText("AlgoritmoHeuristico");
+        btnAHeuristico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAHeuristicoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnAHeuristico);
+
+        btnClean.setText("Limpiar Mapa");
+        btnClean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCleanActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnClean);
+
+        lblEstado.setText("Estado:");
+        lblEstado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(scrollPane, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEstado))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void txtCiclosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCiclosActionPerformed
+
+    }//GEN-LAST:event_txtCiclosActionPerformed
+
+    private void btnAGeneticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAGeneticoActionPerformed
+        ejecutaAlgoritmoGenetico();
+    }//GEN-LAST:event_btnAGeneticoActionPerformed
+
+    private void btnAHeuristicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAHeuristicoActionPerformed
+        ejecutaAlgoritmoHeuristico();
+    }//GEN-LAST:event_btnAHeuristicoActionPerformed
+
+    private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
+        pnlMapa.clearMap();
+    }//GEN-LAST:event_btnCleanActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FrmViajante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrmViajante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrmViajante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmViajante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FrmViajante().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAGenetico;
+    private javax.swing.JButton btnAHeuristico;
+    private javax.swing.JButton btnClean;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblEstado;
+    private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JTextField txtCiclos;
+    private javax.swing.JTextField txtIndiceCiudad;
+    private javax.swing.JTextField txtPoblacion;
+    // End of variables declaration//GEN-END:variables
 }
