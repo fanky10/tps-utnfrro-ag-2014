@@ -16,7 +16,9 @@ import com.utn.ag.viajante.model.Poblacion;
  * @author fanky
  */
 public class FrmViajante extends javax.swing.JFrame {
+
     private ImagePanel pnlMapa;
+
     /**
      * Creates new form FrmViajante2
      */
@@ -33,33 +35,41 @@ public class FrmViajante extends javax.swing.JFrame {
 
     private void ejecutaAlgoritmoGenetico() {
         pnlMapa.clearMap();
-        GeneticoEst.CANT_CICLOS = Integer.valueOf(txtCiclos.getText());
-        GeneticoEst.CANT_POBLACION = Integer.valueOf(txtPoblacion.getText());
+        lblEstado.setText("Ejecutando algoritmo genetico...");
+        new Thread() {
+            @Override
+            public void run() {
 
-        GeneticoEst gen = new GeneticoEst();
+                GeneticoEst.CANT_CICLOS = Integer.valueOf(txtCiclos.getText());
+                GeneticoEst.CANT_POBLACION = Integer.valueOf(txtPoblacion.getText());
 
-        Poblacion p = null;
-        for (int i = 0; i < GeneticoEst.CANT_CICLOS; i++) {
-            if (i == 0) {
-                p = gen.nuevaPoblacion();
-            } else {
-                p = gen.nuevaPoblacion(p);
+                GeneticoEst gen = new GeneticoEst();
+
+                Poblacion p = null;
+                for (int i = 0; i < GeneticoEst.CANT_CICLOS; i++) {
+                    if (i == 0) {
+                        p = gen.nuevaPoblacion();
+                    } else {
+                        p = gen.nuevaPoblacion(p);
+                    }
+                    p.printPoblacion();
+                }
+
+                p.processFitness();
+
+                Cromosoma resultado = new Cromosoma();
+                resultado.setFitness(0);
+                for (Cromosoma c : p) {
+                    if (c.getFitness() > resultado.getFitness()) {
+                        resultado = c;
+                    }
+                }
+                pnlMapa.dibujarRecorrido(resultado.getCiudades());
+                lblEstado.setText("Ciudad Inicial: " + Constants.NOMBRES_PROVINCIAS[resultado.getCiudades()[0]]
+                        + " i: " + resultado.getCiudades()[0] + " y recorrido de " + resultado.getDistanciaRecorrido() + "km");
+
             }
-            p.printPoblacion();
-        }
-
-        p.processFitness();
-
-        Cromosoma resultado = new Cromosoma();
-        resultado.setFitness(0);
-        for (Cromosoma c : p) {
-            if (c.getFitness() > resultado.getFitness()) {
-                resultado = c;
-            }
-        }
-        pnlMapa.dibujarRecorrido(resultado.getCiudades());
-        lblEstado.setText("Ciudad Inicial: " + Constants.NOMBRES_PROVINCIAS[resultado.getCiudades()[0]]
-                + " i: " + resultado.getCiudades()[0] + " y recorrido de " + resultado.getDistanciaRecorrido() + "km");
+        }.start();
     }
 
     private void ejecutaAlgoritmoHeuristico() {
