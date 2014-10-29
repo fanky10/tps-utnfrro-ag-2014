@@ -123,14 +123,15 @@ public class FrmViajante extends JFrame {
         pnlBotones.add(btnEjecutarAlgGentico);
         pnlBotones.add(btnEjecutarAlgHeurstico);
         pnlBtnResult.add(pnlBotones, BorderLayout.SOUTH);
-        ImageIcon imagen = new ImageIcon(IMG_PATH);
-        pnlMapa = new ImagePanel(imagen.getImage());
+        
+        pnlMapa = new ImagePanel();
 
         getContentPane().add(pnlMapa, BorderLayout.CENTER);
 
     }
 
     private void ejecutaAlgoritmoGenetico() {
+        pnlMapa.clearMap();
         GeneticoEst.CANT_CICLOS = Integer.valueOf(txtCantCiclos.getText());
         GeneticoEst.CANT_POBLACION = Integer.valueOf(txtCantPoblacion.getText());
 
@@ -161,7 +162,7 @@ public class FrmViajante extends JFrame {
     }
 
     private void ejecutaAlgoritmoHeuristico() {
-        System.out.println("done");
+        pnlMapa.clearMap();
         int mejorCiudad = -1;
         int mejorRecorrido = -1;
         for (int i = 0; i < Constants.CANTIDAD_PROVINCIAS; i++) {
