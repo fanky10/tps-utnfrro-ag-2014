@@ -29,7 +29,7 @@ public class FrmViajante extends javax.swing.JFrame {
 
     private void init() {
         setTitle("AG - Viajante");
-        pnlMapa = new ImagePanel();
+        pnlMapa = new ImagePanel(ImagePanel.IMG_ARGENTINA,Constants.COORENADAS_CIUDADES);
         scrollPane.setViewportView(pnlMapa);
     }
 
