@@ -78,8 +78,8 @@ public class Constants {
     };
 
     public static final Vector2D[] COORENADAS_CIUDADES_STA_FE = {
-        new Vector2D(275, 670), new Vector2D(266, 498), new Vector2D(183, 767), new Vector2D(180, 448), new Vector2D(392, 160),
-        new Vector2D(263, 647), new Vector2D(242, 469), new Vector2D(313, 722), new Vector2D(212, 690), new Vector2D(243, 541)
+        new Vector2D(271, 673), new Vector2D(265, 497), new Vector2D(183, 767), new Vector2D(178, 444), new Vector2D(392, 160),
+        new Vector2D(263, 647), new Vector2D(240, 469), new Vector2D(311, 720), new Vector2D(212, 686), new Vector2D(241, 541)
     };
 
     public static final String[] NOMBRES_CIUDADES_SANTA_FE = new String[]{
