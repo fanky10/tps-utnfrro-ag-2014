@@ -5,13 +5,12 @@
  */
 package com.utn.ag.viajante.impl;
 
-import java.security.acl.LastOwnerException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.paukov.combinatorics.Factory;
-import org.paukov.combinatorics.Generator;
-import org.paukov.combinatorics.ICombinatoricsVector;
 
 import com.utn.ag.viajante.model.Constants;
 
@@ -20,17 +19,20 @@ import com.utn.ag.viajante.model.Constants;
  * @author fanky
  */
 public class Exhaustivo {
+	private static final boolean DEBUG = true;
+	private static final boolean OUTPUT_INTO_FILE = true;
 
 	/**
-	 * from: http://www.cs.berkeley.edu/~demmel/cs267/assignment4.html
+	 * 
 	 *
 	 */
 	public static void main(String args[]) {
 		recorrer();
 	}
 
-	private static final int[][] DISTANCIAS = new int[][] { { 0, 15, 17, 5 },
-			{ 15, 0, 10, 7 }, { 17, 10, 0, 11 }, { 5, 7, 11, 0 } };
+	private static final int[][] DISTANCIAS = { { 0, 187, 164, 218, 503 },
+			{ 187, 0, 346, 117, 316 }, { 164, 346, 0, 354, 662 },
+			{ 218, 117, 354, 0, 382 }, { 503, 316, 662, 382, 0 }, };
 
 	public static void recorrer() {
 		int w = 0;
@@ -58,6 +60,10 @@ public class Exhaustivo {
 		Search bestSoFar = new Search(recorridoInicial, distanciasInicial, w);
 		search(s, bestSoFar, ptoInicial);
 		System.out.println("Best: " + bestSoFar);
+		System.out.println("Ciudades: ");
+		for (int i : bestSoFar.recorrido) {
+			System.out.println(Constants.NOMBRES_CIUDADES_SANTA_FE[i]);
+		}
 	}
 
 	/**
@@ -86,16 +92,18 @@ public class Exhaustivo {
 			List<Integer> notIncluded = getNotIncluded(searchRoute);
 			debug(">> not included: " + notIncluded);
 			for (int j : notIncluded) {
+				int toDist = DISTANCIAS[lastDest][j];
 				debug(">> current S: " + searchRoute);
-				debug(">> last destination: " + lastDest);
-				debug(">> to be included: " + j);
-				newW = searchW + DISTANCIAS[lastDest][j];
+				debug(">> from: " + lastDest + " -> to: " + j + " dist: "
+						+ toDist);
+
+				newW = searchW + toDist;
 				debug(">> newW: " + newW);
 				if (newW < wB) {
 					List<Integer> newRoute = new ArrayList<Integer>(searchRoute);
 					newRoute.add(j);
 					List<Integer> newDist = new ArrayList<Integer>(searchDist);
-					newDist.add(DISTANCIAS[lastDest][j]);
+					newDist.add(toDist);
 					s = new Search(newRoute, newDist, newW);
 					search(s, bestSoFar, inicial);
 				}
@@ -122,11 +130,19 @@ public class Exhaustivo {
 		return false;
 	}
 
-	private static final boolean DEBUG = true;
-
 	private static void debug(String text) {
 		if (DEBUG) {
 			System.out.println("DEBUG: " + text);
+		}
+		if (OUTPUT_INTO_FILE) {
+			try {
+				PrintWriter out = new PrintWriter(new BufferedWriter(
+						new FileWriter("out.txt", true)));
+				out.println("DEBUG: " + text);
+				out.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 
