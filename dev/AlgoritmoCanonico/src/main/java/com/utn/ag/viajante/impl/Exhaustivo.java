@@ -6,6 +6,7 @@
 package com.utn.ag.viajante.impl;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,12 +22,14 @@ import com.utn.ag.viajante.model.Constants;
 public class Exhaustivo {
 	private static final boolean DEBUG = true;
 	private static final boolean OUTPUT_INTO_FILE = true;
+	private static final String OUTPUT_FILE_PATH = "out.txt";
 
 	/**
 	 * 
 	 *
 	 */
 	public static void main(String args[]) {
+		initFile();
 		recorrer();
 	}
 
@@ -83,7 +86,9 @@ public class Exhaustivo {
 			s.w = newW;
 			if (newW < wB) {
 				bestSoFar.recorrido = new ArrayList<Integer>(searchRoute);
+				bestSoFar.distancias = new ArrayList<Integer>(searchDist);
 				bestSoFar.w = newW;
+				debug("##----- NEW BEST!! ----##");
 			}
 			debug("##----- END Line Posibility ----##");
 			debug("##----- Current " + s + " ----##");
@@ -129,7 +134,12 @@ public class Exhaustivo {
 		}
 		return false;
 	}
-
+	private static void initFile(){
+		File f = new File(OUTPUT_FILE_PATH);
+		if(f.exists()){
+			f.delete();
+		}
+	}
 	private static void debug(String text) {
 		if (DEBUG) {
 			System.out.println("DEBUG: " + text);
@@ -137,7 +147,7 @@ public class Exhaustivo {
 		if (OUTPUT_INTO_FILE) {
 			try {
 				PrintWriter out = new PrintWriter(new BufferedWriter(
-						new FileWriter("out.txt", true)));
+						new FileWriter(OUTPUT_FILE_PATH, true)));
 				out.println("DEBUG: " + text);
 				out.close();
 			} catch (IOException ex) {
