@@ -57,7 +57,7 @@ public class Exhaustivo {
 		Search s = new Search(ptoInicial);
 		Search bestSoFar = new Search(recorridoInicial, distanciasInicial, w);
 		search(s, bestSoFar, ptoInicial);
-		System.out.println("best so far: " + bestSoFar);
+		System.out.println("Best: " + bestSoFar);
 	}
 
 	/**
@@ -70,9 +70,10 @@ public class Exhaustivo {
 		int searchW = s.w;
 		int wB = bestSoFar.w;
 		int newW = 0;
+		int lastDest = searchRoute.get(searchRoute.size() - 1);
 		if (searchRoute.size() == bestSoFar.recorrido.size()) {
-			newW = searchW + DISTANCIAS[searchRoute.size() - 1][inicial];
-			searchDist.add(DISTANCIAS[searchRoute.size() - 1][inicial]);
+			newW = searchW + DISTANCIAS[lastDest][inicial];
+			searchDist.add(DISTANCIAS[lastDest][inicial]);
 			s.w = newW;
 			if (newW < wB) {
 				bestSoFar.recorrido = new ArrayList<Integer>(searchRoute);
@@ -86,14 +87,15 @@ public class Exhaustivo {
 			debug(">> not included: " + notIncluded);
 			for (int j : notIncluded) {
 				debug(">> current S: " + searchRoute);
+				debug(">> last destination: " + lastDest);
 				debug(">> to be included: " + j);
-				newW = searchW + DISTANCIAS[searchRoute.size() - 1][j];
+				newW = searchW + DISTANCIAS[lastDest][j];
 				debug(">> newW: " + newW);
 				if (newW < wB) {
 					List<Integer> newRoute = new ArrayList<Integer>(searchRoute);
 					newRoute.add(j);
 					List<Integer> newDist = new ArrayList<Integer>(searchDist);
-					newDist.add(DISTANCIAS[searchRoute.size() - 1][j]);
+					newDist.add(DISTANCIAS[lastDest][j]);
 					s = new Search(newRoute, newDist, newW);
 					search(s, bestSoFar, inicial);
 				}
