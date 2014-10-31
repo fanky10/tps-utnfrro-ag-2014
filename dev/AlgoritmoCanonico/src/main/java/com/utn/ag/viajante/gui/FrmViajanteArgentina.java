@@ -15,21 +15,21 @@ import com.utn.ag.viajante.model.Poblacion;
  *
  * @author fanky
  */
-public class FrmViajante extends javax.swing.JFrame {
+public class FrmViajanteArgentina extends javax.swing.JFrame {
 
     private ImagePanel pnlMapa;
 
     /**
      * Creates new form FrmViajante2
      */
-    public FrmViajante() {
+    public FrmViajanteArgentina() {
         initComponents();
         init();
     }
 
     private void init() {
         setTitle("AG - Viajante");
-        pnlMapa = new ImagePanel(ImagePanel.IMG_ARGENTINA,Constants.COORENADAS_CIUDADES);
+        pnlMapa = new ImagePanel(ImagePanel.IMG_ARGENTINA,Constants.COORENADAS_CIUDADES_ARGENTINA);
         scrollPane.setViewportView(pnlMapa);
     }
 
@@ -240,21 +240,23 @@ public class FrmViajante extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmViajante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmViajanteArgentina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmViajante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmViajanteArgentina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmViajante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmViajanteArgentina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmViajante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmViajanteArgentina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmViajante().setVisible(true);
+                new FrmViajanteArgentina().setVisible(true);
             }
         });
     }

@@ -16,7 +16,7 @@ class ImagePanel extends JPanel {
 
     private static final String IMG_PATH_ARGENTINA = "src/main/java/com/utn/ag/viajante/gui/mapa1Argentina.jpg";
     public static final Image IMG_ARGENTINA = new ImageIcon(IMG_PATH_ARGENTINA).getImage();
-    private static final String IMG_PATH_STA_FE = "src/main/java/com/utn/ag/viajante/gui/imagenStaFe.jpg";
+    private static final String IMG_PATH_STA_FE = "src/main/java/com/utn/ag/viajante/gui/mapaStaFe.jpg";
     public static final Image IMG_STA_FE = new ImageIcon(IMG_PATH_STA_FE).getImage();
 
     private int[] ciudades;
