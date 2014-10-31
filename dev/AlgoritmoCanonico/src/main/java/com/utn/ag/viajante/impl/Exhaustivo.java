@@ -20,9 +20,25 @@ import com.utn.ag.viajante.model.Constants;
  * @author fanky
  */
 public class Exhaustivo {
-	private static final boolean DEBUG = true;
-	private static final boolean OUTPUT_INTO_FILE = true;
+	private static final boolean DEBUG = false;
+	private static final boolean OUTPUT_INTO_FILE = false;
 	private static final String OUTPUT_FILE_PATH = "out.txt";
+
+	private int[][] distancias;
+	private String[] nombres;
+	private int puntoInicial;
+	private List<Integer> mejorRecorrido;
+
+	public Exhaustivo(int[][] distancias, String[] nombres, int puntoInicial) {
+		super();
+		this.distancias = distancias;
+		this.nombres = nombres;
+		this.puntoInicial = puntoInicial;
+	}
+
+	public List<Integer> getMejorRecorrido() {
+		return mejorRecorrido;
+	}
 
 	/**
 	 * 
@@ -30,21 +46,19 @@ public class Exhaustivo {
 	 */
 	public static void main(String args[]) {
 		initFile();
-		recorrer();
+		new Exhaustivo(Constants.DISTANCIAS_CIUDADES_SANTA_FE,Constants.NOMBRES_CIUDADES_SANTA_FE,0).recorrer();;
 	}
 
-	private static final int[][] DISTANCIAS = Constants.DISTANCIAS_CIUDADES_SANTA_FE;
-
-	public static void recorrer() {
+	public void recorrer() {
 		int w = 0;
 		List<Integer> recorridoInicial = new ArrayList<Integer>();
 		List<Integer> distanciasInicial = new ArrayList<Integer>();
-		for (int i = 0; i < DISTANCIAS.length; i++) {
+		for (int i = 0; i < distancias.length; i++) {
 			int toAdd = 0;
-			if (i + 1 == DISTANCIAS.length) {
-				toAdd = DISTANCIAS[i][0];
+			if (i + 1 == distancias.length) {
+				toAdd = distancias[i][0];
 			} else {
-				toAdd = DISTANCIAS[i][i + 1];
+				toAdd = distancias[i][i + 1];
 
 			}
 			recorridoInicial.add(i);
@@ -56,14 +70,13 @@ public class Exhaustivo {
 		debug("dist inicial: " + distanciasInicial);
 		debug("dist: " + w);
 		debug("======== SEARCH =========");
-		int ptoInicial = 0;
-		Search s = new Search(ptoInicial);
+		Search s = new Search(puntoInicial);
 		Search bestSoFar = new Search(recorridoInicial, distanciasInicial, w);
-		search(s, bestSoFar, ptoInicial);
+		search(s, bestSoFar, puntoInicial);
 		System.out.println("Best: " + bestSoFar);
 		System.out.println("Ciudades: ");
 		for (int i : bestSoFar.recorrido) {
-			System.out.println(Constants.NOMBRES_CIUDADES_SANTA_FE[i]);
+			System.out.println(nombres[i]);
 		}
 	}
 
@@ -71,7 +84,7 @@ public class Exhaustivo {
 	 * @param s
 	 * @param bestSoFar
 	 */
-	private static void search(Search s, Search bestSoFar, int inicial) {
+	private void search(Search s, Search bestSoFar, int inicial) {
 		List<Integer> searchRoute = s.recorrido;
 		List<Integer> searchDist = s.distancias;
 		int searchW = s.w;
@@ -79,8 +92,8 @@ public class Exhaustivo {
 		int newW = 0;
 		int lastDest = searchRoute.get(searchRoute.size() - 1);
 		if (searchRoute.size() == bestSoFar.recorrido.size()) {
-			newW = searchW + DISTANCIAS[lastDest][inicial];
-			searchDist.add(DISTANCIAS[lastDest][inicial]);
+			newW = searchW + distancias[lastDest][inicial];
+			searchDist.add(distancias[lastDest][inicial]);
 			s.w = newW;
 			if (newW < wB) {
 				bestSoFar.recorrido = new ArrayList<Integer>(searchRoute);
@@ -95,7 +108,7 @@ public class Exhaustivo {
 			List<Integer> notIncluded = getNotIncluded(searchRoute);
 			debug(">> not included: " + notIncluded);
 			for (int j : notIncluded) {
-				int toDist = DISTANCIAS[lastDest][j];
+				int toDist = distancias[lastDest][j];
 				debug(">> current S: " + searchRoute);
 				debug(">> from: " + lastDest + " -> to: " + j + " dist: "
 						+ toDist);
@@ -114,9 +127,9 @@ public class Exhaustivo {
 		}
 	}
 
-	public static List<Integer> getNotIncluded(List<Integer> searchRoute) {
+	public List<Integer> getNotIncluded(List<Integer> searchRoute) {
 		List<Integer> notIncluded = new ArrayList<Integer>();
-		for (int j = 0; j < DISTANCIAS.length; j++) {
+		for (int j = 0; j < distancias.length; j++) {
 			if (!isContained(j, searchRoute)) {
 				notIncluded.add(j);
 			}
