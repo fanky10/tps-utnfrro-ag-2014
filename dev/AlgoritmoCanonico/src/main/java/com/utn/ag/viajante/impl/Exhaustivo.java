@@ -33,9 +33,7 @@ public class Exhaustivo {
 		recorrer();
 	}
 
-	private static final int[][] DISTANCIAS = { { 0, 187, 164, 218, 503 },
-			{ 187, 0, 346, 117, 316 }, { 164, 346, 0, 354, 662 },
-			{ 218, 117, 354, 0, 382 }, { 503, 316, 662, 382, 0 }, };
+	private static final int[][] DISTANCIAS = Constants.DISTANCIAS_CIUDADES_SANTA_FE;
 
 	public static void recorrer() {
 		int w = 0;
@@ -134,12 +132,16 @@ public class Exhaustivo {
 		}
 		return false;
 	}
-	private static void initFile(){
-		File f = new File(OUTPUT_FILE_PATH);
-		if(f.exists()){
-			f.delete();
+
+	private static void initFile() {
+		if (OUTPUT_INTO_FILE) {
+			File f = new File(OUTPUT_FILE_PATH);
+			if (f.exists()) {
+				f.delete();
+			}
 		}
 	}
+
 	private static void debug(String text) {
 		if (DEBUG) {
 			System.out.println("DEBUG: " + text);
