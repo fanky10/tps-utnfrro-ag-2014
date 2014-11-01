@@ -34,12 +34,22 @@ public class FrmViajanteStaFe extends javax.swing.JFrame {
 
     private void ejecutaAlgoritmoExhaustivo() {
         pnlMapa.clearMap();
-        Exhaustivo e = new Exhaustivo(Constants.DISTANCIAS_CIUDADES_SANTA_FE, Constants.NOMBRES_CIUDADES_SANTA_FE, 0);
-        e.recorrer();
-        List<Integer> mejorRecorrido = e.getMejorRecorrido();
-        Integer[] arrMejorRecorrido = mejorRecorrido.toArray(new Integer[mejorRecorrido.size()]);
-        pnlMapa.dibujarRecorrido(ArrayUtils.toPrimitive(arrMejorRecorrido));
-        lblEstado.setText("Ciudad Inicial: recorrido de " + mejorRecorrido + "km");
+        lblEstado.setText("Cargando mapa...");
+        new Thread() {
+            @Override
+            public void run() {
+                Exhaustivo e = new Exhaustivo(Constants.DISTANCIAS_CIUDADES_SANTA_FE, Constants.NOMBRES_CIUDADES_SANTA_FE, 0);
+
+                e.recorrer();
+                List<Integer> mejorRecorrido = e.getMejorRecorrido();
+                int distancia = e.getMejorDistancia();
+                Integer[] arrMejorRecorrido = mejorRecorrido.toArray(new Integer[mejorRecorrido.size()]);
+
+                pnlMapa.dibujarRecorrido(ArrayUtils.toPrimitive(arrMejorRecorrido));
+                lblEstado.setText(
+                        "Ciudad Inicial: " + Constants.NOMBRES_CIUDADES_SANTA_FE[mejorRecorrido.get(0)] + " recorrido de " + distancia + "km");
+            }
+        }.start();
     }
 
     /**
