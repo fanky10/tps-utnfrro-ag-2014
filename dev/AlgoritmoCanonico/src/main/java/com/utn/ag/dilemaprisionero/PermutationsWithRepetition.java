@@ -30,6 +30,15 @@ public class PermutationsWithRepetition {
         this.a = sb.toString();
         this.n = a.length;
     }
+    
+    public PermutationsWithRepetition(String[] a, int n) {
+        StringBuilder sb = new StringBuilder();
+        for(String s: a){
+            sb.append(s);
+        }
+        this.a = sb.toString();
+        this.n = n;
+    }
 
     public List<String> getVariations() {
         int l = a.length();
