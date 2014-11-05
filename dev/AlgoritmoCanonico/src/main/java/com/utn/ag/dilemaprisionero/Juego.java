@@ -77,20 +77,21 @@ public class Juego {
             int puntajeJugadas = 0;
             String jugadasX = jugadasJugadorX.get(i);
             String jugadasY = jugadasJugadorY.get(i);
-            // TODO: puntajes por cada uno
-            // sumar todos y me quedo con la mejor tira de 6 y 6 
+            debug("tira de jugadas: " + jugadasX + ":" + jugadasY);
             int idx = 0;
-            for (int j = 2; j < jugadasX.length(); j += 2) {
+            for (int j = 2; j <= jugadasX.length(); j += 2) {
                 String x = TIT_FOR_TAT.get(jugadasX.substring(idx, j));
                 String y = TIT_FOR_TAT.get(jugadasY.substring(idx, j));
                 int puntajeJugada = jugada(x, y);
                 puntajeJugadas += puntajeJugada;
                 idx = j;
             }
-            if (mejorPuntaje < 0 || mejorPuntaje > puntajeJugadas) {
+            if (mejorPuntaje < 0 || mejorPuntaje < puntajeJugadas) {
                 mejorPuntaje = puntajeJugadas;
                 mejorJugadaX = jugadasX;
                 mejorJugadaY = jugadasY;
+                debug("nuevo mejor puntaje! " + mejorPuntaje);
+                debug("con jugadas:  [" + mejorJugadaX + " , " + mejorJugadaY + "]");
             }
         }
 
@@ -102,8 +103,9 @@ public class Juego {
         String puntaje = PUNTAJE.get(x + y);
         int puntajeX = Integer.parseInt(puntaje.split(",")[0]);
         int puntajeY = Integer.parseInt(puntaje.split(",")[1]);
-        debug("puntaje: [x,y] [" + puntajeX + " , " + puntajeY + "]");
-        return puntajeX + puntajeY;
+        int puntajeFinal = puntajeX + puntajeY;
+        debug("par [x,y] [" + x + " , " + y + "] -- puntaje: [" + puntajeX + " , " + puntajeY + "] -- final: " + puntajeFinal);
+        return puntajeFinal;
     }
 
     public void jugar() {

@@ -7,6 +7,7 @@ package com.utn.ag.dilemaprisionero;
 
 import com.utn.ag.algoritmocanonico.MockedLogger;
 import static com.utn.ag.algoritmocanonico.MockedLogger.debug;
+import static com.utn.ag.algoritmocanonico.MockedLogger.info;
 import java.util.List;
 import java.util.Random;
 
@@ -16,15 +17,27 @@ import java.util.Random;
  */
 public class App {
 
+    private static final int CANTIDAD_JUGADAS = 10;
+
     public static void main(String args[]) {
         MockedLogger.DEBUG = true;
-        String parJugadorX = getPar();
-        String parJugadorY = getPar();
-        debug("Comienza el juego con pares:[x,y] [" + parJugadorX + " , " + parJugadorY + "]");
-        Juego j = new Juego(parJugadorX, parJugadorY);
-        j.jugar();
-        j.getMejorJugadaX();
-        j.getMejorJugadaY();
+        int mejorPuntaje = -1;
+        String mejorJugadaX = "", mejorJugadaY = "";
+        for (int i = 0; i < CANTIDAD_JUGADAS; i++) {
+            String parJugadorX = getPar();
+            String parJugadorY = getPar();
+            info("Comienza el juego con pares:[x,y] [" + parJugadorX + " , " + parJugadorY + "]");
+            Juego j = new Juego(parJugadorX, parJugadorY);
+            j.jugar();
+
+            if (mejorPuntaje < 0 || mejorPuntaje < j.getMejorPuntaje()) {
+                mejorPuntaje = j.getMejorPuntaje();
+                mejorJugadaX = j.getMejorJugadaX();
+                mejorJugadaY = j.getMejorJugadaY();
+            }
+        }
+        info("mejor jugada [x,y]: [" + mejorJugadaX + " , " + mejorJugadaY + "]");
+        info("mejor puntaje: " + mejorPuntaje);
 
     }
     private static final Random random = new Random();

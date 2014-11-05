@@ -11,6 +11,7 @@ public class MockedLogger {
 	// Mostrar selecciones y resultados de crossover
 	public static Boolean VERBOSE = Boolean.FALSE;
 	public static Boolean DEBUG = Boolean.FALSE;
+        public static Boolean INFO = Boolean.TRUE;
 	public static Boolean WRITE_FILE = Boolean.FALSE;
 
 	public static void verbose(String text) {
@@ -22,6 +23,12 @@ public class MockedLogger {
 	public static void debug(String txt) {
 		if (DEBUG) {
 			System.out.println("DEBUG: " + txt);
+		}
+	}
+        
+        public static void info(String txt) {
+		if (INFO) {
+			System.out.println("INFO: " + txt);
 		}
 	}
 
