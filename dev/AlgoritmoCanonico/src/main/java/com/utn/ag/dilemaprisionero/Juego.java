@@ -74,6 +74,8 @@ public class Juego {
 		for (int i = 0; i < jugadasJugadorX.size(); i++) {
 			String jugadasX = jugadasJugadorX.get(i);
 			String jugadasY = jugadasJugadorY.get(i);
+			// TODO: puntajes por cada uno
+			// sumar todos y me quedo con la mejor tira de 6 y 6 
 			int idx = 0;
 			for(int j = 2;j<jugadasX.length();j+=2){
 				String x = TIT_FOR_TAT.get(jugadasX.substring(idx,j));
